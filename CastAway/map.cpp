@@ -1,6 +1,5 @@
 #include "map.h"
 #include <iostream>
-#include <Windows.h>
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
@@ -72,14 +71,12 @@ void Map::initMap(){
     map[4][7] = 2; //wall
 }
 
-void Map::clear(){
-    HANDLE hOut;
-    COORD Position;
-
-    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    Position.X = 0;
-    Position.Y = 0;
-    SetConsoleCursorPosition(hOut, Position);
+void  Map::clear(){
+#ifdef _WIN32
+    std::system("cls");
+#else
+    // Assume POSIX
+    std::system ("clear");
+#endif
 }
 
