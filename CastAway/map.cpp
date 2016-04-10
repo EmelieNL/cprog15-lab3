@@ -4,14 +4,17 @@
 #include <ctime>
 #include <conio.h>
 
- Map::Map(int x, int y){
+Map::Map(){
+}
+
+Map::Map(int x, int y){
      widthX = x;
      heightY = y;
 
      //Reset map
      for(int x=0; x < widthX;x++){
          for(int y=0; y < heightY;y++){
-             map[x][y] = 0;
+             map[x][y] = nullptr;
          }
      }
 
@@ -19,21 +22,22 @@
  }
 
 //Return object at position
-int Map::get(int x, int y){
+AbstractEntity* Map::get(int x, int y){
     return map[y][x];
 }
 
 //Set a object at position
-void Map::set(int x, int y, int obj){
+void Map::set(int x, int y, AbstractEntity* obj){
     map[y][x] = obj;
 }
 
-void Map::render(){
+void Map::render() const{
 
     clear();
     for(int y=0; y < 10;y++){
         for(int x=0; x < 10;x++){
-           //player
+           /*
+            //player
             if(map[y][x] == 1){
                std::cout << "@";
                playerX = x;
@@ -41,6 +45,12 @@ void Map::render(){
               //wall
            } else if(map[y][x] == 2){
                 std::cout << "+";
+            } else {
+                std::cout << ".";
+            }*/
+            AbstractEntity* current = map[y][x];
+            if(current != nullptr){
+                current->render();
             } else {
                 std::cout << ".";
             }
@@ -51,27 +61,24 @@ void Map::render(){
     }
 }
 
-int Map::getPlayerX(){
-    return playerX;
-}
-
-int Map::getPlayerY(){
-    return playerY;
-}
 
 void Map::initMap(){
-    map[3][3] = 1; //player
-    map[4][0] = 2; //wall
-    map[4][1] = 2; //wall
-    map[4][2] = 2; //wall
-    map[4][3] = 2; //wall
-    map[4][4] = 2; //wall
-    map[4][5] = 2; //wall
-    map[4][6] = 2; //wall
-    map[4][7] = 2; //wall
+    Blocked* wall;
+    wall->setSolid(true);
+    wall->setSymbol('#');
+
+   map[4][0] = wall;
+    map[4][1] = wall;
+    map[4][2] = wall;
+    map[4][3] = wall;
+    map[4][4] = wall;
+    map[4][5] = wall;
+    map[4][6] = wall;
+    map[4][7] = wall;
+
 }
 
-void  Map::clear(){
+void  Map::clear() const{
 #ifdef _WIN32
     std::system("cls");
 #else
