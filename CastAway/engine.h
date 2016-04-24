@@ -12,7 +12,6 @@ private:
     //Vector to store entities
     std::vector<AbstractEntity> entities;
 public:
-    Engine();
     Engine(Map map);
     void addEntity(AbstractEntity e);
     void clearEntities();

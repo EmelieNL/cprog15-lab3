@@ -5,12 +5,11 @@ using namespace std;
 
 int main(int /*argc*/, char** /*argv[]*/)
 {
-   Map firstMap(10,10); //Create a map
+   Map firstMap; //Create a map
 
-   // Engine engine(firstMap);
-   Engine engine;
-
-   engine.setMap(firstMap);
+   Engine engine(firstMap);
+   //Engine engine;
+   //engine.setMap(firstMap);
 
    char userCommand;
 

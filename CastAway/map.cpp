@@ -23,17 +23,18 @@ void printSymbol(string text, console_text_colors textCol, console_bg_colors bgC
 
 } // End unnamed namespace
 
-Map::Map(){
-}
+Map::Map(/*int x, int y*/){
+//    widthX = x;
+//    heightY = y;
 
-Map::Map(int x, int y){
-    widthX = x;
-    heightY = y;
+//    // Allocate dynamic size of map array
+//    map = new AbstractEntity**[heightY];
 
     //Reset map
-    for(int x=0; x < widthX;x++){
-        for(int y=0; y < heightY;y++){
-            map[x][y] = nullptr;
+    for(int y=0; y < heightY; y++){
+//        map[y] = new AbstractEntity*[widthX];
+        for(int x=0; x < widthX; x++){
+            map[y][x] = nullptr;
         }
     }
 
@@ -52,8 +53,8 @@ void Map::set(int x, int y, AbstractEntity* obj){
 
 void Map::render() const {
     clear();
-    for(int y=0; y < widthX;y++){
-        for(int x=0; x < heightY;x++){
+    for(int y=0; y < heightY;y++){
+        for(int x=0; x < widthX;x++){
             AbstractEntity* current = map[y][x];
             if(current != nullptr){
                 current->render();
@@ -70,7 +71,7 @@ void Map::render() const {
 
 
 void Map::initMap(){
-    Blocked* wall; // uninitialized, will crash :)
+    Blocked* wall = new Blocked();
     wall->setSolid(true);
     wall->setSymbol('#');
 
@@ -93,4 +94,5 @@ void  Map::clear() const{
     std::system ("clear");
 #endif
 }
+
 

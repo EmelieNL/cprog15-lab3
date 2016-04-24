@@ -7,16 +7,16 @@
 class Map
 {
 private:
-    int widthX;
-    int heightY;
-    AbstractEntity* map[10][10]; //the map data
+    static const int widthX = 50;
+    static const int heightY = 20;
+
+    AbstractEntity* map[heightY][widthX]; //the map data
 
     int playerX;
     int playerY;
 
 public:
-    Map();
-    Map(int widthX, int heightY);
+    Map(/*int widthX, int heightY*/);
 
     void initMap();
     AbstractEntity* get(int x, int y);

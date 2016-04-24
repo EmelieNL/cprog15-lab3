@@ -4,10 +4,6 @@
 
 //Class to represent the gameengine, to help to load maps and hold information about active entities
 
-Engine::Engine(){
-
-}
-
 Engine::Engine(Map map){
    // Map firstMap(10,10);
    // map = map;
@@ -106,9 +102,9 @@ void Engine::clearEntities()
  void Engine::loadMap(std::string mapName)
  {
      this->clearEntities();
-     Map map(10,10);
+     //Map map(10,10);
      //Map map(mapName);
-     this->setMap(map);
+     //this->setMap(map);
 
  }
 
