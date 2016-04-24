@@ -13,7 +13,8 @@
 // ----------------------------------------------------------------------------------------------
 // You must not remove this notice, or any other, from this software.
 // ----------------------------------------------------------------------------------------------
-
+#ifndef CONMANIP_H
+#define CONMANIP_H
 #pragma once
 
 #include <windows.h>
@@ -76,10 +77,10 @@ namespace conmanip
       enable_mouse_selection     = 8,
    };
 
-   console_modes operator&(console_modes const a, console_modes const b)
+   template <class T>
+   inline T operator&(T const a, T const b)
    {
-      return static_cast<console_modes>(
-         static_cast<int>(a) & static_cast<int>(b));
+      return static_cast<T>(static_cast<int>(a) & static_cast<int>(b));
    }
 
    enum class console_cleanup_options : int
@@ -94,12 +95,6 @@ namespace conmanip
       restore_all                = restore_all_nopos | restore_pos
    };
 
-   console_cleanup_options operator&(console_cleanup_options const a, console_cleanup_options const b)
-   {
-      return static_cast<console_cleanup_options>(
-         static_cast<int>(a) & static_cast<int>(b));
-   }
-
    struct console_colors
    {
       console_text_colors text;
@@ -111,10 +106,63 @@ namespace conmanip
       }
    };
 
+   template <console_type StdHandle>
+   class console_context
+   {
+   public:
+      HANDLE                     handle;
+      CONSOLE_SCREEN_BUFFER_INFO scrbuf_info;
+      console_cleanup_options    cleanup;
+      DWORD                      mode;
+
+   public:
+      console_context(console_cleanup_options const cleanup = console_cleanup_options::restore_all_nopos):
+         cleanup(cleanup)
+      {
+         handle = ::GetStdHandle((DWORD)StdHandle);
+
+         ::GetConsoleScreenBufferInfo(handle, &scrbuf_info);
+         ::GetConsoleMode(handle, &mode);
+      }
+
+      ~console_context()
+      {
+         restore();
+      }
+
+      inline void restore()
+      {
+         restore(cleanup);
+      }
+
+      inline void restore(console_cleanup_options const options)
+      {
+         if(console_cleanup_options::restore_pos == (options & console_cleanup_options::restore_pos))
+         {
+            ::SetConsoleCursorPosition(handle, scrbuf_info.dwCursorPosition);
+         }
+
+         if(console_cleanup_options::restore_attibutes == (options & console_cleanup_options::restore_attibutes))
+         {
+            ::SetConsoleTextAttribute(handle, scrbuf_info.wAttributes);
+         }
+
+         if(console_cleanup_options::restore_mode == (options & console_cleanup_options::restore_mode))
+         {
+            ::SetConsoleMode(handle, mode);
+         }
+
+         if(console_cleanup_options::restore_buffsize == (options & console_cleanup_options::restore_buffsize))
+         {
+            ::SetConsoleScreenBufferSize(handle, scrbuf_info.dwSize);
+         }
+      }
+   };
+
    // functions namespace _details are not intended for direct use from client code
    namespace _details
    {
-      void _settextcolor(HANDLE const console, console_text_colors const color)
+      inline void _settextcolor(HANDLE const console, console_text_colors const color)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
@@ -125,7 +173,7 @@ namespace conmanip
          ::SetConsoleTextAttribute(console, attr);
       }
 
-      void _setbgcolor(HANDLE const console, console_bg_colors const color)
+      inline void _setbgcolor(HANDLE const console, console_bg_colors const color)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
@@ -136,7 +184,7 @@ namespace conmanip
          ::SetConsoleTextAttribute(console, attr);
       }
 
-      void _setcolors(HANDLE const console, console_colors const color)
+      inline void _setcolors(HANDLE const console, console_colors const color)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
@@ -148,7 +196,7 @@ namespace conmanip
          ::SetConsoleTextAttribute(console, attr);
       }
 
-      void _setmode(HANDLE const console, console_modes const modes)
+      inline void _setmode(HANDLE const console, console_modes const modes)
       {
          DWORD mode = 0;
          ::GetConsoleMode(console, &mode);
@@ -177,7 +225,7 @@ namespace conmanip
          ::SetConsoleMode(console, mode);
       }
 
-      void _clearmode(HANDLE const console, console_modes const modes)
+      inline void _clearmode(HANDLE const console, console_modes const modes)
       {
          DWORD mode = 0;
          ::GetConsoleMode(console, &mode);
@@ -205,14 +253,14 @@ namespace conmanip
          ::SetConsoleMode(console, mode);
       }
 
-      int _getposx(HANDLE const console)
+      inline int _getposx(HANDLE const console)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
          return info.dwCursorPosition.X;
       }
 
-      void _setposx(HANDLE const console, int const x)
+      inline void _setposx(HANDLE const console, int const x)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
@@ -220,14 +268,14 @@ namespace conmanip
          ::SetConsoleCursorPosition(console, info.dwCursorPosition);
       }
 
-      int _getposy(HANDLE const console)
+      inline int _getposy(HANDLE const console)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
          return info.dwCursorPosition.Y;
       }
 
-      void _setposy(HANDLE const console, int const y)
+      inline void _setposy(HANDLE const console, int const y)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
@@ -235,71 +283,18 @@ namespace conmanip
          ::SetConsoleCursorPosition(console, info.dwCursorPosition);
       }
 
-      COORD _getpos(HANDLE const console)
+      inline COORD _getpos(HANDLE const console)
       {
          CONSOLE_SCREEN_BUFFER_INFO info;
          ::GetConsoleScreenBufferInfo(console, &info);
          return info.dwCursorPosition;
       }
 
-      void _setpos(HANDLE const console, COORD const pos)
+      inline void _setpos(HANDLE const console, COORD const pos)
       {
          ::SetConsoleCursorPosition(console, pos);
       }
    }
-
-   template <console_type StdHandle>
-   class console_context
-   {
-   public:
-      HANDLE                     handle;
-      CONSOLE_SCREEN_BUFFER_INFO scrbuf_info;
-      console_cleanup_options    cleanup;
-      DWORD                      mode;
-
-   public:
-      console_context(console_cleanup_options const cleanup = console_cleanup_options::restore_all_nopos):
-         cleanup(cleanup)
-      {
-         handle = ::GetStdHandle((DWORD)StdHandle);
-
-         ::GetConsoleScreenBufferInfo(handle, &scrbuf_info);
-         ::GetConsoleMode(handle, &mode);
-      }
-
-      ~console_context()
-      {
-         restore();
-      }
-
-      void restore()
-      {
-         restore(cleanup);
-      }
-
-      void restore(console_cleanup_options const options)
-      {
-         if(console_cleanup_options::restore_pos == (options & console_cleanup_options::restore_pos))
-         {
-            ::SetConsoleCursorPosition(handle, scrbuf_info.dwCursorPosition);
-         }
-
-         if(console_cleanup_options::restore_attibutes == (options & console_cleanup_options::restore_attibutes))
-         {
-            ::SetConsoleTextAttribute(handle, scrbuf_info.wAttributes);
-         }
-
-         if(console_cleanup_options::restore_mode == (options & console_cleanup_options::restore_mode))
-         {
-            ::SetConsoleMode(handle, mode);
-         }
-
-         if(console_cleanup_options::restore_buffsize == (options & console_cleanup_options::restore_buffsize))
-         {
-            ::SetConsoleScreenBufferSize(handle, scrbuf_info.dwSize);
-         }
-      }
-   };
 
    template <console_type StdHandle>
    class console
@@ -312,98 +307,98 @@ namespace conmanip
       {
       }
 
-      void setmode(console_modes const modes)
+      inline void setmode(console_modes const modes)
       {
          _details::_setmode(context.handle, modes);
       }
 
-      void clearmode(console_modes const modes)
+      inline void clearmode(console_modes const modes)
       {
          _details::_clearmode(context.handle, modes);
       }
 
-      int getposx()
+      inline int getposx()
       {
          return _details::_getposx(context.handle);
       }
 
-      void setposx(int const x)
+      inline void setposx(int const x)
       {
          _details::_setposx(context.handle, x);
       }
 
-      int getposy()
+      inline int getposy()
       {
          return _details::_getposy(context.handle);
       }
 
-      void setposy(int const y)
+      inline void setposy(int const y)
       {
          _details::_setposy(context.handle, y);
       }
 
-      COORD getpos()
+      inline COORD getpos()
       {
          return _details::_getpos(context.handle);
       }
 
-      void setpos(int const x, int const y)
+      inline void setpos(int const x, int const y)
       {
          COORD coord = {x,y};
          _details::_setpos(context.handle, coord);
       }
 
-      void settextcolor(console_text_colors const & color)
+      inline void settextcolor(console_text_colors const & color)
       {
          _details::_settextcolor(context.handle, color);
       }
 
-      void setbgcolor(console_bg_colors const & color)
+      inline void setbgcolor(console_bg_colors const & color)
       {
          _details::_setbgcolor(context.handle, color);
       }
 
-      void setcolors(console_text_colors const & text, console_bg_colors const & background)
+      inline void setcolors(console_text_colors const & text, console_bg_colors const & background)
       {
          _details::_setcolors(context.handle, console_colors(text, background));
       }
 
-      void resetcolors()
+      inline void resetcolors()
       {
          ::SetConsoleTextAttribute(context.handle, context.scrbuf_info.wAttributes);
       }
 
-      COORD getsize()
+      inline COORD getsize()
       {
          CONSOLE_SCREEN_BUFFER_INFO csbi;
          ::GetConsoleScreenBufferInfo(context.handle, &csbi);
          return csbi.dwSize;
       }
 
-      bool setsize(int const x, int const y)
+      inline bool setsize(int const x, int const y)
       {
          COORD size = {x, y};
          return 0 != ::SetConsoleScreenBufferSize(context.handle, size);
       }
 
-      bool settitle(std::string const & title)
+      inline bool settitle(std::string const & title)
       {
          return ::SetConsoleTitleA(title.data()) != 0;
       }
 
-      bool settitle(std::wstring const & title)
+      inline bool settitle(std::wstring const & title)
       {
          return ::SetConsoleTitleW(title.data()) != 0;
       }
 
-      std::string gettitle()
+      inline std::string gettitle()
       {
          char oldtitle[MAX_PATH] = {0};
          ::GetConsoleTitleA(oldtitle, MAX_PATH);
          return std::string(oldtitle);
       }
 
-      std::wstring gettitlew()
+      inline std::wstring gettitlew()
       {
          wchar_t oldtitle[MAX_PATH] = {0};
          ::GetConsoleTitleW(oldtitle, MAX_PATH);
@@ -451,19 +446,19 @@ namespace conmanip
       return stream;
    }
 
-   console_manipulator<console_text_colors> settextcolor(console_text_colors const color)
+   inline console_manipulator<console_text_colors> settextcolor(console_text_colors const color)
    {
       return console_manipulator<console_text_colors>(&_details::_settextcolor, color);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_text_colors> settextcolor(console_text_colors const color, console_context<StdHandle> const context)
+   inline console_manipulator<console_text_colors> settextcolor(console_text_colors const color, console_context<StdHandle> const context)
    {
       return console_manipulator<console_text_colors>(&_details::_settextcolor, color, context.handle);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_text_colors> restoretextcolor(console_context<StdHandle> const context)
+   inline console_manipulator<console_text_colors> restoretextcolor(console_context<StdHandle> const context)
    {
       return console_manipulator<console_text_colors>(
          &_details::_settextcolor,
@@ -471,19 +466,19 @@ namespace conmanip
          context.handle);
    }
 
-   console_manipulator<console_bg_colors> setbgcolor(console_bg_colors const color)
+   inline console_manipulator<console_bg_colors> setbgcolor(console_bg_colors const color)
    {
       return console_manipulator<console_bg_colors>(&_details::_setbgcolor, color);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_bg_colors> setbgcolor(console_bg_colors const color, console_context<StdHandle> const context)
+   inline console_manipulator<console_bg_colors> setbgcolor(console_bg_colors const color, console_context<StdHandle> const context)
    {
       return console_manipulator<console_bg_colors>(&_details::_setbgcolor, color, context.handle);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_text_colors> restorebgcolor(console_context<StdHandle> const context)
+   inline console_manipulator<console_text_colors> restorebgcolor(console_context<StdHandle> const context)
    {
       return console_manipulator<console_text_colors>(
          &_details::_settextcolor,
@@ -491,71 +486,73 @@ namespace conmanip
          context.handle);
    }
 
-   console_manipulator<console_colors> setcolors(console_text_colors const text, console_bg_colors const background)
+   inline console_manipulator<console_colors> setcolors(console_text_colors const text, console_bg_colors const background)
    {
       return console_manipulator<console_colors>(&_details::_setcolors, console_colors(text, background));
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_colors> setcolors(console_text_colors const text, console_bg_colors const background, console_context<StdHandle> const context)
+   inline console_manipulator<console_colors> setcolors(console_text_colors const text, console_bg_colors const background, console_context<StdHandle> const context)
    {
       return console_manipulator<console_colors>(&_details::_setcolors, console_colors(text, background), context.handle);
    }
 
-   console_manipulator<console_modes> setmode(console_modes const modes)
+   inline console_manipulator<console_modes> setmode(console_modes const modes)
    {
       return console_manipulator<console_modes>(&_details::_setmode, modes, nullptr, false);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_modes> setmode(console_modes const modes, console_context<StdHandle> const context)
+   inline console_manipulator<console_modes> setmode(console_modes const modes, console_context<StdHandle> const context)
    {
       return console_manipulator<console_modes>(&_details::_setmode, modes, context.handle, false);
    }
 
-   console_manipulator<console_modes> clearmode(console_modes const modes)
+   inline console_manipulator<console_modes> clearmode(console_modes const modes)
    {
       return console_manipulator<console_modes>(&_details::_clearmode, modes, nullptr, false);
    }
 
    template <console_type StdHandle>
-   console_manipulator<console_modes> clearmode(console_modes const modes, console_context<StdHandle> const context)
+   inline console_manipulator<console_modes> clearmode(console_modes const modes, console_context<StdHandle> const context)
    {
       return console_manipulator<console_modes>(&_details::_clearmode, modes, context.handle, false);
    }
 
-   console_manipulator<int> setposx(int const x)
+   inline console_manipulator<int> setposx(int const x)
    {
       return console_manipulator<int>(&_details::_setposx, x);
    }
 
    template <console_type StdHandle>
-   console_manipulator<int> setposx(int const x, console_context<StdHandle> const context)
+   inline console_manipulator<int> setposx(int const x, console_context<StdHandle> const context)
    {
       return console_manipulator<int>(&_details::_setposx, x, context.handle);
    }
 
-   console_manipulator<int> setposy(int const y)
+   inline console_manipulator<int> setposy(int const y)
    {
       return console_manipulator<int>(&_details::_setposy, y);
    }
 
    template <console_type StdHandle>
-   console_manipulator<int> setposy(int const y, console_context<StdHandle> const context)
+   inline console_manipulator<int> setposy(int const y, console_context<StdHandle> const context)
    {
       return console_manipulator<int>(&_details::_setposy, y, context.handle);
    }
 
-   console_manipulator<COORD> setpos(int const x, int const y)
+   inline console_manipulator<COORD> setpos(int const x, int const y)
    {
-      COORD c = {x, y};
+      COORD c = {static_cast<SHORT>(x), static_cast<SHORT>(y)};
       return console_manipulator<COORD>(&_details::_setpos, c);
    }
 
    template <console_type StdHandle>
-   console_manipulator<COORD> setpos(int const x, int const y, console_context<StdHandle> const context)
+   inline console_manipulator<COORD> setpos(int const x, int const y, console_context<StdHandle> const context)
    {
       COORD c = {x, y};
       return console_manipulator<COORD>(&_details::_setpos, c, context.handle);
    }
 }
+
+#endif // CONMANIP_H

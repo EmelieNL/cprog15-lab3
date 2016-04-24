@@ -99,7 +99,7 @@ void Engine::clearEntities()
      return this->map;
  }
 
- void Engine::loadMap(std::string mapName)
+ void Engine::loadMap(std::string /*mapName*/)
  {
      this->clearEntities();
      //Map map(10,10);

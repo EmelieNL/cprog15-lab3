@@ -9,6 +9,8 @@ public:
     Blocked();
     Blocked(char symbol);
     Blocked(char symbol, int x, int y);
+
+    void render() const override;
 };
 
 #endif // BLOCKED_H

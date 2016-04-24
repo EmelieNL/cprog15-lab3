@@ -7,7 +7,8 @@
 class Map
 {
 private:
-    static const int widthX = 50;
+    // Set map size
+    static const int widthX = 70;
     static const int heightY = 20;
 
     AbstractEntity* map[heightY][widthX]; //the map data
@@ -16,6 +17,7 @@ private:
     int playerY;
 
 public:
+    // Setting of map size from outside not supported at the moment
     Map(/*int widthX, int heightY*/);
 
     void initMap();

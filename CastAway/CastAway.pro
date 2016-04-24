@@ -14,5 +14,6 @@ HEADERS += \
     conmanip.h \
     abstractentity.h \
     engine.h \
-    blocked.h
+    blocked.h \
+    render.h
 

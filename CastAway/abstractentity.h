@@ -1,9 +1,14 @@
 #ifndef ABSTRACTENTITY_H
 #define ABSTRACTENTITY_H
+
 #include <string>
+
+//Basic class to represent entities thay can exist in the game world,
+//should be extended by all other map objects etc
 
 class AbstractEntity
 {
+
 private:
     bool canMove;
     bool moving;
@@ -12,8 +17,10 @@ private:
     std::string id;
     int x;
     int y;
-    char symbol;
     int color;
+
+protected:
+    char symbol;
 
 public:
     //AbstractEntity(int x, int y, char symbol); //main constructor
@@ -26,7 +33,6 @@ public:
     bool isCanMove() const;
     bool isMoving() const;
     bool isSolid() const;
-    void render() const;
     void setCanMove(bool canMove);
     void setColor(int color);
     void setDirection(int direction);
@@ -38,7 +44,7 @@ public:
     void setY(int y);
     void update();
 
-
+    virtual void render() const;
 
 };
 

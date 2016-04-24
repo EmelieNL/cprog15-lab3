@@ -4,24 +4,10 @@
 #include <ctime>
 #include <conio.h>
 #include "conmanip.h"
+#include "render.h"
+
 using namespace conmanip;
 using namespace std;
-
-// Unnamed namespace, functions only visible in this cpp (compilation
-// unit). C++11 version of 'static'.
-namespace {
-
-// Print text with requested colors and reset console colors
-void printSymbol(string text, console_text_colors textCol, console_bg_colors bgCol) {
-    std::cout
-            << settextcolor(textCol)
-            << setbgcolor(bgCol)
-            << text
-            << settextcolor(console_text_colors::white)
-            << setbgcolor(console_bg_colors::black);
-}
-
-} // End unnamed namespace
 
 Map::Map(/*int x, int y*/){
 //    widthX = x;
@@ -58,9 +44,8 @@ void Map::render() const {
             AbstractEntity* current = map[y][x];
             if(current != nullptr){
                 current->render();
-                //  printSymbol("^", console_text_colors::cyan, console_bg_colors::blue);
             } else {
-                std::cout << ".";
+               Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
             }
         }
 

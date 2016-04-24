@@ -1,9 +1,10 @@
 #include <iostream>
 #include "abstractentity.h"
-#include "engine.h"
+#include "conmanip.h"
+#include "render.h"
 
-//Basic class to represent entities thay can exist in the game world,
-//should be extended by all other map objects etc
+using namespace std;
+using namespace conmanip;
 
 int AbstractEntity::getColor() const
 {
@@ -47,8 +48,7 @@ bool AbstractEntity::isSolid() const
 
 void AbstractEntity::render() const
 {
-   //TODO also user color
-    std::cout << this->symbol;
+   Render::printSymbol(symbol, console_text_colors::cyan, console_bg_colors::blue);
 }
 
 void AbstractEntity::setCanMove(bool canMove)
@@ -99,3 +99,4 @@ void update()
 {
     //TODO
 }
+
