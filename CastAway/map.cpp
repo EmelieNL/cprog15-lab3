@@ -14,54 +14,52 @@ namespace {
 // Print text with requested colors and reset console colors
 void printSymbol(string text, console_text_colors textCol, console_bg_colors bgCol) {
     std::cout
-    << settextcolor(textCol)
-    << setbgcolor(bgCol)
-    << text
-    << settextcolor(console_text_colors::white)
-    << setbgcolor(console_bg_colors::black);
+            << settextcolor(textCol)
+            << setbgcolor(bgCol)
+            << text
+            << settextcolor(console_text_colors::white)
+            << setbgcolor(console_bg_colors::black);
 }
 
 } // End unnamed namespace
 
+Map::Map(){
+}
+
 Map::Map(int x, int y){
-     widthX = x;
-     heightY = y;
+    widthX = x;
+    heightY = y;
 
-     //Reset map
-     for(int x=0; x < widthX;x++){
-         for(int y=0; y < heightY;y++){
-             map[x][y] = 0;
-         }
-     }
+    //Reset map
+    for(int x=0; x < widthX;x++){
+        for(int y=0; y < heightY;y++){
+            map[x][y] = nullptr;
+        }
+    }
 
-     initMap();
- }
+    initMap();
+}
 
 //Return object at position
-int Map::get(int x, int y){
+AbstractEntity* Map::get(int x, int y){
     return map[y][x];
 }
 
 //Set a object at position
-void Map::set(int x, int y, int obj){
+void Map::set(int x, int y, AbstractEntity* obj){
     map[y][x] = obj;
 }
 
-void Map::render(){
+void Map::render() const {
     clear();
     for(int y=0; y < widthX;y++){
         for(int x=0; x < heightY;x++){
-           //player
-            if(map[y][x] == 1){
-               std::cout << "@";
-               playerX = x;
-               playerY = y;
-              //wall
-           } else if(map[y][x] == 2){
-                std::cout << "+";
-                // water
+            AbstractEntity* current = map[y][x];
+            if(current != nullptr){
+                current->render();
+                //  printSymbol("^", console_text_colors::cyan, console_bg_colors::blue);
             } else {
-                printSymbol("^", console_text_colors::cyan, console_bg_colors::blue);
+                std::cout << ".";
             }
         }
 
@@ -70,27 +68,24 @@ void Map::render(){
     }
 }
 
-int Map::getPlayerX(){
-    return playerX;
-}
-
-int Map::getPlayerY(){
-    return playerY;
-}
 
 void Map::initMap(){
-    map[3][3] = 1; //player
-    map[4][0] = 2; //wall
-    map[4][1] = 2; //wall
-    map[4][2] = 2; //wall
-    map[4][3] = 2; //wall
-    map[4][4] = 2; //wall
-    map[4][5] = 2; //wall
-    map[4][6] = 2; //wall
-    map[4][7] = 2; //wall
+    Blocked* wall; // uninitialized, will crash :)
+    wall->setSolid(true);
+    wall->setSymbol('#');
+
+    map[4][0] = wall;
+    map[4][1] = wall;
+    map[4][2] = wall;
+    map[4][3] = wall;
+    map[4][4] = wall;
+    map[4][5] = wall;
+    map[4][6] = wall;
+    map[4][7] = wall;
+
 }
 
-void  Map::clear(){
+void  Map::clear() const{
 #ifdef _WIN32
     std::system("cls");
 #else

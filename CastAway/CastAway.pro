@@ -4,9 +4,15 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    map.cpp
+    map.cpp \
+    abstractentity.cpp \
+    engine.cpp \
+    blocked.cpp
 
 HEADERS += \
     map.h \
-    conmanip.h
+    conmanip.h \
+    abstractentity.h \
+    engine.h \
+    blocked.h
 
