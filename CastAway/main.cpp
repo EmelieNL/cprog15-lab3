@@ -3,9 +3,9 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main(int /*argc*/, char** /*argv[]*/)
 {
-   Map map(10,10); //Create a map
+   Map map(20,50); //Create a map
    char userCommand;
 
    //Gameloop

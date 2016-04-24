@@ -1,5 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
+#include <string>
 
 
 class Map
@@ -7,7 +8,7 @@ class Map
 private:
     int widthX;
     int heightY;
-    int map[10][10]; //the map data
+    int map[20][50]; //the map data
 
     int playerX;
     int playerY;

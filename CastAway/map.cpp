@@ -3,8 +3,27 @@
 #include <cstdlib>
 #include <ctime>
 #include <conio.h>
+#include "conmanip.h"
+using namespace conmanip;
+using namespace std;
 
- Map::Map(int x, int y){
+// Unnamed namespace, functions only visible in this cpp (compilation
+// unit). C++11 version of 'static'.
+namespace {
+
+// Print text with requested colors and reset console colors
+void printSymbol(string text, console_text_colors textCol, console_bg_colors bgCol) {
+    std::cout
+    << settextcolor(textCol)
+    << setbgcolor(bgCol)
+    << text
+    << settextcolor(console_text_colors::white)
+    << setbgcolor(console_bg_colors::black);
+}
+
+} // End unnamed namespace
+
+Map::Map(int x, int y){
      widthX = x;
      heightY = y;
 
@@ -29,10 +48,9 @@ void Map::set(int x, int y, int obj){
 }
 
 void Map::render(){
-
     clear();
-    for(int y=0; y < 10;y++){
-        for(int x=0; x < 10;x++){
+    for(int y=0; y < widthX;y++){
+        for(int x=0; x < heightY;x++){
            //player
             if(map[y][x] == 1){
                std::cout << "@";
@@ -41,8 +59,9 @@ void Map::render(){
               //wall
            } else if(map[y][x] == 2){
                 std::cout << "+";
+                // water
             } else {
-                std::cout << ".";
+                printSymbol("^", console_text_colors::cyan, console_bg_colors::blue);
             }
         }
 

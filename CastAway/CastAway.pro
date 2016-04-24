@@ -7,5 +7,6 @@ SOURCES += main.cpp \
     map.cpp
 
 HEADERS += \
-    map.h
+    map.h \
+    conmanip.h
 
