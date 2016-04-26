@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     map.cpp \
     abstractentity.cpp \
     engine.cpp \
-    blocked.cpp
+    blocked.cpp \
+    stateintro.cpp
 
 HEADERS += \
     map.h \
@@ -15,5 +16,7 @@ HEADERS += \
     abstractentity.h \
     engine.h \
     blocked.h \
-    render.h
+    render.h \
+    gamestate.h \
+    stateintro.h
 

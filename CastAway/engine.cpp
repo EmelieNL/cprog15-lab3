@@ -1,8 +1,14 @@
 #include <vector>
 #include <algorithm>
+#include <conio.h>
 #include "engine.h"
+#include "gamestate.h"
 
 //Class to represent the gameengine, to help to load maps and hold information about active entities
+
+Engine::Engine(void){
+
+}
 
 Engine::Engine(Map map){
    // Map firstMap(10,10);
@@ -77,11 +83,16 @@ void Engine::clearEntities()
 
  void Engine::render() const
  {
-     this->map.render();
+     //this->map.render();
+     // the current state handles render
+     states.back()->render(this);
  }
 
  void Engine::update()
  {
+     // the current state handles update
+     states.back()->update(this);
+
     /*
      * for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
         //(*it).update();
@@ -106,5 +117,46 @@ void Engine::clearEntities()
      //Map map(mapName);
      //this->setMap(map);
 
+ }
+
+ void Engine::changeState(GameState *state){
+
+     //The old state might have to do stuff, clean up data
+     if(!states.empty()){
+         states.back()->clear();
+         states.pop_back(); //pop from vector
+     }
+
+     //Add the new state to end of vector
+     states.push_back(state);
+
+     //Init the new state which is at end of vector
+     states.back()->init();
+ }
+
+ void Engine::quit()
+ {
+     this->running = false;
+ }
+
+ bool Engine::isRunning()
+ {
+     return this->running;
+ }
+
+ void Engine::handleEvents()
+ {
+     // the currentstate handles events
+     states.back()->handleInput(this);
+ }
+
+ void Engine::clear() const
+ {
+ #ifdef _WIN32
+     std::system("cls");
+ #else
+     // Assume POSIX
+     std::system ("clear");
+ #endif
  }
 
