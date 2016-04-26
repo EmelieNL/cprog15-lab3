@@ -3,27 +3,16 @@
 #include "engine.h"
 #include "gamestate.h"
 #include "stateintro.h"
+#include "stateplay.h"
 
 StateIntro StateIntro::introState;
 
-void StateIntro::init(){
-
-
-    std::cout << "Welcome to" << "\n";
-    std::cout << "   _____          _                              " << "\n";
-    std::cout << "  / ____|        | |     /\\                      " << "\n";
-    std::cout << " | |     __ _ ___| |_   /  \\__      ____ _ _   _ " << "\n";
-    std::cout << " | |    / _` / __| __| / /\\ \\ \\ /\\ / / _` | | | |" << "\n";
-    std::cout << " | |___| (_| \\__ \\ |_ / ____ \\ V  V / (_| | |_| |" << "\n";
-    std::cout << "  \\_____\\__,_|___/\\__/_/    \\_\\_/\\_/ \\__,_|\\__, |" << "\n";
-    std::cout << "                                            __/ |" << "\n";
-    std::cout << "                                           |___/ " << "\n";
-
-    printCommands();
+void StateIntro::init(Engine* engine){
+    this->render(engine);
 }
 
 void StateIntro::clear(){
-                 std::cout << "IntroState clear!" << "\n";
+  std::cout << "IntroState clear!" << "\n";
 }
 
  void StateIntro::printCommands()
@@ -49,7 +38,7 @@ void StateIntro::handleInput(Engine* engine){
 
     switch (userCommand)
     {
-    case '0':
+    case '0': engine->changeState(StatePlay::instance());
               break;
     case '1':
                 break;
@@ -67,5 +56,16 @@ void StateIntro::update(Engine* engine){
 
 void StateIntro::render(const Engine* engine){
     engine->clear();
-    init();
+
+    std::cout << "Welcome to" << "\n";
+    std::cout << "   _____          _                              " << "\n";
+    std::cout << "  / ____|        | |     /\\                      " << "\n";
+    std::cout << " | |     __ _ ___| |_   /  \\__      ____ _ _   _ " << "\n";
+    std::cout << " | |    / _` / __| __| / /\\ \\ \\ /\\ / / _` | | | |" << "\n";
+    std::cout << " | |___| (_| \\__ \\ |_ / ____ \\ V  V / (_| | |_| |" << "\n";
+    std::cout << "  \\_____\\__,_|___/\\__/_/    \\_\\_/\\_/ \\__,_|\\__, |" << "\n";
+    std::cout << "                                            __/ |" << "\n";
+    std::cout << "                                           |___/ " << "\n";
+
+    printCommands();
 }

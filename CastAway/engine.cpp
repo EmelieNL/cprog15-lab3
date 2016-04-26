@@ -1,19 +1,26 @@
 #include <vector>
 #include <algorithm>
 #include <conio.h>
+#include <iostream>
 #include "engine.h"
 #include "gamestate.h"
 
 //Class to represent the gameengine, to help to load maps and hold information about active entities
 
 Engine::Engine(void){
-
+    init();
 }
 
 Engine::Engine(Map map){
    // Map firstMap(10,10);
    // map = map;
-    setMap(map);
+    //setMap(map);
+}
+
+void Engine::init()
+{
+    Map level_01;
+    this->maps["level_1"] = &level_01;
 }
 
 void Engine::addEntity(AbstractEntity e)
@@ -100,23 +107,26 @@ void Engine::clearEntities()
     */
  }
 
- void Engine::setMap(Map map)
+ Map* Engine::getMap() const
  {
-     this->map = map;
+     return this->currentMap;
  }
 
- Map Engine::getMap()
+ void Engine::loadMap(std::string mapName)
  {
-     return this->map;
- }
 
- void Engine::loadMap(std::string /*mapName*/)
- {
-     this->clearEntities();
+     if(maps.find(mapName) != maps.end()){
+        this->clearEntities();
+        currentMap = maps[mapName];
+        std::cout << "Found map " << mapName << ", now set to currMap" << "\n";
+     } else {
+         std::cout << "Did not find map " << mapName << "... :(" << "\n";
+     }
+
+     //this->clearEntities();
      //Map map(10,10);
      //Map map(mapName);
      //this->setMap(map);
-
  }
 
  void Engine::changeState(GameState *state){
@@ -131,7 +141,7 @@ void Engine::clearEntities()
      states.push_back(state);
 
      //Init the new state which is at end of vector
-     states.back()->init();
+     states.back()->init(this);
  }
 
  void Engine::quit()
@@ -152,6 +162,7 @@ void Engine::clearEntities()
 
  void Engine::clear() const
  {
+
  #ifdef _WIN32
      std::system("cls");
  #else

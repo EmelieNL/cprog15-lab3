@@ -5,7 +5,7 @@
 
 class GameState {
 public:
-    virtual void init() = 0;
+    virtual void init(Engine* engine) = 0;
     virtual void update(Engine* engine) = 0;
     virtual void render(const Engine* engine) = 0;
     virtual void handleInput(Engine* engine) = 0;
@@ -19,6 +19,7 @@ public:
     virtual void changeState(Engine* engine, GameState* state){
         engine->changeState(state);
     }
+
 
 protected:
     GameState(){}

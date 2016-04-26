@@ -41,12 +41,15 @@ void Map::render() const {
     clear();
     for(int y=0; y < heightY;y++){
         for(int x=0; x < widthX;x++){
-            AbstractEntity* current = map[y][x];
+            //TODO cause seg fault
+            /*AbstractEntity* current = map[y][x];
             if(current != nullptr){
                 current->render();
             } else {
                Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
-            }
+            }*/
+             Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
+
         }
 
         //new line
@@ -56,6 +59,7 @@ void Map::render() const {
 
 
 void Map::initMap(){
+    std::cout << "Map is inited from Map class"<< "\n";
     Blocked* wall = new Blocked();
     wall->setSolid(true);
     wall->setSymbol('#');

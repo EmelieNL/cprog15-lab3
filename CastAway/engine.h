@@ -1,5 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
+#include <map>
 #include <vector>
 #include "abstractentity.h"
 #include "map.h"
@@ -9,14 +10,15 @@ class GameState;
 class Engine
 {
 private:
-    Map map;
-    //Vector to store entities
-    std::vector<AbstractEntity> entities;
-    std::vector<GameState*> states;
+    Map* currentMap;
+    std::map<std::string, Map*> maps; //maps available
+    std::vector<AbstractEntity> entities; //Vector to store entities
+    std::vector<GameState*> states; //Game states
     bool running = true;
 public:
     Engine(); //constructor
     Engine(Map map);
+    void init();
     void addEntity(AbstractEntity e);
     void clearEntities();
     AbstractEntity* getEntity(std::string id);
@@ -25,8 +27,7 @@ public:
     void update();
     void handleEvents();
     void clear() const;
-    void setMap(Map map);
-    Map getMap();
+    Map* getMap() const;
     void loadMap(std::string mapName);
     void changeState(GameState* state);
     void quit();

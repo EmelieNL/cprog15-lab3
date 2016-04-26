@@ -1,11 +1,9 @@
-#ifndef STATEINTRO_H
-#define STATEINTRO_H
-
+#ifndef STATEPLAY_H
+#define STATEPLAY_H
 #include "gamestate.h"
 
-class StateIntro:public GameState
+class StatePlay:public GameState
 {
-
 public:
     void init(Engine* engine);
     void update(Engine* engine);
@@ -19,16 +17,12 @@ public:
     void resume();
 
     //Get static
-    static StateIntro* instance(){
-        return &introState;
+    static StatePlay* instance(){
+        return &playState;
     }
-
-protected:
-    //IntroState() {}
-
 private:
-    static StateIntro introState;
+    static StatePlay playState;
     const std::vector<std::string> commands = {"Play", "Help", "Quit"};
 };
 
-#endif // STATEINTRO_H
+#endif // STATEPLAY_H
