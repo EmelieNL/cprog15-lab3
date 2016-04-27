@@ -19,8 +19,8 @@ Engine::Engine(Map map){
 
 void Engine::init()
 {
-    Map level_01;
-    this->maps["level_1"] = &level_01;
+    Map* level_01 = new Map();
+    this->maps["level_1"] = level_01;
 }
 
 void Engine::addEntity(AbstractEntity e)
