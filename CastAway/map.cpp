@@ -47,7 +47,6 @@ void Map::render() const {
             } else {
                Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
             }
-             Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
 
         }
 
