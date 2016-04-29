@@ -10,7 +10,9 @@ SOURCES += main.cpp \
     blocked.cpp \
     stateintro.cpp \
     stateplay.cpp \
-    statepausemenu.cpp
+    statepausemenu.cpp \
+    inventory.cpp \
+    item.cpp
 
 HEADERS += \
     map.h \
@@ -22,5 +24,7 @@ HEADERS += \
     gamestate.h \
     stateintro.h \
     stateplay.h \
-    statepausemenu.h
+    statepausemenu.h \
+    inventory.h \
+    item.h
 
