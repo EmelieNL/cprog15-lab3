@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "gamestate.h"
 #include "stateplay.h"
+#include "statepausemenu.h"
 
 StatePlay StatePlay::playState;
 
@@ -27,12 +28,16 @@ void StatePlay::handleInput(Engine* engine){
 
     switch (userCommand)
     {
-    case '0': //engine->changeState();
+    case 'q': engine->changeState(StatePauseMenu::instance());
               break;
-    case '1':
+    case 'w':
                 break;
-    case '2': engine->quit();
-               break;
+    case 'a':
+                break;
+    case 's':
+                break;
+    case 'd':
+                break;
      default:
             break;
 
@@ -44,8 +49,21 @@ void StatePlay::update(Engine* engine){
 }
 
 void StatePlay::render(const Engine* engine){
-   // engine->clear();
-     std::cout << "Play render!" << "\n";
     engine->getMap()->render();
+    printCommands();
+}
+
+//Print available commands that the player can enter
+void StatePlay::printCommands()
+{
+    std::cout << "w: Move up" << '\n';
+    std::cout << "a: Move left" << '\n';
+    std::cout << "s: Move down" << '\n';
+    std::cout << "d: Move right" << '\n';
+
+    std::cout << '\n';
+
+    std::cout << "q: Menu" << '\n';
+
 }
 

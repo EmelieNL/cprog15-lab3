@@ -1,10 +1,11 @@
-#ifndef STATEPLAY_H
-#define STATEPLAY_H
-#include <map>
+#ifndef STATEPAUSEMENU_H
+#define STATEPAUSEMENU_H
+
 #include "gamestate.h"
 
-class StatePlay:public GameState
+class StatePauseMenu:public GameState
 {
+
 public:
     void init(Engine* engine);
     void update(Engine* engine);
@@ -18,11 +19,16 @@ public:
     void resume();
 
     //Get static
-    static StatePlay* instance(){
-        return &playState;
+    static StatePauseMenu* instance(){
+        return &pausemenuState;
     }
+
+protected:
+    //IntroState() {}
+
 private:
-    static StatePlay playState;
+    static StatePauseMenu pausemenuState;
+    const std::vector<std::string> commands = {"Continue", "Quit"};
 };
 
-#endif // STATEPLAY_H
+#endif // STATEPAUSEMENU_H

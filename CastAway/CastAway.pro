@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     engine.cpp \
     blocked.cpp \
     stateintro.cpp \
-    stateplay.cpp
+    stateplay.cpp \
+    statepausemenu.cpp
 
 HEADERS += \
     map.h \
@@ -20,5 +21,6 @@ HEADERS += \
     render.h \
     gamestate.h \
     stateintro.h \
-    stateplay.h
+    stateplay.h \
+    statepausemenu.h
 
