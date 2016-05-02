@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     stateplay.cpp \
     statepausemenu.cpp \
     inventory.cpp \
-    item.cpp
+    item.cpp \
+    terrain.cpp
 
 HEADERS += \
     map.h \
@@ -26,5 +27,6 @@ HEADERS += \
     stateplay.h \
     statepausemenu.h \
     inventory.h \
-    item.h
+    item.h \
+    terrain.h
 
