@@ -9,67 +9,61 @@
 using namespace conmanip;
 using namespace std;
 
-Map::Map(/*int x, int y*/){
-//    widthX = x;
-//    heightY = y;
-
-//    // Allocate dynamic size of map array
-//    map = new AbstractEntity**[heightY];
-
-    //Reset map
-    for(int y=0; y < heightY; y++){
-//        map[y] = new AbstractEntity*[widthX];
-        for(int x=0; x < widthX; x++){
-            map[y][x] = nullptr;
-        }
-    }
-
+// Default constructor
+Map::Map() {
     initMap();
 }
 
-//Return object at position
-AbstractEntity* Map::get(int x, int y){
+// Return tile at position x, y
+Map::Tile Map::getTile(int x, int y){
     return map[y][x];
 }
 
-//Set a object at position
-void Map::set(int x, int y, AbstractEntity* obj){
-    map[y][x] = obj;
+// Set entity at position x, y
+// Tror inte vi kommer att behöva denna
+void Map::setAbstractEntity(int x, int y, AbstractEntity absEntity){
+    // TODO beroende på hur vi vill hantera objectet
 }
 
+// Set terrain type at position x, y
+// Tror inte vi kommer att behöva denna
+void Map::setTerrain(int x, int y, Terrain::Type terrainType){
+    map[y][x].terrain.setTerrain(terrainType);
+}
+
+// Render map
 void Map::render() const {
     clear();
-    for(int y=0; y < heightY;y++){
-        for(int x=0; x < widthX;x++){
-            AbstractEntity* current = map[y][x];
-            if(current != nullptr){
-                current->render();
-            } else {
-               Render::printSymbol('^', console_text_colors::cyan, console_bg_colors::blue);
-            }
-
+    for(int y=0; y < heightY; y++){
+        for(int x=0; x < widthX; x++){
+            Tile current = map[y][x];
+            Render::printSymbol(current.terrain.getSymbol(), current.terrain.getTextcolor(), current.terrain.getBGcolor());
         }
-
-        //new line
-        std::cout << "\n";
+        std::cout << endl;
     }
 }
 
 
 void Map::initMap(){
     std::cout << "Map is inited from Map class"<< "\n";
-    Blocked* wall = new Blocked();
-    wall->setSolid(true);
-    wall->setSymbol('#');
 
-    map[4][0] = wall;
-    map[4][1] = wall;
-    map[4][2] = wall;
-    map[4][3] = wall;
-    map[4][4] = wall;
-    map[4][5] = wall;
-    map[4][6] = wall;
-    map[4][7] = wall;
+    // Not renderd right now
+    Blocked wall = Blocked();
+    wall.setSolid(true);
+    wall.setSymbol('#');
+
+    map[4][0].absEntity = wall;
+    map[4][1].absEntity = wall;
+    map[4][2].absEntity = wall;
+    map[4][3].absEntity = wall;
+    map[4][4].absEntity = wall;
+    map[4][5].absEntity = wall;
+    map[4][6].absEntity = wall;
+
+    // Testing
+    map[4][7].terrain.setTerrain(Terrain::Type::SAND);
+    map[4][11].terrain.setTerrain(Terrain::Type::FORREST);
+    map[4][19].terrain.setTerrain(Terrain::Type::MOUNTAIN);
 
 }
 

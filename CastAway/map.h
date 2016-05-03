@@ -29,6 +29,7 @@ private:
     static const int widthX = 70;
     static const int heightY = 20;
 
+    Tile map[heightY][widthX];
 
     int playerX;
     int playerY;
