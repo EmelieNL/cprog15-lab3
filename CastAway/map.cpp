@@ -14,6 +14,17 @@ Map::Map() {
     initMap();
 }
 
+Map::~Map()
+{
+
+    //Clean tiles in this map
+    for(int y=0; y < heightY; y++){
+        for(int x=0; x < widthX; x++){
+            delete[] map[y][x];
+         }
+    }
+}
+
 // Return tile at position x, y
 Tile* Map::getTile(int x, int y){
     return map[y][x];

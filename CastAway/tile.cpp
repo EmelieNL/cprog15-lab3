@@ -6,6 +6,11 @@ Tile::Tile()
     terrain = new Terrain(Terrain::Type::WATER); //TODO desturctor
 }
 
+Tile::~Tile()
+{
+    delete absEntity;
+}
+
 AbstractEntity *Tile::getAbsEntity()
 {
     return absEntity;

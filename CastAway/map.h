@@ -10,6 +10,7 @@ class Map
 {
 public:
     Map();
+    ~Map();
 
     void initMap();
     Tile* getTile(int x, int y);

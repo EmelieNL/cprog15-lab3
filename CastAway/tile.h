@@ -12,6 +12,7 @@ private:
 
 public:
     Tile();
+    ~Tile();
     AbstractEntity* getAbsEntity();
     Terrain* getTerrain();
     void setAbsEntity(AbstractEntity* absEntity);

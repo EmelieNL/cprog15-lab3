@@ -17,6 +17,7 @@ private:
     bool running = true;
 public:
     Engine(); //constructor
+    ~Engine(); //destructor
     Engine(Map map);
     void init();
     void addEntity(AbstractEntity e);
