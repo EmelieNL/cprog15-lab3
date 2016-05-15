@@ -3,7 +3,7 @@
 #include "abstractentity.h"
 #include "tile.h"
 
-class Creature:AbstractEntity
+class Creature:public AbstractEntity
 {
 public:
     Creature();

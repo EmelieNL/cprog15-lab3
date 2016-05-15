@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "creature.h"
 
-class Player:Creature
+class Player:public Creature
 {
 public:
     Player();
