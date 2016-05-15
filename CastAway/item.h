@@ -14,6 +14,8 @@ public:
     int getStackAmount() const;
     int getWeight() const;
 
+    virtual void update() override;
+
 private:
     bool canStack; //If this item can be stacked in an inventory
     int maxStack; //max size of a stack of this item, if it can be stacked

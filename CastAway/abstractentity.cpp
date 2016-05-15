@@ -91,12 +91,12 @@ void AbstractEntity::setY(int y)
    this->y = y;
 }
 
-void AbstractEntity::setSymbol(char symbol){
-    this->symbol = symbol;
+void AbstractEntity::update()
+{
+
 }
 
-void update()
-{
-    //TODO
+void AbstractEntity::setSymbol(char symbol){
+    this->symbol = symbol;
 }
 

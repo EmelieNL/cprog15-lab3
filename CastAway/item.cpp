@@ -41,3 +41,8 @@ int Item::getWeight() const
 {
     return weight;
 }
+
+void Item::update()
+{
+
+}

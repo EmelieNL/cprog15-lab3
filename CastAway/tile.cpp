@@ -8,7 +8,7 @@ Tile::Tile()
 
 Tile::~Tile()
 {
-    delete absEntity;
+    delete absEntity; //TODO warning atm...
 }
 
 AbstractEntity *Tile::getAbsEntity()

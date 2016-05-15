@@ -10,7 +10,7 @@ public:
     Blocked(char symbol);
     Blocked(char symbol, int x, int y);
 
-    void render() const override;
+    virtual void update() override;
 };
 
 #endif // BLOCKED_H

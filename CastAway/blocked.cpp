@@ -22,9 +22,9 @@ Blocked::Blocked(char symbol,int x, int y)
     setSolid(true);
 }
 
-void Blocked::render() const
+void Blocked::update()
 {
-   Render::printSymbol(symbol, console_text_colors::green, console_bg_colors::black);
+
 }
 
 

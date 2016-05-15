@@ -43,9 +43,9 @@ public:
     void setSymbol(char symbol);
     void setX(int x);
     void setY(int y);
-    void update();
+    virtual void update();
 
-    virtual void render() const;
+    void render() const;
 
 };
 

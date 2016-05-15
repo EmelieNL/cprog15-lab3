@@ -2,7 +2,7 @@
 #define INVENTORY_H
 #include <vector>
 #include <algorithm>
-#include "item.h";
+#include "item.h"
 
 class Inventory
 {

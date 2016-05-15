@@ -14,7 +14,9 @@ SOURCES += main.cpp \
     inventory.cpp \
     item.cpp \
     terrain.cpp \
-    tile.cpp
+    tile.cpp \
+    creature.cpp \
+    player.cpp
 
 HEADERS += \
     map.h \
@@ -30,5 +32,7 @@ HEADERS += \
     inventory.h \
     item.h \
     terrain.h \
-    tile.h
+    tile.h \
+    creature.h \
+    player.h
 
