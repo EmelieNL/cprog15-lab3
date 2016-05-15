@@ -5,7 +5,7 @@
 using namespace conmanip;
 
 Blocked::Blocked(){
-
+    setSolid(true);
 }
 
 Blocked::Blocked(char symbol)

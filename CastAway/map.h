@@ -4,21 +4,15 @@
 
 #include "blocked.h"
 #include "terrain.h"
+#include "tile.h"
 
 class Map
 {
 public:
     Map();
 
-    // Struct to represent a singel tile in map
-    struct Tile {
-      AbstractEntity absEntity;
-      Terrain terrain;
-      //TODO e.g. Creature creature;
-    };
-
     void initMap();
-    Tile getTile(int x, int y);
+    Tile* getTile(int x, int y);
     void setTerrain(int x, int y, Terrain::Type terrainType);
     void setAbstractEntity(int x, int y, AbstractEntity absEntity);
     void render() const;
@@ -29,7 +23,7 @@ private:
     static const int widthX = 70;
     static const int heightY = 20;
 
-    Tile map[heightY][widthX];
+    Tile* map[heightY][widthX];
 
     int playerX;
     int playerY;

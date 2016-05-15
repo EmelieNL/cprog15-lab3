@@ -1,6 +1,6 @@
 #ifndef ABSTRACTENTITY_H
 #define ABSTRACTENTITY_H
-
+#include "conmanip.h"
 #include <string>
 
 //Basic class to represent entities thay can exist in the game world,
@@ -17,12 +17,13 @@ private:
     std::string id;
     int x;
     int y;
-    int color;
+    int color; //TODO implement conmanip colors
 
 protected:
     char symbol;
 
 public:
+    //TODO make this class abstract!
     //AbstractEntity(int x, int y, char symbol); //main constructor
     //virtual ~AbstractEntity();	//destructor
     int getColor() const;

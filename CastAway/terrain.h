@@ -9,7 +9,7 @@ public:
     // Strict enum to represent different terrains
     enum class Type {WATER, SAND, FORREST, MOUNTAIN};
 
-    Terrain() {};
+    Terrain() {}
     Terrain(Terrain::Type terrainType);
     void setTerrain(Terrain::Type terrainType);
     Terrain::Type getType();

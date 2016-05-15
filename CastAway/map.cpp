@@ -15,20 +15,8 @@ Map::Map() {
 }
 
 // Return tile at position x, y
-Map::Tile Map::getTile(int x, int y){
+Tile* Map::getTile(int x, int y){
     return map[y][x];
-}
-
-// Set entity at position x, y
-// Tror inte vi kommer att behöva denna
-void Map::setAbstractEntity(int x, int y, AbstractEntity absEntity){
-    // TODO beroende på hur vi vill hantera objectet
-}
-
-// Set terrain type at position x, y
-// Tror inte vi kommer att behöva denna
-void Map::setTerrain(int x, int y, Terrain::Type terrainType){
-    map[y][x].terrain.setTerrain(terrainType);
 }
 
 // Render map
@@ -36,35 +24,45 @@ void Map::render() const {
     clear();
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
-            Tile current = map[y][x];
-            Render::printSymbol(current.terrain.getSymbol(), current.terrain.getTextcolor(), current.terrain.getBGcolor());
+            Tile* current = map[y][x];
+            if(current != nullptr){
+                //First try to render any absEntity
+                if(current->getAbsEntity() != nullptr){
+                    current->getAbsEntity()->render();
+                //if not present render the terrain
+                } else {
+                    Render::printSymbol(current->getTerrain()->getSymbol(), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
+                }
+            } else {
+                 Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
+            }
         }
         std::cout << endl;
     }
 }
 
-
 void Map::initMap(){
     std::cout << "Map is inited from Map class"<< "\n";
 
-    // Not renderd right now
-    Blocked wall = Blocked();
-    wall.setSolid(true);
-    wall.setSymbol('#');
+    //Init tiles
+    for(int y=0; y < heightY; y++){
+        for(int x=0; x < widthX; x++){
+            map[y][x] = new Tile(); //TODO add to destructor
+          }
+    }
 
-    map[4][0].absEntity = wall;
-    map[4][1].absEntity = wall;
-    map[4][2].absEntity = wall;
-    map[4][3].absEntity = wall;
-    map[4][4].absEntity = wall;
-    map[4][5].absEntity = wall;
-    map[4][6].absEntity = wall;
+    Blocked* wall = new Blocked('#'); //TODO add destructor
+    map[7][3]->setAbsEntity(wall);
 
-    // Testing
-    map[4][7].terrain.setTerrain(Terrain::Type::SAND);
-    map[4][11].terrain.setTerrain(Terrain::Type::FORREST);
-    map[4][19].terrain.setTerrain(Terrain::Type::MOUNTAIN);
+    map[4][15]->setTerrain(Terrain::Type::SAND);
+    map[4][16]->setTerrain(Terrain::Type::SAND);
+    map[4][17]->setTerrain(Terrain::Type::FORREST);
+    map[4][18]->setTerrain(Terrain::Type::SAND);
 
+    map[5][15]->setTerrain(Terrain::Type::SAND);
+    map[5][16]->setTerrain(Terrain::Type::MOUNTAIN);
+    map[5][17]->setTerrain(Terrain::Type::SAND);
+    map[5][18]->setTerrain(Terrain::Type::SAND);
 }
 
 void  Map::clear() const{

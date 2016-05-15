@@ -19,7 +19,7 @@ Engine::Engine(Map map){
 
 void Engine::init()
 {
-    Map* level_01 = new Map();
+    Map* level_01 = new Map(); //TODO add to destructor
     this->maps["level_1"] = level_01;
 }
 
