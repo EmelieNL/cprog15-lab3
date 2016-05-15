@@ -15,10 +15,25 @@ private:
     std::vector<AbstractEntity> entities; //Vector to store entities
     std::vector<GameState*> states; //Game states
     bool running = true;
-public:
+
     Engine(); //constructor
+    //Engine(Map map);
     ~Engine(); //destructor
-    Engine(Map map);
+    Engine(Engine const&); //dont implement
+    void operator=(Engine const&); //dont implement
+
+
+
+public:
+
+    static Engine& Instance(){
+        static Engine engine;
+        return engine;
+    }
+
+    //Engine(Engine const&) = delete;
+    //void operator=(Engine const&) = delete;
+
     void init();
     void addEntity(AbstractEntity e);
     void clearEntities();

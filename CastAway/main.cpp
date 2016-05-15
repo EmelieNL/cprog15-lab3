@@ -5,26 +5,14 @@ using namespace std;
 
 int main(int /*argc*/, char** /*argv[]*/)
 {
-   //Map firstMap; //Create a map
-
-   // Engine engine(firstMap);
-   Engine engine;
-   //engine.init();
-   engine.changeState(StateIntro::instance());
-
-   //Engine engine;
-   //engine.setMap(firstMap);
-
-   //char userCommand;
+   Engine::Instance().init();
+   Engine::Instance().changeState(StateIntro::instance());
 
    //Gameloop
-   while(engine.isRunning()){
-
-       engine.handleEvents();
-       engine.update();
-       engine.render();
-       //std::cin >> userCommand;
-       //TODO movement
+   while(Engine::Instance().isRunning()){
+       Engine::Instance().handleEvents();
+       Engine::Instance().update();
+       Engine::Instance().render();
    }
 
    return 0;

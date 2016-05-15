@@ -1,6 +1,7 @@
 #ifndef ABSTRACTENTITY_H
 #define ABSTRACTENTITY_H
 #include "conmanip.h"
+//#include "engine.h"
 #include <string>
 
 //Basic class to represent entities thay can exist in the game world,

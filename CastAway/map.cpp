@@ -85,4 +85,13 @@ void  Map::clear() const{
 #endif
 }
 
+bool Map::isBlocked(int x, int y)
+{
+    Tile* tile = getTile(x,y);
+    if(tile->getAbsEntity() != nullptr) //&& tile->getAbsEntity()->isSolid())
+        return true;
+    else
+        return false;
+}
+
 

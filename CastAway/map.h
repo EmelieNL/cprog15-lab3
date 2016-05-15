@@ -18,6 +18,7 @@ public:
     void setAbstractEntity(int x, int y, AbstractEntity absEntity);
     void render() const;
     void clear() const;
+    bool isBlocked(int x, int y);
 
 private:
     // Set map size

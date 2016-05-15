@@ -17,11 +17,11 @@ Engine::~Engine()
     maps.clear(); //TODO is this correct as delete[] is not compiling?
 }
 
-Engine::Engine(Map map){
+/*Engine::Engine(Map map){
    // Map firstMap(10,10);
    // map = map;
     //setMap(map);
-}
+}*/
 
 void Engine::init()
 {

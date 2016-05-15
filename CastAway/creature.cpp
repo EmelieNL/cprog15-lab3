@@ -48,13 +48,29 @@ bool Creature::isAlive() const
 
 void Creature::moveX(int x)
 {
+    /*
     //Can this creature move at all?
     if(isCanMove()){
 
         //is there anyting blocking?
-        //Tile* tile =
+        if(Engine::getMap()->isBlocked(getX() + x, getY())){
+            return false;
+        } else {
 
-    }
+            //Remove creature from map tile
+            Engine::getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
+
+            //Update the creatures position
+            setX(getX()+x);
+
+            //Add creatre to map tile
+            Engine::getMap()->getTile(getX(), getY())->setAbsEntity(this);
+
+
+
+        }
+
+    }*/
 }
 
 void Creature::update()
