@@ -9,6 +9,20 @@ StatePlay StatePlay::playState;
 void StatePlay::init(Engine *engine){
      std::cout << "Play init!" << "\n";
     engine->loadMap("level_1");
+
+    Player* player = new Player;
+    Engine::Instance().setPlayer(player);
+
+    //start pos for the player
+    int playerX = 10;
+    int playerY = 10;
+
+    player->setX(playerX);
+    player->setY(playerY);
+   // Engine::Instance().getPlayer()->setX(playerX);
+    //Engine::Instance().getPlayer()->setY(playerY);
+
+    Engine::Instance().getMap()->getTile(playerX, playerY)->setAbsEntity(player);
 }
 
 void StatePlay::clear(){
@@ -31,12 +45,16 @@ void StatePlay::handleInput(Engine* engine){
     case 'q': engine->changeState(StatePauseMenu::instance());
               break;
     case 'w':
+                engine->getPlayer()->moveY(-1);
                 break;
     case 'a':
+                engine->getPlayer()->moveX(-1);
                 break;
     case 's':
+                engine->getPlayer()->moveY(1);
                 break;
     case 'd':
+                engine->getPlayer()->moveX(1);
                 break;
      default:
             break;

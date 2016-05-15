@@ -15,6 +15,9 @@ Engine::~Engine()
 {
     //Clean maps
     maps.clear(); //TODO is this correct as delete[] is not compiling?
+
+    //Remove player
+    //delete player; //TODO how to free player?
 }
 
 /*Engine::Engine(Map map){
@@ -27,6 +30,20 @@ void Engine::init()
 {
     Map* level_01 = new Map(); //TODO add to destructor
     this->maps["level_1"] = level_01;
+/*
+    player = new Player();
+
+    //start pos for the player
+    int playerX = 10;
+    int playerY = 10;
+
+    player->setX(playerX);
+    player->setY(playerY);
+
+    getMap()->getTile(playerX, playerY)->setAbsEntity(player);
+    */
+
+
 }
 
 void Engine::addEntity(AbstractEntity e)
@@ -158,6 +175,16 @@ void Engine::clearEntities()
  bool Engine::isRunning()
  {
      return this->running;
+ }
+
+ Player *Engine::getPlayer() const
+ {
+     return player;
+ }
+
+ void Engine::setPlayer(Player *player)
+ {
+     this->player = player;
  }
 
  void Engine::handleEvents()

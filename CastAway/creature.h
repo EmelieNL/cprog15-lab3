@@ -2,6 +2,8 @@
 #define CREATURE_H
 #include "abstractentity.h"
 #include "tile.h"
+#include "map.h"
+#include "engine.h"
 
 class Creature:public AbstractEntity
 {

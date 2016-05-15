@@ -2,6 +2,7 @@
 #define STATEPLAY_H
 #include <map>
 #include "gamestate.h"
+#include "player.h"
 
 class StatePlay:public GameState
 {

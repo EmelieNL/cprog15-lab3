@@ -63,7 +63,16 @@ void Map::initMap(){
     }
 
     Blocked* wall = new Blocked('#'); //TODO add destructor
-    map[7][3]->setAbsEntity(wall);
+    map[12][11]->setAbsEntity(wall);
+
+    Blocked* wall2 = new Blocked('#'); //TODO add destructor
+    map[13][11]->setAbsEntity(wall2);
+
+    Blocked* wall3 = new Blocked('#'); //TODO add destructor
+    map[14][11]->setAbsEntity(wall3);
+
+    Blocked* wall4 = new Blocked('#'); //TODO add destructor
+    map[14][12]->setAbsEntity(wall4);
 
     map[4][15]->setTerrain(Terrain::Type::SAND);
     map[4][16]->setTerrain(Terrain::Type::SAND);

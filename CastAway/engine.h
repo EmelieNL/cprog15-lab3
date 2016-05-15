@@ -5,6 +5,7 @@
 #include "abstractentity.h"
 #include "map.h"
 
+class Player; //forward declaration
 class GameState;
 
 class Engine
@@ -21,7 +22,7 @@ private:
     ~Engine(); //destructor
     Engine(Engine const&); //dont implement
     void operator=(Engine const&); //dont implement
-
+    Player* player;
 
 
 public:
@@ -48,6 +49,8 @@ public:
     void changeState(GameState* state);
     void quit();
     bool isRunning();
+    Player* getPlayer() const;
+    void setPlayer(Player* player);
 };
 
 #endif // ENGINE_H
