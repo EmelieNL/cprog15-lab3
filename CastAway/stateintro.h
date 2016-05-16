@@ -7,10 +7,10 @@ class StateIntro:public GameState
 {
 
 public:
-    void init(Engine* engine);
-    void update(Engine* engine);
-    void render(const Engine* engine);
-    void handleInput(Engine* engine);
+    void init();
+    void update();
+    void render();
+    void handleInput();
     void clear();
     void printCommands();
 

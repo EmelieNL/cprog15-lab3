@@ -115,13 +115,13 @@ void Engine::clearEntities()
  {
      //this->map.render();
      // the current state handles render
-     states.back()->render(this);
+     states.back()->render();
  }
 
  void Engine::update()
  {
      // the current state handles update
-     states.back()->update(this);
+     states.back()->update();
 
     /*
      * for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
@@ -164,7 +164,7 @@ void Engine::clearEntities()
      states.push_back(state);
 
      //Init the new state which is at end of vector
-     states.back()->init(this);
+     states.back()->init();
  }
 
  void Engine::quit()
@@ -190,7 +190,7 @@ void Engine::clearEntities()
  void Engine::handleEvents()
  {
      // the currentstate handles events
-     states.back()->handleInput(this);
+     states.back()->handleInput();
  }
 
  void Engine::clear() const

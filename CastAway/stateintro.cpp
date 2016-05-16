@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <iostream>
-#include "engine.h"
+
 #include "gamestate.h"
 #include "stateintro.h"
 #include "stateplay.h"
 
 StateIntro StateIntro::introState;
 
-void StateIntro::init(Engine* engine){
-    this->render(engine);
+void StateIntro::init(){
+    this->render();
 }
 
 void StateIntro::clear(){
@@ -32,17 +32,17 @@ void StateIntro::resume(){
     std::cout << "IntroState resume!" << "\n";
 }
 
-void StateIntro::handleInput(Engine* engine){
+void StateIntro::handleInput(){
     char userCommand;
     std::cin >> userCommand;
 
     switch (userCommand)
     {
-    case '0': engine->changeState(StatePlay::instance());
+    case '0': Engine::Instance().changeState(StatePlay::instance());
               break;
     case '1':
                 break;
-    case '2': engine->quit();
+    case '2': Engine::Instance().quit();
                break;
      default:
             break;
@@ -50,12 +50,12 @@ void StateIntro::handleInput(Engine* engine){
     }
 }
 
-void StateIntro::update(Engine* engine){
+void StateIntro::update(){
 
 }
 
-void StateIntro::render(const Engine* engine){
-    engine->clear();
+void StateIntro::render(){
+    Engine::Instance().clear();
 
     std::cout << "Welcome to" << "\n";
     std::cout << "   _____          _                              " << "\n";

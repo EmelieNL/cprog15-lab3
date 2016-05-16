@@ -8,8 +8,8 @@
 
 StatePauseMenu StatePauseMenu::pausemenuState;
 
-void StatePauseMenu::init(Engine* engine){
-    this->render(engine);
+void StatePauseMenu::init(){
+    this->render();
 }
 
 void StatePauseMenu::clear(){
@@ -33,27 +33,27 @@ void StatePauseMenu::resume(){
     std::cout << "IntroState resume!" << "\n";
 }
 
-void StatePauseMenu::handleInput(Engine* engine){
+void StatePauseMenu::handleInput(){
     char userCommand;
     std::cin >> userCommand;
 
     switch (userCommand)
     {
-    case '0': engine->changeState(StatePlay::instance());
+    case '0': Engine::Instance().changeState(StatePlay::instance());
               break;
-    case '1': engine->quit();
+    case '1': Engine::Instance().quit();
                break;
      default:
             break;
     }
 }
 
-void StatePauseMenu::update(Engine* engine){
+void StatePauseMenu::update(){
 
 }
 
-void StatePauseMenu::render(const Engine* engine){
-    engine->clear();
+void StatePauseMenu::render(){
+    Engine::Instance().clear();
 
 
     std::cout << "   _____          _                              " << "\n";

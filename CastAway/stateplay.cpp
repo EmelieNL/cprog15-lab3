@@ -6,9 +6,9 @@
 
 StatePlay StatePlay::playState;
 
-void StatePlay::init(Engine *engine){
+void StatePlay::init(){
      std::cout << "Play init!" << "\n";
-    engine->loadMap("level_1");
+    Engine::Instance().loadMap("level_1");
 
     Player* player = new Player;
     Engine::Instance().setPlayer(player);
@@ -36,25 +36,25 @@ void StatePlay::pause(){
 void StatePlay::resume(){
 }
 
-void StatePlay::handleInput(Engine* engine){
+void StatePlay::handleInput(){
     char userCommand;
     std::cin >> userCommand;
 
     switch (userCommand)
     {
-    case 'q': engine->changeState(StatePauseMenu::instance());
+    case 'q': Engine::Instance().changeState(StatePauseMenu::instance());
               break;
     case 'w':
-                engine->getPlayer()->moveY(-1);
+                Engine::Instance().getPlayer()->moveY(-1);
                 break;
     case 'a':
-                engine->getPlayer()->moveX(-1);
+                Engine::Instance().getPlayer()->moveX(-1);
                 break;
     case 's':
-                engine->getPlayer()->moveY(1);
+                Engine::Instance().getPlayer()->moveY(1);
                 break;
     case 'd':
-                engine->getPlayer()->moveX(1);
+                Engine::Instance().getPlayer()->moveX(1);
                 break;
      default:
             break;
@@ -62,12 +62,12 @@ void StatePlay::handleInput(Engine* engine){
     }
 }
 
-void StatePlay::update(Engine* engine){
+void StatePlay::update(){
 
 }
 
-void StatePlay::render(const Engine* engine){
-    engine->getMap()->render();
+void StatePlay::render(){
+    Engine::Instance().getMap()->render();
     printCommands();
 }
 
