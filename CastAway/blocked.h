@@ -8,9 +8,11 @@ class Blocked:public AbstractEntity
 public:
     Blocked();
     Blocked(char symbol);
-    Blocked(char symbol, int x, int y);
 
     virtual void update() override;
+
+private:
+    void init(char symbol);
 };
 
 #endif // BLOCKED_H

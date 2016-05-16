@@ -11,7 +11,6 @@ class Creature:public AbstractEntity
 public:
     Creature();
     Creature(char symbol);
-    Creature(char symbol, int x, int y);
     ~Creature();
     void setHealth(int health);
     int getHealth() const;
@@ -26,6 +25,7 @@ public:
 private:
     int health;
     Inventory* inventory;
+    void init(char symbol);
 };
 
 #endif // CREATURE_H

@@ -2,22 +2,12 @@
 
 Creature::Creature()
 {
-    Creature('C');
+    init('C');
 }
 
 Creature::Creature(char symbol)
 {
-    Creature(symbol, 1, 1);
-}
-
-Creature::Creature(char symbol, int x, int y)
-{
-    setHealth(100);
-    setSymbol(symbol);
-    setX(x);
-    setY(y);
-    setCanMove(true);
-    //inventory = new Inventory();
+    init(symbol);
 }
 
 Creature::~Creature()
@@ -37,7 +27,7 @@ int Creature::getHealth() const
 
 void Creature::changeHealth(int healthChange)
 {
-    health += healthChange;
+    setHealth(getHealth() + healthChange);
 }
 
 bool Creature::isAlive() const
@@ -113,4 +103,18 @@ Inventory *Creature::getInventory() const
 void Creature::setInventory(Inventory *inventory)
 {
     this->inventory = inventory;
+}
+
+void Creature::init(char symbol)
+{
+    setHealth(100);
+    setSymbol(symbol);
+    setSolid(true);
+    setFgColor(conmanip::console_text_colors::yellow);
+    setBgColor(conmanip::console_bg_colors::black);
+    setX(0);
+    setY(0);
+    setCanMove(true);
+    setId("Creature");
+    setInventory(new Inventory());
 }

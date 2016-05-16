@@ -24,7 +24,7 @@ public:
         return initDone;
     }
 
-    bool setInitDone(){
+    void setInitDone(){
         initDone = true;
     }
 

@@ -17,10 +17,12 @@ public:
     bool isFull() const;                    //Is the inventory full regarding weight capacity?
     std::vector<Item*> getItems() const;    //Get a list of all items
     int getMaxWeight() const;
+    int getWeight() const;
 
 private:
     std::vector<Item*> items; //items in this inventory
     int maxWeight; //max weight this inventory can hold
+    void init(int maxWeight);
 };
 
 #endif // INVENTORY_H

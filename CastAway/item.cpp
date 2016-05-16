@@ -2,20 +2,12 @@
 
 Item::Item(std::string id, int weight, char symbol)
 {
-    Item(id, weight, symbol, false, 1, 1);
+    init(id, weight, symbol, false, 1, 1);
 }
 
 Item::Item(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount)
 {
-    this->setId(id);
-    this->setWeight(weight);
-    this->setSymbol(symbol);
-    this->setCanStack(canStack);
-    this->setMaxStack(maxStack);
-    this->setStackAmount(stackAmount);
-
-    this->setCanMove(false);
-
+    init(id, weight, symbol, canStack, maxStack, stackAmount);
 }
 
 bool Item::getCanStack() const
@@ -25,7 +17,7 @@ bool Item::getCanStack() const
 
 void Item::setCanStack(bool canStack)
 {
-    canStack = canStack;
+    this->canStack = canStack;
 }
 
 int Item::getMaxStack() const
@@ -35,7 +27,7 @@ int Item::getMaxStack() const
 
 void Item::setMaxStack(bool maxStack)
 {
-   this->maxStack = maxStack;
+    this->maxStack = maxStack;
 }
 
 int Item::getStackAmount() const
@@ -55,10 +47,25 @@ int Item::getWeight() const
 
 void Item::setWeight(int weight)
 {
-    weight = weight;
+    this->weight = weight;
 }
 
 void Item::update()
 {
 
+}
+
+void Item::init(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount)
+{
+    this->setId(id);
+    this->setWeight(weight);
+    this->setSymbol(symbol);
+    this->setCanStack(canStack);
+    this->setMaxStack(maxStack);
+    this->setStackAmount(stackAmount);
+
+    this->setCanMove(false);
+
+    setFgColor(conmanip::console_text_colors::white);
+    setBgColor(conmanip::console_bg_colors::black);
 }

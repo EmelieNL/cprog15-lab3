@@ -20,87 +20,14 @@ Engine::~Engine()
     //delete player; //TODO how to free player?
 }
 
-/*Engine::Engine(Map map){
-   // Map firstMap(10,10);
-   // map = map;
-    //setMap(map);
-}*/
-
 void Engine::init()
 {
     Map* level_01 = new Map(); //TODO add to destructor
     this->maps["level_1"] = level_01;
 }
 
-void Engine::addEntity(AbstractEntity e)
-{
-    //TODO, only compares on string id
-     for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-          if((*it).getId() == e.getId()){
-              return;
-          }
-     }
-
-     entities.push_back(e);
-
-//    //If the entity is already in the list
-//    if(std::find(entities.begin(), entities.end(), e) != entities.end()) {
-//       //entities containts e
-//        return;
-//    //e does not exist in entities
-//    } else {
-//       entities.push_back(e); //add e last to vector
-//    }
-}
-
-void Engine::clearEntities()
-{
-    entities.clear();
-}
-
- AbstractEntity* Engine::getEntity(std::string id) {
-
-     for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-    // for(std::vector<AbstractEntity>::const_iterator it = entities.begin(); it != entities.end(); ++it) {
-         if((*it).getId() == id){
-           // return &(*it);
-         }
-     }
-
-     return nullptr;
-
-     //TODO
-    /*auto it = find_if(entities.begin(), entities.end(), [&id](AbstractEntity* obj) {
-         return obj->getId() == id;
-     });
-
-     if(it != entities.end())
-     {
-       // found element. it is an iterator to the first matching element.
-       // if you really need the index, you can also get it:
-       //auto index = std::distance(v.begin(), it);
-             return &(*it);
-     }
-*/
-     return nullptr;
- }
-
- AbstractEntity* Engine::getEntityAtLocation(int x, int y)
- {
-     for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-    // for(std::vector<AbstractEntity>::const_iterator it = entities.begin(); it != entities.end(); ++it) {
-         if((*it).getX() == x && (*it).getY() == y){
-            //return &(*it);
-         }
-     }
-
-     return nullptr;
- }
-
  void Engine::render() const
  {
-     //this->map.render();
-     // the current state handles render
      states.back()->render();
  }
 
@@ -108,12 +35,6 @@ void Engine::clearEntities()
  {
      // the current state handles update
      states.back()->update();
-
-    /*
-     * for(std::vector<AbstractEntity>::iterator it = entities.begin(); it != entities.end(); ++it) {
-        //(*it).update();
-     }
-    */
  }
 
  Map* Engine::getMap() const
@@ -123,19 +44,12 @@ void Engine::clearEntities()
 
  void Engine::loadMap(std::string mapName)
  {
-
      if(maps.find(mapName) != maps.end()){
-        this->clearEntities();
         currentMap = maps[mapName];
         std::cout << "Found map " << mapName << ", now set to currMap" << "\n";
      } else {
          std::cout << "Did not find map " << mapName << "... :(" << "\n";
      }
-
-     //this->clearEntities();
-     //Map map(10,10);
-     //Map map(mapName);
-     //this->setMap(map);
  }
 
  void Engine::changeState(GameState *state){

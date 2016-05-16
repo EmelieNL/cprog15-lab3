@@ -55,7 +55,6 @@ void StatePauseMenu::update(){
 void StatePauseMenu::render(){
     Engine::Instance().clear();
 
-
     std::cout << "   _____          _                              " << "\n";
     std::cout << "  / ____|        | |     /\\                      " << "\n";
     std::cout << " | |     __ _ ___| |_   /  \\__      ____ _ _   _ " << "\n";

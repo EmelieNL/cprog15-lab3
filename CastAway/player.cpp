@@ -3,8 +3,8 @@
 Player::Player()
 {
     setSymbol('@');
-    setSolid(true);
 
-   // Item* knife = new Item("Knife", 400, '|');
-   // getInventory()->addItem(knife);
+    setFgColor(conmanip::console_text_colors::red);
+    setBgColor(conmanip::console_bg_colors::black);
+
 }

@@ -6,14 +6,14 @@
 using namespace std;
 using namespace conmanip;
 
-int AbstractEntity::getColor() const
+conmanip::console_bg_colors AbstractEntity::getBgColor() const
 {
-    return this->color;
+    return this->bgColor;
 }
 
-int AbstractEntity::getDirection() const
+console_text_colors AbstractEntity::getFgColor() const
 {
-    return this->direction;
+    return this->fgColor;
 }
 
 std::string AbstractEntity::getId() const
@@ -36,11 +36,6 @@ bool AbstractEntity::isCanMove() const
     return this->canMove;
 }
 
-bool AbstractEntity::isMoving() const
-{
-    return this->moving;
-}
-
 bool AbstractEntity::isSolid() const
 {
     return this->solid;
@@ -48,7 +43,7 @@ bool AbstractEntity::isSolid() const
 
 void AbstractEntity::render() const
 {
-   Render::printSymbol(symbol, console_text_colors::cyan, console_bg_colors::blue);
+   Render::printSymbol(symbol, getFgColor(), getBgColor());
 }
 
 void AbstractEntity::setCanMove(bool canMove)
@@ -56,24 +51,19 @@ void AbstractEntity::setCanMove(bool canMove)
    this->canMove = canMove;
 }
 
-void AbstractEntity::setColor(int color)
+void AbstractEntity::setBgColor(conmanip::console_bg_colors color)
 {
-   this->color = color;
+    this->bgColor = color;
 }
 
-void AbstractEntity::setDirection(int direction)
+void AbstractEntity::setFgColor(console_text_colors color)
 {
-   this->direction = direction;
+    this->fgColor = color;
 }
 
 void AbstractEntity::setId(std::string newId)
 {
    this->id = newId;
-}
-
-void AbstractEntity::setMoving(bool moving)
-{
-   this->moving = moving;
 }
 
 void AbstractEntity::setSolid(bool solid)

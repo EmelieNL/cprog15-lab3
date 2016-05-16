@@ -24,6 +24,7 @@ private:
     int maxStack; //max size of a stack of this item, if it can be stacked
     int stackAmount; //amount of items in this stack
     int weight; //item weight in grams
+    void init(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount);
 };
 
 #endif // ITEM_H

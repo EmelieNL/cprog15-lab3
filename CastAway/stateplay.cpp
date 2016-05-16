@@ -26,6 +26,9 @@ void StatePlay::init(){
 
     Engine::Instance().getMap()->getTile(playerX, playerY)->setAbsEntity(player);
 
+    Item* knife = new Item("Knife", 400, '|');
+    player->getInventory()->addItem(knife);
+
     setInitDone();
 }
 
@@ -98,6 +101,5 @@ void StatePlay::printCommands()
     if(Engine::Instance().isDebug()){
         std::cout << "Player pos: (" << Engine::Instance().getPlayer()->getX() << ", " << Engine::Instance().getPlayer()->getY() << ")\n";
     }
-
 }
 

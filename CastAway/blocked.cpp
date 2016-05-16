@@ -5,26 +5,29 @@
 using namespace conmanip;
 
 Blocked::Blocked(){
-    setSolid(true);
+    init('#');
 }
 
 Blocked::Blocked(char symbol)
 {
-    setSymbol(symbol);
-    setSolid(true);
-}
-
-Blocked::Blocked(char symbol,int x, int y)
-{
-    setX(x);
-    setY(y);
-    setSymbol(symbol);
-    setSolid(true);
+    init(symbol);
 }
 
 void Blocked::update()
 {
 
+}
+
+void Blocked::init(char symbol)
+{
+    setSymbol(symbol);
+    setSolid(true);
+    setFgColor(conmanip::console_text_colors::white);
+    setBgColor(conmanip::console_bg_colors::black);
+    setCanMove(false);
+    setId("Wall");
+    setX(0);
+    setY(0);
 }
 
 

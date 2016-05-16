@@ -2,12 +2,12 @@
 
 Inventory::Inventory()
 {
-    Inventory(1000);
+    init(1000);
 }
 
 Inventory::Inventory(int maxWeight)
 {
-    this->maxWeight = maxWeight;
+    init(maxWeight);
 }
 
 Inventory::~Inventory()
@@ -64,4 +64,20 @@ std::vector<Item *> Inventory::getItems() const
 int Inventory::getMaxWeight() const
 {
     return maxWeight;
+}
+
+int Inventory::getWeight() const
+{
+    int totalWeight = 0;
+    for (std::vector<Item*>::const_iterator it = items.begin() ; it != items.end(); ++it){
+        totalWeight += (*it)->getWeight();
+    }
+
+    return totalWeight;
+
+}
+
+void Inventory::init(int maxWeight)
+{
+    this->maxWeight = maxWeight;
 }

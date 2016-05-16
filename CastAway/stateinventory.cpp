@@ -18,11 +18,9 @@ void StateInventory::render()
 {
     Engine::Instance().clear();
 
-
     std::cout << "             ___      ___  __   __      " << std::endl;
     std::cout << "| |\\ | \\  / |__  |\\ |  |  /  \\ |__) \\ / " << std::endl;
     std::cout << "| | \\|  \\/  |___ | \\|  |  \\__/ |  \\  |  " << std::endl;
-
 
     printCommands();
 }
@@ -48,16 +46,24 @@ void StateInventory::clear()
 
 void StateInventory::printCommands()
 {
+    Inventory* inventory = Engine::Instance().getPlayer()->getInventory();
+
+    //Print nr of items
+    std::cout << "You have " << inventory->getInventorySize()<< " items in your inventory. Weight: " << inventory->getWeight() << " gram" << std::endl;
+
+    //Commands?
     for (std::vector<std::string>::const_iterator it = commands.begin() ; it != commands.end(); ++it){
         std::cout << it - commands.begin() << ": " << *it << "\n";
     }
 
-      //TODO
+    std::cout << std::endl;
+
     //Show everything in the inventory
-    /*Inventory* inventory = Engine::Instance().getPlayer()->getInventory();
-    for (std::vector<Item*>::const_iterator it = inventory->getItems().begin() ; it != inventory->getItems().end(); ++it){
-        std::cout << *it << "\n";
-    }*/
+    std::vector<Item*> items = inventory->getItems();
+    std::vector<Item*>::iterator it, end;
+    for(it = items.begin(), end = items.end() ; it != end; ++it) {
+        std::cout << (*it)->getId() << ", " << (*it)->getWeight() << " gram" << std::endl;
+    }
 }
 
 void StateInventory::pause()
@@ -69,5 +75,3 @@ void StateInventory::resume()
 {
 
 }
-
-
