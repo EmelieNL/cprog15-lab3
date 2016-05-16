@@ -5,6 +5,7 @@
 #include "blocked.h"
 #include "terrain.h"
 #include "tile.h"
+#include "item.h"
 
 class Map
 {

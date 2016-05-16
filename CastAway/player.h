@@ -7,7 +7,6 @@ class Player:public Creature
 public:
     Player();
 private:
-    //TODO inventory here or in creature class?
 };
 
 #endif // PLAYER_H

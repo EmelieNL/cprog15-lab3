@@ -7,7 +7,11 @@
 StatePlay StatePlay::playState;
 
 void StatePlay::init(){
-     std::cout << "Play init!" << "\n";
+
+    if(isInitDone())
+        return;
+
+    std::cout << "Play init!" << "\n";
     Engine::Instance().loadMap("level_1");
 
     Player* player = new Player;
@@ -19,10 +23,10 @@ void StatePlay::init(){
 
     player->setX(playerX);
     player->setY(playerY);
-   // Engine::Instance().getPlayer()->setX(playerX);
-    //Engine::Instance().getPlayer()->setY(playerY);
 
     Engine::Instance().getMap()->getTile(playerX, playerY)->setAbsEntity(player);
+
+    setInitDone();
 }
 
 void StatePlay::clear(){
@@ -44,6 +48,8 @@ void StatePlay::handleInput(){
     {
     case 'q': Engine::Instance().changeState(StatePauseMenu::instance());
               break;
+
+    //Movement
     case 'w':
                 Engine::Instance().getPlayer()->moveY(-1);
                 break;
@@ -55,6 +61,11 @@ void StatePlay::handleInput(){
                 break;
     case 'd':
                 Engine::Instance().getPlayer()->moveX(1);
+                break;
+
+     //Actions
+     case 'i':
+                Engine::Instance().changeState(StateInventory::instance());
                 break;
      default:
             break;
@@ -74,11 +85,12 @@ void StatePlay::render(){
 //Print available commands that the player can enter
 void StatePlay::printCommands()
 {
+    std::cout << "-- Actions --" << '\n';
     std::cout << "w: Move up" << '\n';
     std::cout << "a: Move left" << '\n';
     std::cout << "s: Move down" << '\n';
     std::cout << "d: Move right" << '\n';
-
+    std::cout << "i: Inventory" << '\n';
     std::cout << '\n';
 
     std::cout << "q: Menu" << '\n';

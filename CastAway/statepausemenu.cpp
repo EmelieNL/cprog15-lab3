@@ -9,7 +9,7 @@
 StatePauseMenu StatePauseMenu::pausemenuState;
 
 void StatePauseMenu::init(){
-    this->render();
+    setInitDone();
 }
 
 void StatePauseMenu::clear(){

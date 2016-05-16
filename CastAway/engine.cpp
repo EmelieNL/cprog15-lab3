@@ -30,20 +30,6 @@ void Engine::init()
 {
     Map* level_01 = new Map(); //TODO add to destructor
     this->maps["level_1"] = level_01;
-/*
-    player = new Player();
-
-    //start pos for the player
-    int playerX = 10;
-    int playerY = 10;
-
-    player->setX(playerX);
-    player->setY(playerY);
-
-    getMap()->getTile(playerX, playerY)->setAbsEntity(player);
-    */
-
-
 }
 
 void Engine::addEntity(AbstractEntity e)
@@ -165,6 +151,7 @@ void Engine::clearEntities()
 
      //Init the new state which is at end of vector
      states.back()->init();
+     states.back()->render();
  }
 
  void Engine::quit()

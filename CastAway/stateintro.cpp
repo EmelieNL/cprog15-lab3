@@ -8,7 +8,7 @@
 StateIntro StateIntro::introState;
 
 void StateIntro::init(){
-    this->render();
+    setInitDone();
 }
 
 void StateIntro::clear(){
@@ -68,4 +68,5 @@ void StateIntro::render(){
     std::cout << "                                           |___/ " << "\n";
 
     printCommands();
+
 }

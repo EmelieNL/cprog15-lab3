@@ -2,16 +2,12 @@
 
 Creature::Creature()
 {
-    setHealth(100);
-    setSymbol('C');
-    setCanMove(true);
+    Creature('C');
 }
 
 Creature::Creature(char symbol)
 {
-    setHealth(100);
-    setSymbol(symbol);
-    setCanMove(true);
+    Creature(symbol, 1, 1);
 }
 
 Creature::Creature(char symbol, int x, int y)
@@ -21,6 +17,12 @@ Creature::Creature(char symbol, int x, int y)
     setX(x);
     setY(y);
     setCanMove(true);
+    //inventory = new Inventory();
+}
+
+Creature::~Creature()
+{
+
 }
 
 void Creature::setHealth(int health)
@@ -101,4 +103,14 @@ void Creature::moveY(int y)
 void Creature::update()
 {
 
+}
+
+Inventory *Creature::getInventory() const
+{
+    return inventory;
+}
+
+void Creature::setInventory(Inventory *inventory)
+{
+    this->inventory = inventory;
 }

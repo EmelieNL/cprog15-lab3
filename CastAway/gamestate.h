@@ -20,7 +20,16 @@ public:
         Engine::Instance().changeState(state);
     }
 
+    bool isInitDone() const {
+        return initDone;
+    }
 
+    bool setInitDone(){
+        initDone = true;
+    }
+
+private:
+    bool initDone = false;
 protected:
     GameState(){}
 };

@@ -1,22 +1,18 @@
 #include "item.h"
 
-Item::Item()
-{
-    Item("New item", false, 1, 1, 1000);
-}
-
 Item::Item(std::string id, int weight, char symbol)
 {
-    Item(id, false, 1, 1, weight);
+    Item(id, weight, symbol, false, 1, 1);
 }
 
-Item::Item(std::string id, bool canStack, int maxStack, int stackAmount, int weight)
+Item::Item(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount)
 {
     this->setId(id);
-    this->canStack = canStack;
-    this->maxStack = maxStack;
-    this->stackAmount = stackAmount;
-    this->weight = weight;
+    this->setWeight(weight);
+    this->setSymbol(symbol);
+    this->setCanStack(canStack);
+    this->setMaxStack(maxStack);
+    this->setStackAmount(stackAmount);
 
     this->setCanMove(false);
 
@@ -27,9 +23,19 @@ bool Item::getCanStack() const
     return canStack;
 }
 
+void Item::setCanStack(bool canStack)
+{
+    canStack = canStack;
+}
+
 int Item::getMaxStack() const
 {
     return maxStack;
+}
+
+void Item::setMaxStack(bool maxStack)
+{
+   this->maxStack = maxStack;
 }
 
 int Item::getStackAmount() const
@@ -37,9 +43,19 @@ int Item::getStackAmount() const
     return stackAmount;
 }
 
+void Item::setStackAmount(int amount)
+{
+    this->stackAmount = amount;
+}
+
 int Item::getWeight() const
 {
     return weight;
+}
+
+void Item::setWeight(int weight)
+{
+    weight = weight;
 }
 
 void Item::update()

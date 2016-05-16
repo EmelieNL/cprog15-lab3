@@ -62,6 +62,10 @@ void Map::initMap(){
           }
     }
 
+    //Test item
+    Item* knife = new Item("Knife", 400, '|');
+    map[3][2]->setAbsEntity(knife);
+
     Blocked* wall = new Blocked('#'); //TODO add destructor
     map[12][11]->setAbsEntity(wall);
 

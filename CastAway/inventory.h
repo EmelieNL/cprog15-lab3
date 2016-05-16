@@ -8,6 +8,8 @@ class Inventory
 {
 public:
     Inventory();
+    Inventory(int maxWeight);
+    ~Inventory();
     void addItem(Item* item);               //Add item to this inventory
     void removeItem(Item* item);            //Remove an item from inventory
     Item* getItem(int i) const;             //Get a specific item by index

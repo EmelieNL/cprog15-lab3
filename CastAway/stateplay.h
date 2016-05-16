@@ -3,6 +3,7 @@
 #include <map>
 #include "gamestate.h"
 #include "player.h"
+#include "stateinventory.h"
 
 class StatePlay:public GameState
 {

@@ -5,14 +5,17 @@
 class Item:public AbstractEntity
 {
 public:
-    Item();
     Item(std::string id, int weight, char symbol);
-    Item(std::string id, bool canStack, int maxStack, int stackAmount, int weight);
+    Item(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount);
 
     bool getCanStack() const;
+    void setCanStack(bool canStack);
     int getMaxStack() const;
+    void setMaxStack(bool maxStack);
     int getStackAmount() const;
+    void setStackAmount(int amount);
     int getWeight() const;
+    void setWeight(int weight);
 
     virtual void update() override;
 

@@ -2,7 +2,17 @@
 
 Inventory::Inventory()
 {
+    Inventory(1000);
+}
 
+Inventory::Inventory(int maxWeight)
+{
+    this->maxWeight = maxWeight;
+}
+
+Inventory::~Inventory()
+{
+  //TODO delete all items
 }
 
 void Inventory::addItem(Item *item)
