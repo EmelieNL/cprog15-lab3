@@ -19,6 +19,8 @@ public:
     void render() const;
     void clear() const;
     bool isBlocked(int x, int y);
+    int getWidth() const;
+    int getHeight() const;
 
 private:
     // Set map size

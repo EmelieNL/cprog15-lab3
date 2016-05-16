@@ -187,6 +187,11 @@ void Engine::clearEntities()
      this->player = player;
  }
 
+ bool Engine::isDebug() const
+ {
+     return debug;
+ }
+
  void Engine::handleEvents()
  {
      // the currentstate handles events

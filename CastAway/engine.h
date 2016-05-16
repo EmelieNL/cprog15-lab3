@@ -23,6 +23,7 @@ private:
     Engine(Engine const&); //dont implement
     void operator=(Engine const&); //dont implement
     Player* player;
+    bool debug = true;
 
 
 public:
@@ -51,6 +52,7 @@ public:
     bool isRunning();
     Player* getPlayer() const;
     void setPlayer(Player* player);
+    bool isDebug() const;
 };
 
 #endif // ENGINE_H

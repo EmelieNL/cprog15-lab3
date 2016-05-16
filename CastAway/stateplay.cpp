@@ -14,8 +14,8 @@ void StatePlay::init(){
     Engine::Instance().setPlayer(player);
 
     //start pos for the player
-    int playerX = 10;
-    int playerY = 10;
+    int playerX = 1;
+    int playerY = 1;
 
     player->setX(playerX);
     player->setY(playerY);
@@ -82,6 +82,10 @@ void StatePlay::printCommands()
     std::cout << '\n';
 
     std::cout << "q: Menu" << '\n';
+
+    if(Engine::Instance().isDebug()){
+        std::cout << "Player pos: (" << Engine::Instance().getPlayer()->getX() << ", " << Engine::Instance().getPlayer()->getY() << ")\n";
+    }
 
 }
 

@@ -96,11 +96,28 @@ void  Map::clear() const{
 
 bool Map::isBlocked(int x, int y)
 {
+    //Map boundry check
+    if(x < 0 || x >= getWidth() || y < 0 || y >= getHeight()){
+        return true;
+    }
+
     Tile* tile = getTile(x,y);
-    if(tile->getAbsEntity() != nullptr) //&& tile->getAbsEntity()->isSolid())
+    if(tile != nullptr && tile->getAbsEntity() != nullptr) //&& tile->getAbsEntity()->isSolid())
         return true;
     else
         return false;
+}
+
+//Get map width
+int Map::getWidth() const
+{
+    return widthX;
+}
+
+//Get map height
+int Map::getHeight() const
+{
+    return heightY;
 }
 
 

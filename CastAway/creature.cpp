@@ -54,6 +54,10 @@ void Creature::moveX(int x)
         //is there anyting blocking?
         if(Engine::Instance().getMap()->isBlocked(getX() + x, getY())){
             return;
+
+        //check map boundaries in x
+        } else if((getX() + x) < 0 || (getX() + x ) >= Engine::Instance().getMap()->getWidth()){
+            return;
         } else {
 
             //Remove creature from map tile
@@ -73,8 +77,12 @@ void Creature::moveY(int y)
     //Can this creature move at all?
     if(isCanMove()){
 
-        //is there anyting blocking?
+        //is there anything blocking?
         if(Engine::Instance().getMap()->isBlocked(getX(), getY() + y)){
+            return;
+
+        //check map boundaries in y
+        } else if((getY() + y) < 0 || (getY() + y ) >= Engine::Instance().getMap()->getHeight()){
             return;
         } else {
 
