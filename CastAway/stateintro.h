@@ -2,8 +2,9 @@
 #define STATEINTRO_H
 
 #include "gamestate.h"
+#include "menuoption.h"
 
-class StateIntro:public GameState
+class StateIntro:public GameState, public MenuOption
 {
 
 public:
@@ -17,6 +18,8 @@ public:
     //Be able to pause states when we enter a new one
     void pause();
     void resume();
+
+    void menuOptionAction();
 
     //Get static
     static StateIntro* instance(){

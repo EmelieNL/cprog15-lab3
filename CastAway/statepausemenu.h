@@ -1,9 +1,10 @@
 #ifndef STATEPAUSEMENU_H
 #define STATEPAUSEMENU_H
 
+#include "menuoption.h"
 #include "gamestate.h"
 
-class StatePauseMenu:public GameState
+class StatePauseMenu:public GameState, public MenuOption
 {
 
 public:
@@ -17,6 +18,8 @@ public:
     //Be able to pause states when we enter a new one
     void pause();
     void resume();
+
+    void menuOptionAction();
 
     //Get static
     static StatePauseMenu* instance(){

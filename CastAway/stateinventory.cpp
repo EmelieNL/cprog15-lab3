@@ -28,12 +28,24 @@ void StateInventory::render()
 void StateInventory::handleInput()
 {
     char userCommand;
-    std::cin >> userCommand;
+    std::string input = "";
+    getline(std::cin, input);
+
+    if (input.length() == 1) {
+     userCommand = input[0];
+   } else {
+        menuOptionAction();
+        return;
+   }
 
     switch (userCommand)
     {
-    case '0': Engine::Instance().changeState(StatePlay::instance());
+    case 'i': Engine::Instance().changeState(StatePlay::instance());
               break;
+    case 'w':   decreaseMenuOption();
+                break;
+    case 's':   increaseMenuOption();
+                break;
      default:
             break;
     }
@@ -48,13 +60,11 @@ void StateInventory::printCommands()
 {
     Inventory* inventory = Engine::Instance().getPlayer()->getInventory();
 
+    //Commands
+    std::cout << "i: Continue" << std::endl;
+
     //Print nr of items
     std::cout << "You have " << inventory->getInventorySize()<< " items in your inventory. Weight: " << inventory->getWeight() << " gram" << std::endl;
-
-    //Commands?
-    for (std::vector<std::string>::const_iterator it = commands.begin() ; it != commands.end(); ++it){
-        std::cout << it - commands.begin() << ": " << *it << "\n";
-    }
 
     std::cout << std::endl;
 
@@ -62,8 +72,20 @@ void StateInventory::printCommands()
     std::vector<Item*> items = inventory->getItems();
     std::vector<Item*>::iterator it, end;
     for(it = items.begin(), end = items.end() ; it != end; ++it) {
+
+        //If current item is selected show this to the user
+        if(it - items.begin() == getCurrentMenuOption()){
+            std::cout << "-> ";
+        }
         std::cout << (*it)->getId() << ", " << (*it)->getWeight() << " gram" << std::endl;
     }
+
+    std::cout << "Current menu opt: " << getCurrentMenuOption() << std::endl;
+}
+
+void StateInventory::menuOptionAction()
+{
+    //TODO
 }
 
 void StateInventory::pause()
@@ -73,5 +95,6 @@ void StateInventory::pause()
 
 void StateInventory::resume()
 {
-
+    setCurrentMenuOption(0); //reset menuoption
+    setMaxMenuOption(Engine::Instance().getPlayer()->getInventory()->getInventorySize()-1);
 }

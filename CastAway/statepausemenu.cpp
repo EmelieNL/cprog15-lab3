@@ -21,30 +21,56 @@ void StatePauseMenu::clear(){
     std::cout << "What would you like to do?" << "\n";
 
     for (std::vector<std::string>::const_iterator it = commands.begin() ; it != commands.end(); ++it){
-        std::cout << it - commands.begin() << ": " << *it << "\n";
+        //If current item is selected show this to the user
+        if(it - commands.begin() == getCurrentMenuOption()){
+            std::cout << "-> ";
+        }
+
+        std::cout << "\t";
+        std::cout << *it << "\n";
     }
 }
 
 void StatePauseMenu::pause(){
-    std::cout << "IntroState pause!" << "\n";
 }
 
 void StatePauseMenu::resume(){
-    std::cout << "IntroState resume!" << "\n";
+    setCurrentMenuOption(0);
+    setMaxMenuOption(commands.size()-1);
+}
+
+void StatePauseMenu::menuOptionAction()
+{
+    switch(getCurrentMenuOption()){
+        case 0: Engine::Instance().changeState(StatePlay::instance());
+                break;
+        case 1: Engine::Instance().quit();
+                break;
+        default:
+                break;
+    }
 }
 
 void StatePauseMenu::handleInput(){
     char userCommand;
-    std::cin >> userCommand;
+    std::string input = "";
+    getline(std::cin, input);
+
+    if (input.length() == 1) {
+     userCommand = input[0];
+   } else {
+        menuOptionAction();
+        return;
+   }
 
     switch (userCommand)
     {
-    case '0': Engine::Instance().changeState(StatePlay::instance());
-              break;
-    case '1': Engine::Instance().quit();
-               break;
-     default:
-            break;
+        case 'w':   decreaseMenuOption();
+                    break;
+        case 's':   increaseMenuOption();
+                    break;
+        default:
+                    break;
     }
 }
 

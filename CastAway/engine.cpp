@@ -57,6 +57,7 @@ void Engine::init()
      //The old state might have to do stuff, clean up data
      if(!states.empty()){
          states.back()->clear();
+         states.back()->pause();
          states.pop_back(); //pop from vector
      }
 
@@ -65,6 +66,7 @@ void Engine::init()
 
      //Init the new state which is at end of vector
      states.back()->init();
+     states.back()->resume();
      states.back()->render();
  }
 

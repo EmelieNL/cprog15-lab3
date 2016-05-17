@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     creature.cpp \
     player.cpp \
     stateinventory.cpp \
-    consumable.cpp
+    consumable.cpp \
+    menuoption.cpp
 
 HEADERS += \
     map.h \
@@ -38,5 +39,6 @@ HEADERS += \
     creature.h \
     player.h \
     stateinventory.h \
-    consumable.h
+    consumable.h \
+    menuoption.h
 

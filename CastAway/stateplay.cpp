@@ -45,7 +45,12 @@ void StatePlay::resume(){
 
 void StatePlay::handleInput(){
     char userCommand;
-    std::cin >> userCommand;
+    std::string input = "";
+    getline(std::cin, input);
+
+    if (input.length() == 1) {
+     userCommand = input[0];
+    }
 
     switch (userCommand)
     {

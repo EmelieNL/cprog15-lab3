@@ -2,9 +2,10 @@
 #define STATEINVENTORY_H
 
 #include "gamestate.h"
+#include "menuoption.h"
 #include "inventory.h"
 
-class StateInventory:public GameState
+class StateInventory:public GameState, public MenuOption
 {
 public:
     void init();
@@ -13,6 +14,7 @@ public:
     void handleInput();
     void clear();
     void printCommands();
+    void menuOptionAction();
 
     //Be able to pause states when we enter a new one
     void pause();
@@ -25,7 +27,8 @@ public:
 
 private:
     static StateInventory inventoryState;
-    const std::vector<std::string> commands = {"Continue"};
+
+    int menuOption;
 };
 
 #endif // STATEINVENTORY_H
