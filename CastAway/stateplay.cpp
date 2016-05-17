@@ -87,6 +87,10 @@ void StatePlay::update(){
 
 void StatePlay::render(){
     Engine::Instance().getMap()->render();
+
+    //Output health
+    std::cout << "HEALTH " << Engine::Instance().getPlayer()->getHealth() << std::endl;
+
     printCommands();
 }
 

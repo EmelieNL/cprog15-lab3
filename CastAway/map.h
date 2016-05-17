@@ -6,6 +6,7 @@
 #include "terrain.h"
 #include "tile.h"
 #include "item.h"
+#include "consumable.h"
 
 class Map
 {

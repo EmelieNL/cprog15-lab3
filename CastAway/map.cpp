@@ -66,6 +66,11 @@ void Map::initMap(){
     Item* knife = new Item("Knife", 400, '|');
     map[3][2]->setAbsEntity(knife);
 
+    //Test apple
+    Consumable* apple = new Consumable("Apple", 50, 'A', 20);
+    apple->setFgColor(conmanip::console_text_colors::light_red);
+    map[4][4]->setAbsEntity(apple);
+
     Blocked* wall = new Blocked('#'); //TODO add destructor
     map[12][11]->setAbsEntity(wall);
 
