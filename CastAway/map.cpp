@@ -5,6 +5,8 @@
 #include <conio.h>
 #include "conmanip.h"
 #include "render.h"
+#include "engine.h"
+#include "player.h"
 
 using namespace conmanip;
 using namespace std;
@@ -33,18 +35,41 @@ Tile* Map::getTile(int x, int y){
 // Render map
 void Map::render() const {
     clear();
+
+    int playerX = Engine::Instance().getPlayer()->getX();
+    int playerY = Engine::Instance().getPlayer()->getY();
+
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
             Tile* current = map[y][x];
             if(current != nullptr){
-                //First try to render any absEntity
-                if(current->getAbsEntity() != nullptr){
-                    current->getAbsEntity()->render();
-                //if not present render the terrain
+
+                double rad =  sqrt(pow(((double)x - (double)playerX), 2) + pow((double)y - (double)playerY, 2));
+
+                //FOV
+                if(rad <= 8){
+
+                    current->setExplored();
+
+                    //First try to render any absEntity
+                    if(current->getAbsEntity() != nullptr){
+                        current->getAbsEntity()->render();
+                    //if not present render the terrain
+                    } else {
+                        Render::printSymbol(current->getTerrain()->getSymbol(), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
+                        Render::printSymbol(char(32), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
+                    }
+
+                //if already explored, show terrain but not entities
+                } else if(current->isExplored()){
+                    Render::printSymbol(current->getTerrain()->getSymbol(), conmanip::console_text_colors::gray, conmanip::console_bg_colors::black);
+                    Render::printSymbol(char(32), conmanip::console_text_colors::gray, conmanip::console_bg_colors::black);
                 } else {
-                    Render::printSymbol(current->getTerrain()->getSymbol(), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
+                   Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
+                   Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
                 }
             } else {
+                 Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
                  Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
             }
         }
@@ -128,5 +153,3 @@ int Map::getHeight() const
 {
     return heightY;
 }
-
-

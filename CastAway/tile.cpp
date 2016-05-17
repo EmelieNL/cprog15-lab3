@@ -4,6 +4,7 @@ Tile::Tile()
 {
     absEntity = nullptr;
     terrain = new Terrain(Terrain::Type::WATER); //TODO desturctor
+    explored=false;
 }
 
 Tile::~Tile()
@@ -29,4 +30,14 @@ void Tile::setAbsEntity(AbstractEntity *absEntity)
 void Tile::setTerrain(Terrain::Type terrainType)
 {
     this->terrain->setTerrain(terrainType);
+}
+
+void Tile::setExplored()
+{
+    this->explored = true;
+}
+
+bool Tile::isExplored() const
+{
+    return explored;
 }

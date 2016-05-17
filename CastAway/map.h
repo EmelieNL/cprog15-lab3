@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 #include <string>
+#include <cmath>
 
 #include "blocked.h"
 #include "terrain.h"

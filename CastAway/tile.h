@@ -9,6 +9,7 @@ class Tile
 private:
     AbstractEntity* absEntity;
     Terrain* terrain;
+    bool explored;
 
 public:
     Tile();
@@ -17,6 +18,8 @@ public:
     Terrain* getTerrain();
     void setAbsEntity(AbstractEntity* absEntity);
     void setTerrain(Terrain::Type terrainType);
+    void setExplored();
+    bool isExplored() const;
 };
 
 #endif // TILE_H

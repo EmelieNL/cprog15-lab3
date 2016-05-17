@@ -27,6 +27,7 @@ namespace conmanip
    enum class console_text_colors : WORD
    {
       black          = 0,
+      gray           = 0 | FOREGROUND_INTENSITY,
       white          = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED,
       blue           = FOREGROUND_BLUE,
       green          = FOREGROUND_GREEN,
