@@ -67,7 +67,6 @@ void Engine::init()
      //Init the new state which is at end of vector
      states.back()->init();
      states.back()->resume();
-     states.back()->render();
  }
 
  void Engine::quit()

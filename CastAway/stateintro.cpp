@@ -8,7 +8,11 @@
 StateIntro StateIntro::introState;
 
 void StateIntro::init(){
-    setInitDone();
+    if(!isInitDone()){
+        this->render();
+        setInitDone();
+    }
+
 }
 
 void StateIntro::clear(){
