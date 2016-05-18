@@ -34,6 +34,9 @@ public:
     int getBasicAttack() const;
     void setBasicAttack(int value);
 
+    int getAttackDamage() const;
+    int attack(Creature* enemy);
+
 private:
     int health;
     int maxHealth;

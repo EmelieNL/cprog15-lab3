@@ -43,7 +43,7 @@ void Creature::changeHealth(int healthChange)
 
 bool Creature::isAlive() const
 {
-    if(health > 0)
+    if(getHealth() > 0)
         return true;
     else
         return false;
@@ -102,6 +102,15 @@ void Creature::moveY(int y)
 
 void Creature::update()
 {
+    //Check if the creature is still alive
+    if(!isAlive()){
+
+        //TODO the entity is not removed from the map...
+        Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
+
+        //Todo delete this object
+    }
+
     //Standard movment for a creature is random direction by one
     int direction = rand() % 4; //0, 1, 2, 3
     switch(direction){
@@ -152,13 +161,32 @@ void Creature::setBasicAttack(int value)
     basicAttack = value;
 }
 
+int Creature::getAttackDamage() const
+{
+    //Do this creature have a weapon?
+    if(getWeapon() == nullptr){
+        return basicAttack;
+    } else {
+        return getWeapon()->getAttackValue();
+    }
+
+}
+
+int Creature::attack(Creature *enemy)
+{
+    int randomDamage = rand() % getAttackDamage() + 1; //1 to maxDamage
+
+    enemy->changeHealth(-randomDamage);
+    return randomDamage;
+}
+
 void Creature::init(char symbol)
 {
     /* initialize random seed: */
     srand (time(NULL));
 
-    setHealth(100);
     setMaxHealth(100);
+    setHealth(100);
     setSymbol(symbol);
     setBasicAttack(10);
     setSolid(true);
@@ -169,4 +197,5 @@ void Creature::init(char symbol)
     setCanMove(true);
     setId("Creature");
     setInventory(new Inventory());
+    setWeapon(nullptr);
 }

@@ -101,6 +101,15 @@ void Player::action(int x, int y)
         } else {
              this->addLog("You see a " + item->getId() + " but can't pick it up!");
         }
+
+    //If we hit a creature, attack it
+    } else if(Creature* enemy = dynamic_cast<Creature*>(blocking)) {
+        int damageDelt = attack(enemy);
+        if(enemy->isAlive()){
+            this->addLog("You hit " + enemy->getId() + " with " + std::to_string(damageDelt) + " damage! Health: " + std::to_string(enemy->getHealth()));
+        } else {
+            this->addLog("You killed the " + enemy->getId() + "!");
+        }
     } else {
         this->addLog("You bumped in to a " + blocking->getId());
     }
@@ -108,5 +117,5 @@ void Player::action(int x, int y)
 
 void Player::update()
 {
-    //Dont update anything, the player controls input for this creature
+    //TODO Check if alive :)
 }
