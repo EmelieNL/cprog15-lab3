@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     player.cpp \
     stateinventory.cpp \
     consumable.cpp \
-    menuoption.cpp
+    menuoption.cpp \
+    weapon.cpp
 
 HEADERS += \
     map.h \
@@ -40,5 +41,6 @@ HEADERS += \
     player.h \
     stateinventory.h \
     consumable.h \
-    menuoption.h
+    menuoption.h \
+    weapon.h
 

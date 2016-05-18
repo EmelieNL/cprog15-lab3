@@ -2,12 +2,15 @@
 #define MAP_H
 #include <string>
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 #include "blocked.h"
 #include "terrain.h"
 #include "tile.h"
 #include "item.h"
 #include "consumable.h"
+#include "weapon.h"
 
 class Map
 {
@@ -18,8 +21,10 @@ public:
     void initMap();
     Tile* getTile(int x, int y);
     void setTerrain(int x, int y, Terrain::Type terrainType);
-    void setAbstractEntity(int x, int y, AbstractEntity absEntity);
+    void addAbstractEntity(int x, int y, AbstractEntity* absEntity);
+    void removeAbstractEntity(AbstractEntity* absEntity);
     void render() const;
+    void update();
     void clear() const;
     bool isBlocked(int x, int y);
     int getWidth() const;
@@ -31,6 +36,7 @@ private:
     static const int heightY = 20;
 
     Tile* map[heightY][widthX];
+    std::vector<AbstractEntity*> entities; //entities in this map
 };
 
 #endif // MAP_H

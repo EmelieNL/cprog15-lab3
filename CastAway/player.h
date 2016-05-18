@@ -14,6 +14,7 @@ public:
     void moveX(int x);
     void moveY(int y);
     void action(int x, int y);
+    void update() override;
 private:
      std::vector<std::string> log; //vector of log messanges
 };

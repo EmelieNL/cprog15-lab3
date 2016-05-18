@@ -19,6 +19,16 @@ Creature::~Creature()
 void Creature::setHealth(int health)
 {
     this->health = health;
+
+    //Dont go over maxHealth
+    if(this->health > this->maxHealth){
+        this->health = this->maxHealth;
+    }
+}
+
+void Creature::setMaxHealth(int maxHealth)
+{
+    this->maxHealth = maxHealth;
 }
 
 int Creature::getHealth() const
@@ -92,6 +102,18 @@ void Creature::moveY(int y)
 
 void Creature::update()
 {
+    //Standard movment for a creature is random direction by one
+    int direction = rand() % 4; //0, 1, 2, 3
+    switch(direction){
+        case 0: moveY(-1);
+                break;
+        case 1: moveY(1);
+                break;
+        case 2: moveX(-1);
+                break;
+        case 3: moveX(1);
+                break;
+    }
 
 }
 
@@ -110,10 +132,35 @@ void Creature::action(int x, int y)
 
 }
 
+Weapon *Creature::getWeapon() const
+{
+    return weapon;
+}
+
+void Creature::setWeapon(Weapon *value)
+{
+    weapon = value;
+}
+
+int Creature::getBasicAttack() const
+{
+    return basicAttack;
+}
+
+void Creature::setBasicAttack(int value)
+{
+    basicAttack = value;
+}
+
 void Creature::init(char symbol)
 {
+    /* initialize random seed: */
+    srand (time(NULL));
+
     setHealth(100);
+    setMaxHealth(100);
     setSymbol(symbol);
+    setBasicAttack(10);
     setSolid(true);
     setFgColor(conmanip::console_text_colors::yellow);
     setBgColor(conmanip::console_bg_colors::black);

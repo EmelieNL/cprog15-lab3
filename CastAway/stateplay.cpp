@@ -26,11 +26,11 @@ void StatePlay::init(){
 
     player->addLog("You wake up and regain your conscience!");
 
-    Engine::Instance().getMap()->getTile(playerX, playerY)->setAbsEntity(player);
+    Engine::Instance().getMap()->addAbstractEntity(player->getX(), player->getY(), player);
 
-
-    Item* knife = new Item("Knife", 400, '|');
-    player->getInventory()->addItem(knife);
+    //Player starting items
+    //Item* knife = new Item("Knife", 400, '|');
+    //player->getInventory()->addItem(knife);
 
     setInitDone();
 }
@@ -85,7 +85,7 @@ void StatePlay::handleInput(){
 }
 
 void StatePlay::update(){
-
+     Engine::Instance().getMap()->update();
 }
 
 void StatePlay::render(){

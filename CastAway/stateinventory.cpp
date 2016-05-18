@@ -79,13 +79,39 @@ void StateInventory::printCommands()
         }
         std::cout << (*it)->getId() << ", " << (*it)->getWeight() << " gram" << std::endl;
     }
-
-    std::cout << "Current menu opt: " << getCurrentMenuOption() << std::endl;
 }
 
 void StateInventory::menuOptionAction()
 {
-    //TODO
+    //Get the entity at x and y
+    Player* player = Engine::Instance().getPlayer();
+
+    if(getCurrentMenuOption() >= player->getInventory()->getInventorySize())
+        return;
+
+    Item* item = player->getInventory()->getItem(getCurrentMenuOption());
+
+    if(item == nullptr)
+        return;
+
+    //If we try to use a consumable
+    if(Consumable* consumable = dynamic_cast<Consumable*>(item)) {
+        player->changeHealth(consumable->getHealthValue());
+        player->addLog("You consume the " + item->getId()+ " and feel better");
+        player->getInventory()->removeItem(item);
+
+    //Use a weapon
+    } else if(Weapon* wep = dynamic_cast<Weapon*>(item)) {
+           player->setWeapon(wep);
+           player->addLog("You arm yourself with the " + item->getId() + " (" + std::to_string(wep->getAttackValue()) + " damage)");
+
+    } else {
+        player->addLog("You could not use that...");
+    }
+
+    //Go back to play state
+    Engine::Instance().changeState(StatePlay::instance());
+
 }
 
 void StateInventory::pause()

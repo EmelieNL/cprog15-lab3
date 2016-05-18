@@ -32,6 +32,22 @@ Tile* Map::getTile(int x, int y){
     return map[y][x];
 }
 
+void Map::addAbstractEntity(int x, int y, AbstractEntity *absEntity)
+{
+    this->map[y][x]->setAbsEntity(absEntity);
+    entities.insert(entities.begin(), absEntity);
+}
+
+//Remove a entity from the map vector
+void Map::removeAbstractEntity(AbstractEntity *absEntity)
+{
+    //Remove from map
+    map[absEntity->getY()][absEntity->getX()]->setAbsEntity(nullptr);
+
+    //Remove from entities vector
+    entities.erase(std::remove(entities.begin(), entities.end(), absEntity), entities.end());
+}
+
 // Render map
 void Map::render() const {
     clear();
@@ -77,6 +93,15 @@ void Map::render() const {
     }
 }
 
+void Map::update()
+{
+    //Update all entities once
+    std::vector<AbstractEntity*>::iterator it, end;
+    for(it = entities.begin(), end = entities.end() ; it != end; ++it) {
+        (*it)->update();
+    }
+}
+
 void Map::initMap(){
     std::cout << "Map is inited from Map class"<< "\n";
 
@@ -87,26 +112,42 @@ void Map::initMap(){
           }
     }
 
-    //Test item
-    Item* knife = new Item("Knife", 400, '|');
-    map[3][2]->setAbsEntity(knife);
+    //Test enemy
+    Creature* squid = new Creature('{');
+    squid->setId("Squid");
+    squid->setFgColor(conmanip::console_text_colors::cyan);
+    squid->setX(3);
+    squid->setY(3);
+    addAbstractEntity(squid->getX(), squid->getY(), squid);
+
+    //Test weapon
+    Weapon* knife = new Weapon("Knife", 400, '|', 10);
+    knife->setX(3);
+    knife->setY(2);
+    addAbstractEntity(knife->getX(), knife->getY(), knife);
 
     //Test apple
     Consumable* apple = new Consumable("Apple", 50, 'A', 20);
     apple->setFgColor(conmanip::console_text_colors::light_red);
-    map[4][4]->setAbsEntity(apple);
+    apple->setX(4);
+    apple->setY(4);
+    addAbstractEntity(apple->getX(), apple->getY(), apple);
+
 
     Blocked* wall = new Blocked('#'); //TODO add destructor
-    map[12][11]->setAbsEntity(wall);
+    wall->setX(12);
+    wall->setY(11);
+    addAbstractEntity(wall->getX(), wall->getY(), wall);
 
     Blocked* wall2 = new Blocked('#'); //TODO add destructor
-    map[13][11]->setAbsEntity(wall2);
+    wall2->setX(13);
+    wall2->setY(11);
+    addAbstractEntity(wall2->getX(), wall2->getY(), wall2);
 
     Blocked* wall3 = new Blocked('#'); //TODO add destructor
-    map[14][11]->setAbsEntity(wall3);
-
-    Blocked* wall4 = new Blocked('#'); //TODO add destructor
-    map[14][12]->setAbsEntity(wall4);
+    wall3->setX(14);
+    wall3->setY(11);
+    addAbstractEntity(wall3->getX(), wall3->getY(), wall3);
 
     map[4][15]->setTerrain(Terrain::Type::SAND);
     map[4][16]->setTerrain(Terrain::Type::SAND);

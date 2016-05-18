@@ -94,7 +94,7 @@ void Player::action(int x, int y)
     //If we hit a item, try to pick it up
     if(Item* item = dynamic_cast<Item*>(blocking)) {
         if(this->getInventory()->addItem(item)){
-            tile->setAbsEntity(nullptr);
+            Engine::Instance().getMap()->removeAbstractEntity(blocking);
             this->addLog("You picked up a " + item->getId());
 
          //could not pick up item
@@ -104,4 +104,9 @@ void Player::action(int x, int y)
     } else {
         this->addLog("You bumped in to a " + blocking->getId());
     }
+}
+
+void Player::update()
+{
+    //Dont update anything, the player controls input for this creature
 }
