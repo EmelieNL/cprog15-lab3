@@ -44,6 +44,7 @@ bool AbstractEntity::isSolid() const
 void AbstractEntity::render() const
 {
    Render::printSymbol(symbol, getFgColor(), getBgColor());
+   Render::printSymbol(char(32), getFgColor(), getBgColor());
 }
 
 void AbstractEntity::setCanMove(bool canMove)

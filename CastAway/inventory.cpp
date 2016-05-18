@@ -28,9 +28,9 @@ void Inventory::removeItem(Item *item)
     items.erase(std::remove(items.begin(), items.end(), item), items.end());
 }
 
-Item *Inventory::getItem(int i) const
+Item *Inventory::getItem(unsigned int i) const
 {
-    if(items.size() > i-1){
+    if(items.size()+1 > i){
         return items[i];
     } else {
         return nullptr;

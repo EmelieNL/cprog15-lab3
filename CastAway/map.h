@@ -31,9 +31,6 @@ private:
     static const int heightY = 20;
 
     Tile* map[heightY][widthX];
-
-    int playerX;
-    int playerY;
 };
 
 #endif // MAP_H

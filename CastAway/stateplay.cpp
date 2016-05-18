@@ -24,7 +24,10 @@ void StatePlay::init(){
     player->setX(playerX);
     player->setY(playerY);
 
+    player->addLog("You wake up and regain your conscience!");
+
     Engine::Instance().getMap()->getTile(playerX, playerY)->setAbsEntity(player);
+
 
     Item* knife = new Item("Knife", 400, '|');
     player->getInventory()->addItem(knife);
@@ -92,6 +95,15 @@ void StatePlay::render(){
     std::cout << "HEALTH " << Engine::Instance().getPlayer()->getHealth() << std::endl;
 
     printCommands();
+
+    //Print player log
+     std::cout << std::endl;
+    std::cout << "-- Log --" << std::endl;
+    std::vector<std::string> log = Engine::Instance().getPlayer()->getLog();
+    std::vector<std::string>::iterator it, end;
+    for(it = log.begin(), end = log.end() ; it != end; ++it) {
+        std::cout << (*it) << std::endl;
+    }
 }
 
 //Print available commands that the player can enter

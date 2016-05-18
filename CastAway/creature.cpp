@@ -1,4 +1,5 @@
 #include "creature.h"
+#include "player.h"
 
 Creature::Creature()
 {
@@ -45,6 +46,13 @@ void Creature::moveX(int x)
 
         //is there anyting blocking?
         if(Engine::Instance().getMap()->isBlocked(getX() + x, getY())){
+
+            AbstractEntity* blocking = Engine::Instance().getMap()->getTile(getX() + x, getY())->getAbsEntity();
+            //If this is the player
+            if(Player* p = dynamic_cast<Player*>(this)) {
+               // old was safely casted to NewType
+               p->addLog("You bumped in to a " + blocking->getId());
+            }
             return;
 
         //check map boundaries in x
