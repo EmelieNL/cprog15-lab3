@@ -15,7 +15,7 @@ Inventory::~Inventory()
   //TODO delete all items
 }
 
-void Inventory::addItem(Item *item)
+bool Inventory::addItem(Item *item)
 {
     //TODO check if this item can be stacked
     if(!isFull()){

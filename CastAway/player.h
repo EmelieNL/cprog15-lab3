@@ -11,6 +11,9 @@ public:
     Player();
     void addLog(std::string message);
     std::vector<std::string> getLog() const;
+    void moveX(int x);
+    void moveY(int y);
+    void action(int x, int y);
 private:
      std::vector<std::string> log; //vector of log messanges
 };

@@ -16,11 +16,12 @@ public:
     int getHealth() const;
     void changeHealth(int healthChange);
     bool isAlive() const;
-    void moveX(int x);
-    void moveY(int y);
+    virtual void moveX(int x);
+    virtual void moveY(int y);
     virtual void update() override;
     Inventory* getInventory() const;
     void setInventory(Inventory* inventory);
+    virtual void action(int x, int y);
 
 private:
     int health;

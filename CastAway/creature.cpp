@@ -44,22 +44,14 @@ void Creature::moveX(int x)
     //Can this creature move at all?
     if(isCanMove()){
 
-        //is there anyting blocking?
-        if(Engine::Instance().getMap()->isBlocked(getX() + x, getY())){
-
-            AbstractEntity* blocking = Engine::Instance().getMap()->getTile(getX() + x, getY())->getAbsEntity();
-            //If this is the player
-            if(Player* p = dynamic_cast<Player*>(this)) {
-               // old was safely casted to NewType
-               p->addLog("You bumped in to a " + blocking->getId());
-            }
+        //check map boundaries in x
+        if((getX() + x) < 0 || (getX() + x ) >= Engine::Instance().getMap()->getWidth()){
             return;
 
-        //check map boundaries in x
-        } else if((getX() + x) < 0 || (getX() + x ) >= Engine::Instance().getMap()->getWidth()){
+        //is there anyting blocking?
+        } else if(Engine::Instance().getMap()->isBlocked(getX() + x, getY())){
             return;
         } else {
-
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
 
@@ -76,14 +68,14 @@ void Creature::moveY(int y)
 {
     //Can this creature move at all?
     if(isCanMove()){
+        //check map boundaries in y
+        if((getY() + y) < 0 || (getY() + y ) >= Engine::Instance().getMap()->getHeight()){
+            return;
 
         //is there anything blocking?
-        if(Engine::Instance().getMap()->isBlocked(getX(), getY() + y)){
+       } else if(Engine::Instance().getMap()->isBlocked(getX(), getY() + y)){
             return;
 
-        //check map boundaries in y
-        } else if((getY() + y) < 0 || (getY() + y ) >= Engine::Instance().getMap()->getHeight()){
-            return;
         } else {
 
             //Remove creature from map tile
@@ -111,6 +103,11 @@ Inventory *Creature::getInventory() const
 void Creature::setInventory(Inventory *inventory)
 {
     this->inventory = inventory;
+}
+
+void Creature::action(int x, int y)
+{
+
 }
 
 void Creature::init(char symbol)
