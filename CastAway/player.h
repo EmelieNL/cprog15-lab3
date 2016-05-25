@@ -15,7 +15,7 @@ public:
     void moveY(int y);
     void action(int x, int y);
     void update() override;
-    void updateTerrainDesc(int newX, int newY) const;
+    void updateTerrainData(int newX, int newY);
 
 private:
      std::vector<std::string> log; //vector of log messanges

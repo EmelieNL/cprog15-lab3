@@ -1,4 +1,5 @@
 #include "terrain.h"
+#include "creature.h"
 
 Terrain::Terrain(Terrain::Type terrainType) {
     setTerrain(terrainType);
@@ -64,7 +65,7 @@ std::string Terrain::getDesc() const
     switch(type)
     {
     case Type::WATER:
-        return "You are now swimming";
+        return "You are now swimming and are freezing!";
     case Type::SAND:
        return "You walk on warm sand";
     case Type::FORREST:
@@ -72,5 +73,22 @@ std::string Terrain::getDesc() const
     case Type::MOUNTAIN:
         return "You climb the mountain";
     }
+}
+
+void Terrain::effect(Creature *creature)
+{
+    switch(type)
+    {
+    case Type::WATER:
+        creature->changeHealth(-1);
+        break;
+    case Type::SAND:
+        break;
+    case Type::FORREST:
+        break;
+    case Type::MOUNTAIN:
+        break;
+    }
+
 }
 

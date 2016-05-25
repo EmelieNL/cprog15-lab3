@@ -26,7 +26,13 @@ void StatePlay::init(){
 
     player->addLog("You wake up and regain your conscience!");
 
+    //Update player terrain info even as the player have not yet moved...
+    Terrain* currentTerrain = Engine::Instance().getMap()->getTile(player->getX(), player->getY())->getTerrain();
+    player->addLog(currentTerrain->getDesc());
+
+
     Engine::Instance().getMap()->addAbstractEntity(player->getX(), player->getY(), player);
+
 
     //Player starting items
     //Item* knife = new Item("Knife", 400, '|');

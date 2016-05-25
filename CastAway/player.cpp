@@ -44,7 +44,7 @@ void Player::moveX(int x)
         } else {
 
             //Update terrain info
-            updateTerrainDesc(newX, newY);
+            updateTerrainData(newX, newY);
 
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
@@ -79,7 +79,7 @@ void Player::moveY(int y)
         } else {
 
             //Update terrain info
-            updateTerrainDesc(newX, newY);
+            updateTerrainData(newX, newY);
 
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
@@ -128,13 +128,17 @@ void Player::update()
     //TODO Check if alive :)
 }
 
-void Player::updateTerrainDesc(int newX, int newY) const
+void Player::updateTerrainData(int newX, int newY)
 {
+
     Terrain* currentTerrain = Engine::Instance().getMap()->getTile(getX(), getY())->getTerrain();
     Terrain* newTerrain = Engine::Instance().getMap()->getTile(newX, newY)->getTerrain();
 
-    //if the terrain is different
+    //Add info to the player if the terrain changes
     if(currentTerrain->getType() != newTerrain->getType()){
          Engine::Instance().getPlayer()->addLog(newTerrain->getDesc());
     }
+
+    //Effect the player if the terrain have any effect
+    newTerrain->effect(this);
 }
