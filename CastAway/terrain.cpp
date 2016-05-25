@@ -59,3 +59,18 @@ conmanip::console_text_colors Terrain::getTextcolor() {
     return conmanip::console_text_colors::white;
 }
 
+std::string Terrain::getDesc() const
+{
+    switch(type)
+    {
+    case Type::WATER:
+        return "You are now swimming";
+    case Type::SAND:
+       return "You walk on warm sand";
+    case Type::FORREST:
+        return "You enter a forest";
+    case Type::MOUNTAIN:
+        return "You climb the mountain";
+    }
+}
+

@@ -40,7 +40,11 @@ void Player::moveX(int x)
             action(newX, newY);
             return;
 
+        //move
         } else {
+
+            //Update terrain info
+            updateTerrainDesc(newX, newY);
 
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
@@ -71,7 +75,11 @@ void Player::moveY(int y)
             action(newX, newY);
             return;
 
+        //move
         } else {
+
+            //Update terrain info
+            updateTerrainDesc(newX, newY);
 
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
@@ -118,4 +126,15 @@ void Player::action(int x, int y)
 void Player::update()
 {
     //TODO Check if alive :)
+}
+
+void Player::updateTerrainDesc(int newX, int newY) const
+{
+    Terrain* currentTerrain = Engine::Instance().getMap()->getTile(getX(), getY())->getTerrain();
+    Terrain* newTerrain = Engine::Instance().getMap()->getTile(newX, newY)->getTerrain();
+
+    //if the terrain is different
+    if(currentTerrain->getType() != newTerrain->getType()){
+         Engine::Instance().getPlayer()->addLog(newTerrain->getDesc());
+    }
 }

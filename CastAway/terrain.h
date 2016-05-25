@@ -16,6 +16,7 @@ public:
     char getSymbol();
     conmanip::console_bg_colors getBGcolor();
     conmanip::console_text_colors getTextcolor();
+    std::string getDesc() const;
 
 private:
     Type type;
