@@ -11,7 +11,6 @@ class AbstractEntity
 
 private:
     bool canMove;
-    bool solid;
     std::string id;
     int x;
     int y;
@@ -31,12 +30,10 @@ public:
     int getX() const;
     int getY() const;
     bool isCanMove() const;
-    bool isSolid() const;
     void setCanMove(bool canMove);
     void setBgColor( conmanip::console_bg_colors color);
     void setFgColor( conmanip::console_text_colors color);
     void setId(std::string newId);
-    void setSolid(bool solid);
     void setSymbol(char symbol);
     void setX(int x);
     void setY(int y);

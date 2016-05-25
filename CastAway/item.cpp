@@ -63,7 +63,6 @@ void Item::init(std::string id, int weight, char symbol, bool canStack, int maxS
     this->setCanStack(canStack);
     this->setMaxStack(maxStack);
     this->setStackAmount(stackAmount);
-    this->setSolid(true);
     this->setCanMove(false);
 
     setFgColor(conmanip::console_text_colors::white);

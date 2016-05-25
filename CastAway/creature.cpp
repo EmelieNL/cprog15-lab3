@@ -189,7 +189,6 @@ void Creature::init(char symbol)
     setHealth(100);
     setSymbol(symbol);
     setBasicAttack(10);
-    setSolid(true);
     setFgColor(conmanip::console_text_colors::yellow);
     setBgColor(conmanip::console_bg_colors::black);
     setX(0);

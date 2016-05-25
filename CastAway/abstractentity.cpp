@@ -36,11 +36,6 @@ bool AbstractEntity::isCanMove() const
     return this->canMove;
 }
 
-bool AbstractEntity::isSolid() const
-{
-    return this->solid;
-}
-
 void AbstractEntity::render() const
 {
    Render::printSymbol(symbol, getFgColor(), getBgColor());
@@ -65,11 +60,6 @@ void AbstractEntity::setFgColor(console_text_colors color)
 void AbstractEntity::setId(std::string newId)
 {
    this->id = newId;
-}
-
-void AbstractEntity::setSolid(bool solid)
-{
-   this->solid = solid;
 }
 
 void AbstractEntity::setX(int x)

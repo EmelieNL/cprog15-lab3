@@ -180,7 +180,7 @@ bool Map::isBlocked(int x, int y)
     }
 
     Tile* tile = getTile(x,y);
-    if(tile != nullptr && tile->getAbsEntity() != nullptr) //&& tile->getAbsEntity()->isSolid())
+    if(tile != nullptr && tile->getAbsEntity() != nullptr)
         return true;
     else
         return false;
