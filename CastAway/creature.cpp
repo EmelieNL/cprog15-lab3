@@ -51,39 +51,47 @@ bool Creature::isAlive() const
 
 void Creature::moveX(int x)
 {
+    int newX = getX() + x;
+    int newY = getY();
+
     //Can this creature move at all?
     if(isCanMove()){
 
         //check map boundaries in x
-        if((getX() + x) < 0 || (getX() + x ) >= Engine::Instance().getMap()->getWidth()){
+        if(newX < 0 || newX >= Engine::Instance().getMap()->getWidth()){
             return;
 
         //is there anyting blocking?
-        } else if(Engine::Instance().getMap()->isBlocked(getX() + x, getY())){
+        } else if(Engine::Instance().getMap()->isBlocked(newX, newY)){
+             action(newX, newY);
             return;
         } else {
             //Remove creature from map tile
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
 
             //Update the creatures position
-            setX(getX()+x);
+            setX(newX);
 
             //Add creatre to map tile
-            Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(this);
+            Engine::Instance().getMap()->getTile(newX, newY)->setAbsEntity(this);
         }
     }
 }
 
 void Creature::moveY(int y)
 {
+    int newX = getX();
+    int newY = getY() + y;
+
     //Can this creature move at all?
     if(isCanMove()){
         //check map boundaries in y
-        if((getY() + y) < 0 || (getY() + y ) >= Engine::Instance().getMap()->getHeight()){
+        if(newY < 0 || newY >= Engine::Instance().getMap()->getHeight()){
             return;
 
         //is there anything blocking?
-       } else if(Engine::Instance().getMap()->isBlocked(getX(), getY() + y)){
+       } else if(Engine::Instance().getMap()->isBlocked(newX, newY)){
+            action(newX, newY);
             return;
 
         } else {
@@ -92,10 +100,10 @@ void Creature::moveY(int y)
             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(nullptr);
 
             //Update the creatures position
-            setY(getY()+y);
+            setY(newY);
 
             //Add creatre to map tile
-            Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(this);
+            Engine::Instance().getMap()->getTile(newX, newY)->setAbsEntity(this);
         }
     }
 }
@@ -109,6 +117,76 @@ void Creature::update()
         Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
 
         //Todo delete this object
+    }
+
+    //Movement for hostile creatures if player is close
+    float xDist =  Engine::Instance().getPlayer()->getX() - getX();
+    float yDist =  Engine::Instance().getPlayer()->getY() - getY();
+    float distance = std::sqrt((xDist*xDist) + (yDist*yDist)); //hypotenuse
+
+    //If the player is close enough, move towards player
+    if(isHostile() && distance < 6){
+
+        //Random chance that the creature will not move
+        int random = rand() % 100;
+        if(random > 50)
+            return;
+
+        //Normalize
+        xDist /= distance;
+        yDist /= distance;
+
+        //creature is directly below player
+        if(xDist == 0 && yDist == -1){
+            moveY(-1);
+        //creature is directly above player
+        } else if(xDist == 0 && yDist == 1){
+            moveY(1);
+        //creature is directly left of player
+        } else if(xDist == 1 && yDist == 0){
+            moveX(1);
+        //creature is directly right of player
+        } else if(xDist == -1 && yDist == 0){
+            moveX(-1);
+        //Diagonal, choose a direction
+        //Player is not 4th quadrant compared to the creature
+        } else if(xDist > 0 && yDist>0){
+            if(xDist < yDist){
+                moveY(1);
+            } else {
+                moveX(1);
+            }
+        //Player is in 1th quadrant compared to the creature
+        } else if(xDist > 0 && yDist<0){
+            if(xDist < std::abs(yDist)){
+                moveY(-1);
+            } else {
+                moveX(1);
+            }
+        //Player is in 2th quadrant compared to the creature
+        } else if(xDist < 0 && yDist<0){
+            if(xDist < yDist){
+                moveY(-1);
+            } else {
+                moveX(-1);
+            }
+        //Player is in 3th quadrant compared to the creature
+        } else if(xDist < 0 && yDist>0){
+            if(std::abs(xDist) < yDist){
+                moveY(1);
+            } else {
+                moveX(-1);
+            }
+        }
+
+        //Allow the creature the option to attack the player, as it will not be able to catch up anytime
+        xDist =  Engine::Instance().getPlayer()->getX() - getX();
+        yDist =  Engine::Instance().getPlayer()->getY() - getY();
+        distance = std::sqrt((xDist*xDist) + (yDist*yDist)); //hypotenuse
+        if(distance < 2)
+            attack(Engine::Instance().getPlayer());
+
+        return;
     }
 
     //Standard movment for a creature is random direction by one
@@ -138,7 +216,14 @@ void Creature::setInventory(Inventory *inventory)
 
 void Creature::action(int x, int y)
 {
+    //Get the entity at x and y
+    Tile* tile = Engine::Instance().getMap()->getTile(x, y);
+    AbstractEntity* blocking = tile->getAbsEntity();
 
+    //If we hit the player, attack it
+    if(Player* enemy = dynamic_cast<Player*>(blocking)) {
+        attack(enemy);
+    }
 }
 
 Weapon *Creature::getWeapon() const
@@ -176,8 +261,23 @@ int Creature::attack(Creature *enemy)
 {
     int randomDamage = rand() % getAttackDamage() + 1; //1 to maxDamage
 
+    //If we hit the player, log it to the player
+    if(Player* player = dynamic_cast<Player*>(enemy)) {
+       player->addLog(getId() + " attacked you with " + std::to_string(randomDamage) + " damage!");
+    }
+
     enemy->changeHealth(-randomDamage);
     return randomDamage;
+}
+
+bool Creature::isHostile() const
+{
+    return hostile;
+}
+
+void Creature::setHostile(bool value)
+{
+    hostile = value;
 }
 
 void Creature::init(char symbol)
@@ -197,4 +297,5 @@ void Creature::init(char symbol)
     setId("Creature");
     setInventory(new Inventory());
     setWeapon(nullptr);
+    setHostile(true);
 }

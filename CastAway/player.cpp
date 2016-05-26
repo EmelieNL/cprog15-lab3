@@ -110,13 +110,21 @@ void Player::action(int x, int y)
              this->addLog("You see a " + item->getId() + " but can't pick it up!");
         }
 
-    //If we hit a creature, attack it
-    } else if(Creature* enemy = dynamic_cast<Creature*>(blocking)) {
-        int damageDelt = attack(enemy);
-        if(enemy->isAlive()){
-            this->addLog("You hit " + enemy->getId() + " with " + std::to_string(damageDelt) + " damage! Health: " + std::to_string(enemy->getHealth()));
+    //If we hit a creature
+    } else if(Creature* enemy = dynamic_cast<Creature*>(blocking)){
+
+        //If hostile attack
+        if(enemy->isHostile()) {
+            int damageDelt = attack(enemy);
+            if(enemy->isAlive()){
+                this->addLog("You hit " + enemy->getId() + " with " + std::to_string(damageDelt) + " damage! Health: " + std::to_string(enemy->getHealth()));
+            } else {
+                this->addLog("You killed the " + enemy->getId() + "!");
+            }
+
+        //not hostile
         } else {
-            this->addLog("You killed the " + enemy->getId() + "!");
+            this->addLog("You bumped in to a friendly " + blocking->getId());
         }
     } else {
         this->addLog("You bumped in to a " + blocking->getId());

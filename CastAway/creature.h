@@ -37,10 +37,14 @@ public:
     int getAttackDamage() const;
     int attack(Creature* enemy);
 
+    bool isHostile() const;
+    void setHostile(bool value);
+
 private:
     int health;
     int maxHealth;
     int basicAttack;
+    bool hostile;
     Weapon* weapon;
     Inventory* inventory;
     void init(char symbol);
