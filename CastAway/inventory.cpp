@@ -20,7 +20,10 @@ bool Inventory::addItem(Item *item)
     //TODO check if this item can be stacked
     if(!isFull()){
         items.push_back(item);
+        return true;
     }
+
+    return false;
 }
 
 void Inventory::removeItem(Item *item)

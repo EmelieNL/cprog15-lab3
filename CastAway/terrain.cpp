@@ -72,6 +72,8 @@ std::string Terrain::getDesc() const
         return "You enter a forest";
     case Type::MOUNTAIN:
         return "You climb the mountain";
+    default:
+        return "You enter unfamiliar terrain";
     }
 }
 
