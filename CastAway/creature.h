@@ -39,6 +39,7 @@ public:
 
     bool isHostile() const;
     void setHostile(bool value);
+    void init(char symbol);
 
 private:
     int health;
@@ -47,7 +48,7 @@ private:
     bool hostile;
     Weapon* weapon;
     Inventory* inventory;
-    void init(char symbol);
+
 };
 
 #endif // CREATURE_H

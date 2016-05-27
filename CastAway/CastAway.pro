@@ -20,7 +20,8 @@ SOURCES += main.cpp \
     stateinventory.cpp \
     consumable.cpp \
     menuoption.cpp \
-    weapon.cpp
+    weapon.cpp \
+    fish.cpp
 
 HEADERS += \
     map.h \
@@ -42,5 +43,6 @@ HEADERS += \
     stateinventory.h \
     consumable.h \
     menuoption.h \
-    weapon.h
+    weapon.h \
+    fish.h
 

@@ -11,6 +11,7 @@
 #include "item.h"
 #include "consumable.h"
 #include "weapon.h"
+//#include "fish.h" //TODO
 
 class Map
 {

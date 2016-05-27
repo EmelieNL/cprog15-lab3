@@ -116,7 +116,8 @@ void Map::initMap(){
     }
 
     //Test enemy
-    Creature* squid = new Creature('{');
+    //Fish* squid = new Fish('{');
+    Creature* squid = new Creature('{'); //TODO change to class Fish
     squid->setId("Squid");
     squid->setFgColor(conmanip::console_text_colors::cyan);
     squid->setX(3);
