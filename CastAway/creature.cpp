@@ -1,5 +1,8 @@
 #include "creature.h"
 #include "player.h"
+#include "inventory.h"
+#include "weapon.h"
+
 
 Creature::Creature()
 {

@@ -3,6 +3,7 @@
 #include "stateplay.h"
 #include "stateinventory.h"
 #include "consumable.h"
+#include "weapon.h"
 
 
 void StateInventory::init(){
@@ -18,9 +19,12 @@ void StateInventory::render()
 {
     Engine::Instance().clear();
 
-    std::cout << "             ___      ___  __   __      " << std::endl;
-    std::cout << "| |\\ | \\  / |__  |\\ |  |  /  \\ |__) \\ / " << std::endl;
-    std::cout << "| | \\|  \\/  |___ | \\|  |  \\__/ |  \\  |  " << std::endl;
+    std::cout <<
+    R"(
+                 ___      ___  __   __
+    | |\ | \  / |__  |\ |  |  /  \ |__) \ /
+    | | \|  \/  |___ | \|  |  \__/ |  \  |
+    )" << std::endl;
 
     printCommands();
 }

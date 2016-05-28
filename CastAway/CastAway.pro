@@ -21,7 +21,8 @@ SOURCES += main.cpp \
     consumable.cpp \
     menuoption.cpp \
     weapon.cpp \
-    fish.cpp
+    fish.cpp \
+    stategameover.cpp
 
 HEADERS += \
     map.h \
@@ -44,5 +45,6 @@ HEADERS += \
     consumable.h \
     menuoption.h \
     weapon.h \
-    fish.h
+    fish.h \
+    stategameover.h
 

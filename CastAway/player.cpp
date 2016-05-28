@@ -1,4 +1,6 @@
 #include "player.h"
+#include "item.h"
+#include "inventory.h"
 
 Player::Player()
 {

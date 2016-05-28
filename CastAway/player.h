@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include <vector>
-
 #include "creature.h"
 
 class Player:public Creature

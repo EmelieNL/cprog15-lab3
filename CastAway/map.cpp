@@ -57,7 +57,7 @@ void Map::removeAbstractEntity(AbstractEntity *absEntity)
     map[absEntity->getY()][absEntity->getX()]->setAbsEntity(nullptr);
 
     //Remove from entities vector
-    entities.erase(std::remove(entities.begin(), entities.end(), absEntity), entities.end());
+    entities.erase(remove(entities.begin(), entities.end(), absEntity), entities.end());
 }
 
 // Render map
@@ -90,32 +90,32 @@ void Map::render() const {
 
                 //if already explored, show terrain but not entities
                 } else if(current->isExplored()){
-                    Render::printSymbol(current->getTerrain()->getSymbol(), conmanip::console_text_colors::gray, conmanip::console_bg_colors::black);
-                    Render::printSymbol(char(32), conmanip::console_text_colors::gray, conmanip::console_bg_colors::black);
+                    Render::printSymbol(current->getTerrain()->getSymbol(), console_text_colors::gray, console_bg_colors::black);
+                    Render::printSymbol(char(32), console_text_colors::gray, console_bg_colors::black);
                 } else {
-                   Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
-                   Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
+                   Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                   Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
                 }
             } else {
-                 Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
-                 Render::printSymbol('.', conmanip::console_text_colors::black, conmanip::console_bg_colors::black);
+                 Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                 Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
             }
         }
-        std::cout << endl;
+        cout << endl;
     }
 }
 
 void Map::update()
 {
     //Update all entities once
-    std::vector<AbstractEntity*>::iterator it, end;
+    vector<AbstractEntity*>::iterator it, end;
     for(it = entities.begin(), end = entities.end() ; it != end; ++it) {
         (*it)->update();
     }
 }
 
 void Map::initMap(){
-    std::cout << "Map is inited from Map class"<< "\n";
+    cout << "Map is inited from Map class"<< "\n";
 
     //Init tiles
     for(int y=0; y < heightY; y++){
@@ -128,7 +128,7 @@ void Map::initMap(){
     //Fish* squid = new Fish('{');
     Creature* squid = new Creature('{'); //TODO change to class Fish
     squid->setId("Squid");
-    squid->setFgColor(conmanip::console_text_colors::cyan);
+    squid->setFgColor(console_text_colors::cyan);
     squid->setX(3);
     squid->setY(3);
     addAbstractEntity(squid->getX(), squid->getY(), squid);
@@ -141,7 +141,7 @@ void Map::initMap(){
 
     //Test apple
     Consumable* apple = new Consumable("Apple", 50, 'A', 20);
-    apple->setFgColor(conmanip::console_text_colors::light_red);
+    apple->setFgColor(console_text_colors::light_red);
     apple->setX(4);
     apple->setY(4);
     addAbstractEntity(apple->getX(), apple->getY(), apple);

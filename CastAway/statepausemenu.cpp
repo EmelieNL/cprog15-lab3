@@ -11,7 +11,7 @@ void StatePauseMenu::init(){
 }
 
 void StatePauseMenu::clear(){
-  std::cout << "IntroState clear!" << "\n";
+  std::cout << "StatePauseState clear!" << "\n";
 }
 
  void StatePauseMenu::printCommands()
@@ -79,14 +79,16 @@ void StatePauseMenu::update(){
 void StatePauseMenu::render(){
     Engine::Instance().clear();
 
-    std::cout << "   _____          _                              " << "\n";
-    std::cout << "  / ____|        | |     /\\                      " << "\n";
-    std::cout << " | |     __ _ ___| |_   /  \\__      ____ _ _   _ " << "\n";
-    std::cout << " | |    / _` / __| __| / /\\ \\ \\ /\\ / / _` | | | |" << "\n";
-    std::cout << " | |___| (_| \\__ \\ |_ / ____ \\ V  V / (_| | |_| |" << "\n";
-    std::cout << "  \\_____\\__,_|___/\\__/_/    \\_\\_/\\_/ \\__,_|\\__, |" << "\n";
-    std::cout << "                                            __/ |" << "\n";
-    std::cout << "                                           |___/ " << "\n";
+    std::cout <<
+    R"(
+    _____          _
+   / ____|        | |     /\
+  | |     __ _ ___| |_   /  \__      ____ _ _   _
+  | |    / _` / __| __| / /\ \ \ /\ / / _` | | | |
+  | |___| (_| \__ \ |_ / ____ \ V  V / (_| | |_| |
+   \_____\__,_|___/\__/_/    \_\_/\_/ \__,_|\__, |
+                                             __/ |
+                                            |___/ )" << std::endl;
 
     std::cout << "Game paused" << "\n";
 

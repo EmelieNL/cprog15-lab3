@@ -6,8 +6,9 @@
 #include "tile.h"
 #include "map.h"
 #include "engine.h"
-#include "inventory.h"
-#include "weapon.h"
+
+class Inventory;
+class Weapon;
 
 class Creature:public AbstractEntity
 {
