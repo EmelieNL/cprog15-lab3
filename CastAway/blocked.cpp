@@ -21,8 +21,8 @@ void Blocked::update()
 void Blocked::init(char symbol)
 {
     setSymbol(symbol);
-    setFgColor(conmanip::console_text_colors::white);
-    setBgColor(conmanip::console_bg_colors::black);
+    setFgColor(console_text_colors::white);
+    setBgColor(console_bg_colors::black);
     setCanMove(false);
     setId("Wall");
     setX(0);

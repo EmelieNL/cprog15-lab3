@@ -4,12 +4,13 @@ Tile::Tile()
 {
     absEntity = nullptr;
     terrain = new Terrain(Terrain::Type::WATER); //TODO desturctor
-    explored=false;
+    explored = false;
 }
 
 Tile::~Tile()
 {
-    delete absEntity; //TODO warning atm...
+    delete absEntity;
+    delete terrain;
 }
 
 AbstractEntity *Tile::getAbsEntity()

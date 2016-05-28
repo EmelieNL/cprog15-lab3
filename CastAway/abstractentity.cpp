@@ -8,32 +8,32 @@ using namespace conmanip;
 
 conmanip::console_bg_colors AbstractEntity::getBgColor() const
 {
-    return this->bgColor;
+    return bgColor;
 }
 
 console_text_colors AbstractEntity::getFgColor() const
 {
-    return this->fgColor;
+    return fgColor;
 }
 
 std::string AbstractEntity::getId() const
 {
-    return this->id;
+    return id;
 }
 
 int AbstractEntity::getX() const
 {
-    return this->x;
+    return x;
 }
 
 int AbstractEntity::getY() const
 {
-    return this->y;
+    return y;
 }
 
 bool AbstractEntity::isCanMove() const
 {
-    return this->canMove;
+    return canMove;
 }
 
 void AbstractEntity::render() const
@@ -44,22 +44,22 @@ void AbstractEntity::render() const
 
 void AbstractEntity::setCanMove(bool canMove)
 {
-   this->canMove = canMove;
+   canMove = canMove;
 }
 
 void AbstractEntity::setBgColor(conmanip::console_bg_colors color)
 {
-    this->bgColor = color;
+    bgColor = color;
 }
 
 void AbstractEntity::setFgColor(console_text_colors color)
 {
-    this->fgColor = color;
+    fgColor = color;
 }
 
 void AbstractEntity::setId(std::string newId)
 {
-   this->id = newId;
+   id = newId;
 }
 
 void AbstractEntity::setX(int x)
@@ -70,11 +70,6 @@ void AbstractEntity::setX(int x)
 void AbstractEntity::setY(int y)
 {
    this->y = y;
-}
-
-void AbstractEntity::update()
-{
-
 }
 
 void AbstractEntity::setSymbol(char symbol){

@@ -27,11 +27,10 @@ Map::Map() {
 
 Map::~Map()
 {
-
     //Clean tiles in this map
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
-            delete[] map[y][x];
+            delete map[y][x];
          }
     }
 }
@@ -120,7 +119,7 @@ void Map::initMap(){
     //Init tiles
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
-            map[y][x] = new Tile(); //TODO add to destructor
+            map[y][x] = new Tile();
           }
     }
 

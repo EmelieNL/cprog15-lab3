@@ -22,8 +22,8 @@ Engine::~Engine()
 
 void Engine::init()
 {
-    Map* level_01 = new Map(); //TODO add to destructor
-    this->maps["level_1"] = level_01;
+    // Create new map, level_1
+    maps["level_1"];
 }
 
  void Engine::render() const
@@ -39,13 +39,13 @@ void Engine::init()
 
  Map* Engine::getMap() const
  {
-     return this->currentMap;
+     return currentMap;
  }
 
  void Engine::loadMap(std::string mapName)
  {
      if(maps.find(mapName) != maps.end()){
-        currentMap = maps[mapName];
+        currentMap = &maps.at(mapName);
         std::cout << "Found map " << mapName << ", now set to currMap" << "\n";
      } else {
          std::cout << "Did not find map " << mapName << "... :(" << "\n";

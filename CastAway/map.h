@@ -16,6 +16,11 @@ public:
     Map();
     ~Map();
 
+    // Assignment and copy constructors are deleted due to having member variables as pointers
+    // (Non-trivial class)
+    Map (const Map&) = delete;
+    void operator= (const Map&) = delete;
+
     void initMap();
     Tile* getTile(int x, int y);
     void setTerrain(int x, int y, Terrain::Type terrainType);

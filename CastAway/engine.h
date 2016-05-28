@@ -1,6 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include "abstractentity.h"
 #include "map.h"
@@ -12,7 +12,7 @@ class Engine
 {
 private:
     Map* currentMap;
-    std::map<std::string, Map*> maps; //maps available
+    std::unordered_map<std::string, Map> maps; //maps available
     std::vector<IGameState*> states; //Game states
     bool running = true;
 

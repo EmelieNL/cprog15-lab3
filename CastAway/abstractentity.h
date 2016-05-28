@@ -21,9 +21,9 @@ protected:
     char symbol;
 
 public:
-    //TODO make this class abstract!
-    //AbstractEntity(int x, int y, char symbol); //main constructor
-    //virtual ~AbstractEntity();	//destructor
+    // Base class constructors should always be virtual
+    virtual ~AbstractEntity() {}
+
     conmanip::console_bg_colors getBgColor() const;
     conmanip::console_text_colors getFgColor() const;
     std::string getId() const;
@@ -37,7 +37,9 @@ public:
     void setSymbol(char symbol);
     void setX(int x);
     void setY(int y);
-    virtual void update();
+
+    // Pure virtual, abstract class
+    virtual void update() = 0;
 
     void render() const;
 
