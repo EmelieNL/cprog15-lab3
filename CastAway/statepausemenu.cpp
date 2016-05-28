@@ -6,8 +6,6 @@
 
 #include "statepausemenu.h"
 
-StatePauseMenu StatePauseMenu::pausemenuState;
-
 void StatePauseMenu::init(){
     setInitDone();
 }

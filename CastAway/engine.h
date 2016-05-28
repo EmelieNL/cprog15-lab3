@@ -6,14 +6,14 @@
 #include "map.h"
 
 class Player; //forward declaration
-class GameState;
+class IGameState;
 
 class Engine
 {
 private:
     Map* currentMap;
     std::map<std::string, Map*> maps; //maps available
-    std::vector<GameState*> states; //Game states
+    std::vector<IGameState*> states; //Game states
     bool running = true;
 
     Engine(); //constructor
@@ -37,7 +37,7 @@ public:
     void clear() const;
     Map* getMap() const;
     void loadMap(std::string mapName);
-    void changeState(GameState* state);
+    void changeState(IGameState &state);
     void quit();
     bool isRunning();
     Player* getPlayer() const;

@@ -52,7 +52,7 @@ void Engine::init()
      }
  }
 
- void Engine::changeState(GameState *state){
+ void Engine::changeState(IGameState& state){
 
      //The old state might have to do stuff, clean up data
      if(!states.empty()){
@@ -62,7 +62,7 @@ void Engine::init()
      }
 
      //Add the new state to end of vector
-     states.push_back(state);
+     states.push_back(&state);
 
      //Init the new state which is at end of vector
      states.back()->init();

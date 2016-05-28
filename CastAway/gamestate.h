@@ -3,7 +3,9 @@
 
 #include "engine.h"
 
-class GameState {
+/* Interface (all functions are pure virtual) to handle the game */
+
+class IGameState {
 public:
     virtual void init() = 0;
     virtual void update() = 0;
@@ -16,7 +18,7 @@ public:
     virtual void resume() = 0;
 
     //Change gamestate from this to another
-    virtual void changeState(GameState* state){
+    virtual void changeState(IGameState& state){
         Engine::Instance().changeState(state);
     }
 
@@ -31,7 +33,7 @@ public:
 private:
     bool initDone = false;
 protected:
-    GameState(){}
+    IGameState(){}
 };
 
 #endif // GAMESTATE_H

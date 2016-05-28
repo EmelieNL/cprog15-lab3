@@ -4,8 +4,6 @@
 #include "stateplay.h"
 #include "statepausemenu.h"
 
-StatePlay StatePlay::playState;
-
 void StatePlay::init(){
 
     if(isInitDone())

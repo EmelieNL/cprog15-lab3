@@ -4,7 +4,6 @@
 #include "stateinventory.h"
 #include "consumable.h"
 
-StateInventory StateInventory::inventoryState;
 
 void StateInventory::init(){
     setInitDone();

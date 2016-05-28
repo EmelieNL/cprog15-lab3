@@ -5,9 +5,13 @@
 #include "menuoption.h"
 #include "inventory.h"
 
-class StateInventory:public GameState, public MenuOption
+class StateInventory:public IGameState, public MenuOption
 {
 public:
+    // Assignment and copy constructors are deleted due to singelton
+    StateInventory (const StateInventory&) = delete;
+    void operator= (const StateInventory&) = delete;
+
     void init();
     void update();
     void render();
@@ -20,14 +24,16 @@ public:
     void pause();
     void resume();
 
-    //Get static
-    static StateInventory* instance(){
-        return &inventoryState;
+    // Get static instance
+    static StateInventory& instance(){
+        static StateInventory inventoryState;
+        return inventoryState;
     }
 
-private:
-    static StateInventory inventoryState;
+protected:
+    StateInventory() {}
 
+private:
     int menuOption;
 };
 

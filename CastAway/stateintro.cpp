@@ -5,8 +5,6 @@
 #include "stateintro.h"
 #include "stateplay.h"
 
-StateIntro StateIntro::introState;
-
 void StateIntro::init(){
     if(!isInitDone()){
         this->render();

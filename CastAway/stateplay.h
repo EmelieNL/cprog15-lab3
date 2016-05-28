@@ -5,9 +5,13 @@
 #include "player.h"
 #include "stateinventory.h"
 
-class StatePlay:public GameState
+class StatePlay:public IGameState
 {
 public:
+    // Assignment and copy constructors are deleted due to singelton
+    StatePlay (const StatePlay&) = delete;
+    void operator= (const StatePlay&) = delete;
+
     void init();
     void update();
     void render();
@@ -20,11 +24,13 @@ public:
     void resume();
 
     //Get static
-    static StatePlay* instance(){
-        return &playState;
+    static StatePlay& instance(){
+        static StatePlay playState;
+        return playState;
     }
-private:
-    static StatePlay playState;
+
+protected:
+    StatePlay() {}
 };
 
 #endif // STATEPLAY_H

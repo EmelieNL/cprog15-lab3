@@ -4,10 +4,14 @@
 #include "gamestate.h"
 #include "menuoption.h"
 
-class StateIntro:public GameState, public MenuOption
+class StateIntro:public IGameState, public MenuOption
 {
 
 public:
+    // Assignment and copy constructors are deleted due to singelton
+    StateIntro (const StateIntro&) = delete;
+    void operator= (const StateIntro&) = delete;
+
     void init();
     void update();
     void render();
@@ -21,16 +25,16 @@ public:
 
     void menuOptionAction();
 
-    //Get static
-    static StateIntro* instance(){
-        return &introState;
+    // Get static instance
+    static StateIntro& instance(){
+        static StateIntro introState;
+        return introState;
     }
 
 protected:
-    //IntroState() {}
+    StateIntro() {}
 
 private:
-    static StateIntro introState;
     const std::vector<std::string> commands = {"Play", "Help", "Quit"};
 };
 
