@@ -4,14 +4,11 @@
 #include <cmath>
 #include <vector>
 #include <algorithm>
-
-#include "blocked.h"
 #include "terrain.h"
-#include "tile.h"
-#include "item.h"
-#include "consumable.h"
-#include "weapon.h"
-//#include "fish.h" //TODO
+
+// Forward declare
+class AbstractEntity;
+class Tile;
 
 class Map
 {

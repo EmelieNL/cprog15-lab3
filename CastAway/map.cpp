@@ -7,9 +7,18 @@
 #include "render.h"
 #include "engine.h"
 #include "player.h"
+#include "fish.h"
+#include "blocked.h"
+#include "tile.h"
+#include "item.h"
+#include "consumable.h"
+#include "weapon.h"
+#include "abstractentity.h"
 
 using namespace conmanip;
 using namespace std;
+
+
 
 // Default constructor
 Map::Map() {

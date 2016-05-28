@@ -2,6 +2,7 @@
 #include <iostream>
 #include "stateplay.h"
 #include "stateinventory.h"
+#include "consumable.h"
 
 StateInventory StateInventory::inventoryState;
 
