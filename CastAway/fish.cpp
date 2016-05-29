@@ -12,7 +12,8 @@ Fish::Fish(char symbol)
 
 void Fish::moveX(int x)
 {
-    Terrain* newTerrain = Engine::Instance().getMap()->getTile(x, getY())->getTerrain();
+    const auto newX = getX() + x;
+    Terrain* newTerrain = Engine::Instance().getMap()->getTile(newX, getY())->getTerrain();
 
     //Check that the new terrain really is water
     if(newTerrain->getType() == Terrain::Type::WATER){
@@ -22,7 +23,8 @@ void Fish::moveX(int x)
 
 void Fish::moveY(int y)
 {
-    Terrain* newTerrain = Engine::Instance().getMap()->getTile(getX(), y)->getTerrain();
+    const auto newY = getY() + y;
+    Terrain* newTerrain = Engine::Instance().getMap()->getTile(getX(), newY)->getTerrain();
 
     //Check that the new terrain really is water
     if(newTerrain->getType() == Terrain::Type::WATER){

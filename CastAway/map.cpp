@@ -54,7 +54,6 @@ void Map::addAbstractEntity(int x, int y, AbstractEntity *absEntity)
 //Remove a entity from the map vector
 void Map::removeAbstractEntity(AbstractEntity *absEntity)
 {
-    //TODO Bug, with this line killed creatures are removed, when this line is removed they dont despawn on death?
     Engine::Instance().getPlayer()->addLog("Try to remove " + absEntity->getId());
 
     //Remove from map
@@ -126,14 +125,14 @@ void Map::initMap(){
           }
     }
 
-    //Test enemy
-    //Fish* squid = new Fish('{');
-    Creature* squid = new Creature('{'); //TODO change to class Fish
-    squid->setId("Squid");
-    squid->setFgColor(console_text_colors::cyan);
-    squid->setX(3);
-    squid->setY(3);
-    addAbstractEntity(squid->getX(), squid->getY(), squid);
+    Fish* shark = new Fish('^');
+    shark->setId("Shark");
+    shark->setFgColor(console_text_colors::light_cyan);
+    shark->setBgColor(console_bg_colors::blue);
+    shark->setX(3);
+    shark->setY(3);
+    shark->setMaxHealth(20);
+    addAbstractEntity(shark->getX(), shark->getY(), shark);
 
     //Test weapon
     Weapon* knife = new Weapon("Knife", 400, '|', 80);
