@@ -15,7 +15,7 @@
 // ----------------------------------------------------------------------------------------------
 #pragma once
 
-#ifndef _WIN32_
+#ifndef _WIN32
 #define FOREGROUND_RESET       39
 #define FOREGROUND_RED	       31
 #define FOREGROUND_GREEN       32
