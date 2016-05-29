@@ -107,10 +107,8 @@ void Map::render() const {
 void Map::update()
 {
     //Update all entities once
-    vector<AbstractEntity*>::iterator it, end;
-    for(it = entities.begin(), end = entities.end() ; it != end; ++it) {
-        (*it)->update();
-    }
+    for(auto entity : entities)
+        entity->update();
 }
 
 void Map::initMap(){

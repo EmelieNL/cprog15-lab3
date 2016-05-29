@@ -103,13 +103,13 @@ void Player::action(int x, int y)
 
     //If we hit a item, try to pick it up
     if(Item* item = dynamic_cast<Item*>(blocking)) {
-        if(this->getInventory()->addItem(item)){
+        if(getInventory()->addItem(item)){
+            addLog("You picked up a " + item->getId());
             Engine::Instance().getMap()->removeAbstractEntity(blocking);
-            this->addLog("You picked up a " + item->getId());
 
          //could not pick up item
         } else {
-             this->addLog("You see a " + item->getId() + " but can't pick it up!");
+             addLog("You see a " + item->getId() + " but can't pick it up!");
         }
 
     //If we hit a creature
@@ -119,17 +119,17 @@ void Player::action(int x, int y)
         if(enemy->isHostile()) {
             int damageDelt = attack(enemy);
             if(enemy->isAlive()){
-                this->addLog("You hit " + enemy->getId() + " with " + std::to_string(damageDelt) + " damage! Health: " + std::to_string(enemy->getHealth()));
+                addLog("You hit " + enemy->getId() + " with " + std::to_string(damageDelt) + " damage! Health: " + std::to_string(enemy->getHealth()));
             } else {
-                this->addLog("You killed the " + enemy->getId() + "!");
+                addLog("You killed the " + enemy->getId() + "!");
             }
 
         //not hostile
         } else {
-            this->addLog("You bumped in to a friendly " + blocking->getId());
+            addLog("You bumped in to a friendly " + blocking->getId());
         }
     } else {
-        this->addLog("You bumped in to a " + blocking->getId());
+        addLog("You bumped in to a " + blocking->getId());
     }
 }
 
