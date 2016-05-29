@@ -84,9 +84,10 @@ void Engine::init()
      return player;
  }
 
- void Engine::setPlayer(Player *player)
+ void Engine::setPlayer(Player* newPlayer)
  {
-     this->player = player;
+     delete player;
+     player = newPlayer;
  }
 
  bool Engine::isDebug() const
