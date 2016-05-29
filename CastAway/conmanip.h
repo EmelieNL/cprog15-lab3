@@ -15,7 +15,10 @@
 // ----------------------------------------------------------------------------------------------
 #pragma once
 
-#ifndef _WIN32
+#include <iostream>
+#include <string>
+
+#ifndef _WIN32 // Not _WIN32
 
 #include <sstream>
 
@@ -90,12 +93,9 @@ namespace conmanip
    }
 }
 
-#else
+#else // _WIN32
 
 #include <windows.h>
-
-#include <iostream>
-#include <string>
 
 namespace conmanip
 {
