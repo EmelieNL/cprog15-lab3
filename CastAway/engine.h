@@ -17,15 +17,16 @@ private:
     std::vector<IGameState*> states; //Game states
     bool running = true;
 
-    Engine(); //constructor
-    ~Engine(); //destructor
-    Engine(Engine const&); //dont implement
-    void operator=(Engine const&); //dont implement
+    Engine();
+    ~Engine();
     Player* player;
     bool debug = true;
 
 
 public:
+    Engine(Engine const&) = delete;
+    void operator=(Engine const&) = delete;
+
     static Engine& Instance(){
         static Engine engine;
         return engine;
@@ -42,7 +43,7 @@ public:
     void quit();
     bool isRunning();
     Player* getPlayer() const;
-    void setPlayer(Player* player);
+    void setPlayer(Player* newPlayer);
     bool isDebug() const;
 };
 

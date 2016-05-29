@@ -73,15 +73,16 @@ void StateInventory::printCommands()
     std::cout << std::endl;
 
     //Show everything in the inventory
-    std::vector<Item*> items = inventory->getItems();
-    std::vector<Item*>::iterator it, end;
-    for(it = items.begin(), end = items.end() ; it != end; ++it) {
+    int pos = 0;
+    const auto& items = inventory->getItems();
+    for(const auto& item : items) {
 
         //If current item is selected show this to the user
-        if(it - items.begin() == getCurrentMenuOption()){
+        if(pos == getCurrentMenuOption()){
             std::cout << "-> ";
         }
-        std::cout << (*it)->getId() << ", " << (*it)->getWeight() << " gram" << std::endl;
+        std::cout << item->getId() << ", " << item->getWeight() << " gram" << std::endl;
+        ++pos;
     }
 }
 
