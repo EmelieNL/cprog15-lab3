@@ -5,6 +5,10 @@
 #include "gamestate.h"
 #include "player.h"
 
+#ifdef _WIN32
+    #include <conio.h>
+#endif
+
 //Class to represent the gameengine, to help to load maps and hold information about active entities
 
 Engine::Engine(void){

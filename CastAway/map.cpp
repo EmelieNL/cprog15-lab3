@@ -16,6 +16,10 @@
 #include "weapon.h"
 #include "abstractentity.h"
 
+#ifdef _WIN32
+    #include <conio.h>
+#endif
+
 using namespace conmanip;
 using namespace std;
 
