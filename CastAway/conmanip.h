@@ -16,61 +16,49 @@
 #pragma once
 
 #ifndef _WIN32_
-#define FOREGROUND_RESET       39
-#define FOREGROUND_RED	       31
-#define FOREGROUND_GREEN       32
-#define FOREGROUND_BLUE	       34
-#define FOREGROUND_INTENSITY	8
-#define BACKGROUND_RESET       49
-#define BACKGROUND_BLUE	       44
-#define BACKGROUND_GREEN	   42
-#define BACKGROUND_RED	       41
-#define BACKGROUND_INTENSITY   128
 
 #include <sstream>
 
 namespace conmanip
 {
-
    enum class console_text_colors : unsigned int
    {
-      black          = 0,
-      gray           = 0 | FOREGROUND_INTENSITY,
-      white          = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED,
-      blue           = FOREGROUND_BLUE,
-      green          = FOREGROUND_GREEN,
-      red            = FOREGROUND_RED,
-      yellow         = FOREGROUND_RED | FOREGROUND_GREEN,
-      magenta        = FOREGROUND_RED | FOREGROUND_BLUE,
-      cyan           = FOREGROUND_GREEN | FOREGROUND_BLUE,
-      light_white    = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY,
-      light_blue     = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
-      light_green    = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-      light_red      = FOREGROUND_RED | FOREGROUND_INTENSITY,
-      light_yellow   = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
-      light_magenta  = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
-      light_cyan     = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+      black          = 30,
+      gray           = 90,
+      white          = 97,
+      blue           = 34,
+      green          = 32,
+      red            = 31,
+      yellow         = 33,
+      magenta        = 35,
+      cyan           = 36,
+      light_white    = 37,
+      light_blue     = 94,
+      light_green    = 92,
+      light_red      = 91,
+      light_yellow   = 93,
+      light_magenta  = 95,
+      light_cyan     = 96
    };
 
    enum class console_bg_colors : unsigned int
    {
-      black          = 0,
-      white          = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED,
-      blue           = BACKGROUND_BLUE,
-      green          = BACKGROUND_GREEN,
-      red            = BACKGROUND_RED,
-      yellow         = BACKGROUND_RED | BACKGROUND_GREEN,
-      magenta        = BACKGROUND_RED | BACKGROUND_BLUE,
-      cyan           = BACKGROUND_GREEN | BACKGROUND_BLUE,
-      light_white    = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY,
-      light_blue     = BACKGROUND_BLUE | BACKGROUND_INTENSITY,
-      light_green    = BACKGROUND_GREEN | BACKGROUND_INTENSITY,
-      light_red      = BACKGROUND_RED | BACKGROUND_INTENSITY,
-      light_yellow   = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY,
-      light_magenta  = BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY,
-      light_cyan     = BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY,
+      black          = 40,
+      white          = 107,
+      blue           = 44,
+      green          = 42,
+      red            = 41,
+      yellow         = 43,
+      magenta        = 45,
+      cyan           = 46,
+      light_white    = 47,
+      light_blue     = 104,
+      light_green    = 102,
+      light_red      = 101,
+      light_yellow   = 103,
+      light_magenta  = 105,
+      light_cyan     = 106
    };
-
 
    template<class T>
    struct console_manipulator
@@ -88,8 +76,7 @@ namespace conmanip
            std::basic_ostream<_Elem, _Traits>& stream,
            const console_manipulator<_Arg>& manip)
    {
-       (void)manip;
-       return stream;
+       return stream << std::string("\033[") << static_cast<unsigned int>(manip.arg) << "m";
    }
 
    inline console_manipulator<console_text_colors> settextcolor(console_text_colors const color)
@@ -101,21 +88,6 @@ namespace conmanip
    {
        return console_manipulator<console_bg_colors>(color);
    }
-
-   /*inline std::ostream settextcolor(console_text_colors const & color)
-   {
-       (void)color;
-       //return std::stringstream() << std::string("\033[") << color << "m";
-       return std::stringstream();
-   }
-
-   inline std::stringstream setbgcolor(console_text_colors const & color)
-   {
-       (void)color;
-       //return "\033[" << color << "m";
-       return std::stringstream();
-   }
-   */
 }
 
 #else
