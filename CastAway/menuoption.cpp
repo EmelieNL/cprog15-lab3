@@ -3,7 +3,7 @@
 void MenuOption::initMenuOption(int max)
 {
     currentMenuOption=0;
-    this->maxMenuOption = max;
+    maxMenuOption = max;
 }
 
 void MenuOption::increaseMenuOption()
@@ -20,12 +20,12 @@ void MenuOption::decreaseMenuOption()
 
 void MenuOption::setMaxMenuOption(int max)
 {
-    this->maxMenuOption = max;
+    maxMenuOption = max;
 }
 
 void MenuOption::setCurrentMenuOption(int curr)
 {
-    this->currentMenuOption = curr;
+    currentMenuOption = curr;
 }
 
 int MenuOption::getCurrentMenuOption() const

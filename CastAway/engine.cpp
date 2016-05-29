@@ -14,10 +14,8 @@ Engine::Engine(void){
 Engine::~Engine()
 {
     //Clean maps
-    maps.clear(); //TODO is this correct as delete[] is not compiling?
-
-    //Remove player
-    //delete player; //TODO how to free player?
+    maps.clear();
+    delete player;
 }
 
 void Engine::init()

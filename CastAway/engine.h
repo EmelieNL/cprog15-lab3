@@ -42,7 +42,7 @@ public:
     void quit();
     bool isRunning();
     Player* getPlayer() const;
-    void setPlayer(Player* player);
+    void setPlayer(Player* newPlayer);
     bool isDebug() const;
 };
 
