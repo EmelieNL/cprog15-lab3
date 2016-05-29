@@ -1,9 +1,13 @@
 #include <vector>
 #include <algorithm>
-#include <conio.h>
 #include <iostream>
 #include "engine.h"
 #include "gamestate.h"
+#include "player.h"
+
+#ifdef _WIN32
+    #include <conio.h>
+#endif
 
 //Class to represent the gameengine, to help to load maps and hold information about active entities
 

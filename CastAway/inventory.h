@@ -22,7 +22,7 @@ public:
 private:
     std::vector<Item*> items; //items in this inventory
     int maxWeight; //max weight this inventory can hold
-    void init(int maxWeight);
+    void init(int newMaxWeight);
 };
 
 #endif // INVENTORY_H

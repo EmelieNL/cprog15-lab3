@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <conio.h>
 #include "conmanip.h"
 #include "render.h"
 #include "engine.h"
@@ -14,6 +13,10 @@
 #include "consumable.h"
 #include "weapon.h"
 #include "abstractentity.h"
+
+#ifdef _WIN32
+    #include <conio.h>
+#endif
 
 using namespace conmanip;
 using namespace std;
