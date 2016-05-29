@@ -4,6 +4,10 @@
 #include "stateplay.h"
 #include "statepausemenu.h"
 
+#ifdef _WIN32
+    #include <conio.h>
+#endif
+
 void StatePlay::init(){
 
     if(isInitDone())
@@ -51,6 +55,13 @@ void StatePlay::resume(){
 }
 
 void StatePlay::handleInput(){
+
+    // Read char, not line
+#ifdef _WIN32
+    char userCommand = _getch();
+
+    // Works as before in Unix for now
+#else
     char userCommand = 0;
     std::string input = "";
     getline(std::cin, input);
@@ -58,6 +69,8 @@ void StatePlay::handleInput(){
     if (input.length() == 1) {
      userCommand = input[0];
     }
+#endif
+
 
     switch (userCommand)
     {
