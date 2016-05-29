@@ -13,9 +13,9 @@ Engine::Engine(void){
 
 Engine::~Engine()
 {
-    //Clean maps
+    //Clean maps which means delete all objects on the map
+    //including Player, Creatures, Items
     maps.clear();
-    delete player;
 }
 
 void Engine::init()

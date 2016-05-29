@@ -8,6 +8,7 @@ public:
     Item(std::string id, int weight, char symbol);
     Item(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount);
 
+    virtual ~Item() {}
     bool getCanStack() const;
     void setCanStack(bool canStack);
     int getMaxStack() const;

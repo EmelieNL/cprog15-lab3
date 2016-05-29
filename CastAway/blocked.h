@@ -8,6 +8,7 @@ class Blocked:public AbstractEntity
 public:
     Blocked();
     Blocked(char symbol);
+    virtual ~Blocked() {}
 
     virtual void update() override;
 

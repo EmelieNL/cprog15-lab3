@@ -16,7 +16,7 @@ Creature::Creature(char symbol)
 
 Creature::~Creature()
 {
-
+    delete inventory;
 }
 
 void Creature::setHealth(int health)
@@ -115,11 +115,11 @@ void Creature::update()
 {
     //Check if the creature is still alive
     if(!isAlive()){
-
-        //TODO the entity is not removed from the map...
+        //Remove from the map...
         Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
-
-        //Todo delete this object
+        //This might not exactly be the cleanest solution...
+        delete this;
+        return;
     }
 
     //Movement for hostile creatures if player is close

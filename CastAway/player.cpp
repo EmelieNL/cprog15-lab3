@@ -2,15 +2,20 @@
 #include "item.h"
 #include "inventory.h"
 
+#include <iostream>
+
 Player::Player()
 {
     setSymbol('@');
     setCanMove(true);
     setFgColor(conmanip::console_text_colors::light_yellow);
     setBgColor(conmanip::console_bg_colors::black);
-
 }
 
+Player::~Player()
+{
+    std::cout << "Destructor for Player" << std::endl;
+}
 void Player::addLog(std::string message)
 {
     log.insert(log.begin(), message); //Add message to first position

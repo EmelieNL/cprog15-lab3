@@ -22,7 +22,7 @@ protected:
 
 public:
     // Base class constructors should always be virtual
-    virtual ~AbstractEntity() {}
+    virtual ~AbstractEntity() {};
 
     conmanip::console_bg_colors getBgColor() const;
     conmanip::console_text_colors getFgColor() const;

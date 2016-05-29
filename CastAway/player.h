@@ -8,6 +8,7 @@ class Player:public Creature
 {
 public:
     Player();
+    virtual ~Player();
     void addLog(std::string message);
     std::vector<std::string> getLog() const;
     void moveX(int x);
