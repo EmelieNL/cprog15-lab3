@@ -1,6 +1,5 @@
 #include <vector>
 #include <algorithm>
-#include <conio.h>
 #include <iostream>
 #include "engine.h"
 #include "gamestate.h"

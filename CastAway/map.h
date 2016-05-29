@@ -1,9 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 #include <string>
-#include <cmath>
 #include <vector>
-#include <algorithm>
 #include "terrain.h"
 
 // Forward declare

@@ -1,8 +1,11 @@
 TEMPLATE = app
-CONFIG += console c++14 -Wall -pedantic
+CONFIG += console
+CONFIG -= c++11
 CONFIG -= app_bundle
 CONFIG -= qt
-
+QMAKE_CXXFLAGS += -std=gnu++11 -Wall -Wpedantic -Wextra
+QMAKE_CXXFLAGS_DEBUG -= -O2
+QMAKE_CXXFLAGS_DEBUG += -O0
 SOURCES += main.cpp \
     map.cpp \
     abstractentity.cpp \

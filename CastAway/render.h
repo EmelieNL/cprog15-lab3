@@ -2,6 +2,8 @@
 #define RENDER_H
 #include "conmanip.h"
 
+#include <iostream>
+
 /* Small utility class to render characters with color */
 
 class Render {

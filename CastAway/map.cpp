@@ -1,8 +1,9 @@
 #include "map.h"
+
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <conio.h>
+#include <cmath>
+#include <algorithm>
+
 #include "conmanip.h"
 #include "render.h"
 #include "engine.h"
@@ -56,7 +57,7 @@ void Map::removeAbstractEntity(AbstractEntity *absEntity)
     map[absEntity->getY()][absEntity->getX()]->setAbsEntity(nullptr);
 
     //Remove from entities vector
-    entities.erase(remove(entities.begin(), entities.end(), absEntity), entities.end());
+    entities.erase(std::remove(entities.begin(), entities.end(), absEntity), entities.end());
 }
 
 // Render map
@@ -175,7 +176,9 @@ void  Map::clear() const{
     std::system("cls");
 #else
     // Assume POSIX
-    std::system ("clear");
+    auto res = std::system("clear");
+    if (res != 0)
+        std::cerr << "Unable to clear screen" << std::endl;
 #endif
 }
 

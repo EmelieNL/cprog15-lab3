@@ -51,7 +51,7 @@ void StatePlay::resume(){
 }
 
 void StatePlay::handleInput(){
-    char userCommand;
+    char userCommand = 0;
     std::string input = "";
     getline(std::cin, input);
 

@@ -42,9 +42,9 @@ void AbstractEntity::render() const
    Render::printSymbol(char(32), getFgColor(), getBgColor());
 }
 
-void AbstractEntity::setCanMove(bool canMove)
+void AbstractEntity::setCanMove(bool newCanMove)
 {
-   canMove = canMove;
+   canMove = newCanMove;
 }
 
 void AbstractEntity::setBgColor(conmanip::console_bg_colors color)

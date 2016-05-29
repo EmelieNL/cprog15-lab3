@@ -13,9 +13,112 @@
 // ----------------------------------------------------------------------------------------------
 // You must not remove this notice, or any other, from this software.
 // ----------------------------------------------------------------------------------------------
-#ifndef CONMANIP_H
-#define CONMANIP_H
 #pragma once
+
+#ifndef _WIN32_
+#define FOREGROUND_RESET       39
+#define FOREGROUND_RED	       31
+#define FOREGROUND_GREEN       32
+#define FOREGROUND_BLUE	       34
+#define FOREGROUND_INTENSITY	8
+#define BACKGROUND_RESET       49
+#define BACKGROUND_BLUE	       44
+#define BACKGROUND_GREEN	   42
+#define BACKGROUND_RED	       41
+#define BACKGROUND_INTENSITY   128
+
+#include <sstream>
+
+namespace conmanip
+{
+
+   enum class console_text_colors : unsigned int
+   {
+      black          = 0,
+      gray           = 0 | FOREGROUND_INTENSITY,
+      white          = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED,
+      blue           = FOREGROUND_BLUE,
+      green          = FOREGROUND_GREEN,
+      red            = FOREGROUND_RED,
+      yellow         = FOREGROUND_RED | FOREGROUND_GREEN,
+      magenta        = FOREGROUND_RED | FOREGROUND_BLUE,
+      cyan           = FOREGROUND_GREEN | FOREGROUND_BLUE,
+      light_white    = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY,
+      light_blue     = FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+      light_green    = FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+      light_red      = FOREGROUND_RED | FOREGROUND_INTENSITY,
+      light_yellow   = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY,
+      light_magenta  = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+      light_cyan     = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY,
+   };
+
+   enum class console_bg_colors : unsigned int
+   {
+      black          = 0,
+      white          = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED,
+      blue           = BACKGROUND_BLUE,
+      green          = BACKGROUND_GREEN,
+      red            = BACKGROUND_RED,
+      yellow         = BACKGROUND_RED | BACKGROUND_GREEN,
+      magenta        = BACKGROUND_RED | BACKGROUND_BLUE,
+      cyan           = BACKGROUND_GREEN | BACKGROUND_BLUE,
+      light_white    = BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_INTENSITY,
+      light_blue     = BACKGROUND_BLUE | BACKGROUND_INTENSITY,
+      light_green    = BACKGROUND_GREEN | BACKGROUND_INTENSITY,
+      light_red      = BACKGROUND_RED | BACKGROUND_INTENSITY,
+      light_yellow   = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY,
+      light_magenta  = BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY,
+      light_cyan     = BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY,
+   };
+
+
+   template<class T>
+   struct console_manipulator
+   {
+       console_manipulator(T arg, bool default_console = true)
+           : arg(arg), defcon(default_console)
+       {
+       }
+
+       T arg;
+       bool defcon;
+   };
+   template<class _Elem, class _Traits, class _Arg>
+   inline std::basic_ostream<_Elem, _Traits>& operator<<(
+           std::basic_ostream<_Elem, _Traits>& stream,
+           const console_manipulator<_Arg>& manip)
+   {
+       (void)manip;
+       return stream;
+   }
+
+   inline console_manipulator<console_text_colors> settextcolor(console_text_colors const color)
+   {
+       return console_manipulator<console_text_colors>(color);
+   }
+
+   inline console_manipulator<console_bg_colors> setbgcolor(console_bg_colors const color)
+   {
+       return console_manipulator<console_bg_colors>(color);
+   }
+
+   /*inline std::ostream settextcolor(console_text_colors const & color)
+   {
+       (void)color;
+       //return std::stringstream() << std::string("\033[") << color << "m";
+       return std::stringstream();
+   }
+
+   inline std::stringstream setbgcolor(console_text_colors const & color)
+   {
+       (void)color;
+       //return "\033[" << color << "m";
+       return std::stringstream();
+   }
+   */
+}
+
+#else
 
 #include <windows.h>
 
@@ -556,4 +659,4 @@ namespace conmanip
    }
 }
 
-#endif // CONMANIP_H
+#endif // __WIN32__

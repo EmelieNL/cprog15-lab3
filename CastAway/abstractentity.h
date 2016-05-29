@@ -30,7 +30,7 @@ public:
     int getX() const;
     int getY() const;
     bool isCanMove() const;
-    void setCanMove(bool canMove);
+    void setCanMove(bool newCanMove);
     void setBgColor( conmanip::console_bg_colors color);
     void setFgColor( conmanip::console_text_colors color);
     void setId(std::string newId);
