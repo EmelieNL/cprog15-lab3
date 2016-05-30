@@ -183,12 +183,12 @@ void Creature::update()
         }
 
         //Allow the creature the option to attack the player, as it will not be able to catch up anytime
-        xDist =  Engine::Instance().getPlayer()->getX() - getX();
+        /*xDist =  Engine::Instance().getPlayer()->getX() - getX();
         yDist =  Engine::Instance().getPlayer()->getY() - getY();
         distance = std::sqrt((xDist*xDist) + (yDist*yDist)); //hypotenuse
         if(distance < 2)
             attack(Engine::Instance().getPlayer());
-
+        */
         return;
     }
 
