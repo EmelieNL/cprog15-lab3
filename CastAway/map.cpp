@@ -9,6 +9,8 @@
 #include "engine.h"
 #include "player.h"
 #include "fish.h"
+#include "inventory.h"
+#include "crab.h"
 #include "blocked.h"
 #include "tile.h"
 #include "item.h"
@@ -134,6 +136,30 @@ void Map::initMap(){
     shark->setMaxHealth(20);
     addAbstractEntity(shark->getX(), shark->getY(), shark);
 
+    //Crab meat that will be added to crab inventory
+    Consumable* crabMeat = new Consumable("Crabmeat", 100, 'M', 15);
+
+    Crab* crab = new Crab('C');
+    crab->setId("Crab");
+    crab->setFgColor(console_text_colors::light_red);
+    crab->setBgColor(console_bg_colors::light_yellow);
+    crab->setX(17);
+    crab->setY(8);
+    crab->setMaxHealth(5);
+    crab->getInventory()->addItem(crabMeat);
+    addAbstractEntity(crab->getX(), crab->getY(), crab);
+
+
+
+    /*Crab* crab2 = new Crab('C');
+    crab2->setId("Crab");
+    crab2->setFgColor(console_text_colors::light_red);
+    crab2->setBgColor(console_bg_colors::light_yellow);
+    crab2->setX(18);
+    crab2->setY(10);
+    crab2->setMaxHealth(5);
+    addAbstractEntity(crab2->getX(), crab2->getY(), crab2);
+    */
     //Test weapon
     Weapon* knife = new Weapon("Knife", 400, '|', 80);
     knife->setX(3);
@@ -172,6 +198,32 @@ void Map::initMap(){
     map[5][16]->setTerrain(Terrain::Type::MOUNTAIN);
     map[5][17]->setTerrain(Terrain::Type::SAND);
     map[5][18]->setTerrain(Terrain::Type::SAND);
+
+    map[6][15]->setTerrain(Terrain::Type::SAND);
+    map[6][16]->setTerrain(Terrain::Type::SAND);
+    map[6][17]->setTerrain(Terrain::Type::SAND);
+
+    map[7][15]->setTerrain(Terrain::Type::SAND);
+    map[7][16]->setTerrain(Terrain::Type::SAND);
+    map[7][17]->setTerrain(Terrain::Type::SAND);
+    map[7][18]->setTerrain(Terrain::Type::SAND);
+
+    map[8][15]->setTerrain(Terrain::Type::SAND);
+    map[8][16]->setTerrain(Terrain::Type::SAND);
+    map[8][17]->setTerrain(Terrain::Type::SAND);
+    map[8][18]->setTerrain(Terrain::Type::SAND);
+    map[8][19]->setTerrain(Terrain::Type::SAND);
+
+    map[9][16]->setTerrain(Terrain::Type::SAND);
+    map[9][17]->setTerrain(Terrain::Type::SAND);
+    map[9][18]->setTerrain(Terrain::Type::SAND);
+
+    map[10][17]->setTerrain(Terrain::Type::SAND);
+    map[10][18]->setTerrain(Terrain::Type::SAND);
+    map[10][19]->setTerrain(Terrain::Type::SAND);
+    map[10][20]->setTerrain(Terrain::Type::SAND);
+
+
 }
 
 void  Map::clear() const{

@@ -12,6 +12,7 @@ public:
     ~Inventory();
     bool addItem(Item* item);               //Add item to this inventory
     void removeItem(Item* item);            //Remove an item from inventory
+    Item* getAndRemoveItem(unsigned int i);  //Get a item and remove from vector
     Item* getItem(unsigned int i);          //Get a specific item by index
     int getInventorySize() const;           //Get total # of items in this inventory
     bool isFull() const;                    //Is the inventory full regarding weight capacity?
