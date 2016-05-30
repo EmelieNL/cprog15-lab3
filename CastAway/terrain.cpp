@@ -13,6 +13,23 @@ Terrain::Type Terrain::getType() {
     return type;
 }
 
+bool Terrain::isSolid() const
+{
+    switch(type)
+    {
+    case Type::WATER:
+        return false;
+    case Type::SAND:
+        return true;
+    case Type::FORREST:
+        return true;
+    case Type::MOUNTAIN:
+        return true;
+
+    }
+    return false;
+}
+
 char Terrain::getSymbol() {
     switch(type)
     {

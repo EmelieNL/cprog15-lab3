@@ -136,7 +136,7 @@ void Creature::update()
         delete this;
 
         if(dropItem){
-             Engine::Instance().getMap()->getTile(getX(), getY())->setAbsEntity(item);
+             Engine::Instance().getMap()->getTile(item->getX(), item->getY())->setAbsEntity(item);
         }
 
         return;
@@ -243,9 +243,12 @@ void Creature::action(int x, int y)
     Tile* tile = Engine::Instance().getMap()->getTile(x, y);
     AbstractEntity* blocking = tile->getAbsEntity();
 
-    //If we hit the player, attack it
-    if(Player* enemy = dynamic_cast<Player*>(blocking)) {
-        attack(enemy);
+    //Is this creature hostile?
+    if(isHostile()){
+        //If we hit the player, attack it
+        if(Player* enemy = dynamic_cast<Player*>(blocking)) {
+            attack(enemy);
+        }
     }
 }
 

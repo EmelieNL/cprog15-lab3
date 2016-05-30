@@ -26,7 +26,8 @@ SOURCES += main.cpp \
     weapon.cpp \
     fish.cpp \
     stategameover.cpp \
-    crab.cpp
+    crab.cpp \
+    native.cpp
 
 HEADERS += \
     map.h \
@@ -51,5 +52,6 @@ HEADERS += \
     weapon.h \
     fish.h \
     stategameover.h \
-    crab.h
+    crab.h \
+    native.h
 

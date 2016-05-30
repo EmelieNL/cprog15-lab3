@@ -9,6 +9,7 @@
 #include "engine.h"
 #include "player.h"
 #include "fish.h"
+#include "native.h"
 #include "inventory.h"
 #include "crab.h"
 #include "blocked.h"
@@ -149,8 +150,6 @@ void Map::initMap(){
     crab->getInventory()->addItem(crabMeat);
     addAbstractEntity(crab->getX(), crab->getY(), crab);
 
-
-
     /*Crab* crab2 = new Crab('C');
     crab2->setId("Crab");
     crab2->setFgColor(console_text_colors::light_red);
@@ -160,6 +159,17 @@ void Map::initMap(){
     crab2->setMaxHealth(5);
     addAbstractEntity(crab2->getX(), crab2->getY(), crab2);
     */
+
+    //Human native
+    Native* human = new Native('H');
+    human->setX(15);
+    human->setY(8);
+    human->setHostile(false);
+    human->setId("Native indian");
+    human->addDialog("Are you lost or something?");
+    human->addDialog("I heard rumors there is a boat in the far east...");
+    addAbstractEntity(human->getX(), human->getY(), human);
+
     //Test weapon
     Weapon* knife = new Weapon("Knife", 400, '|', 80);
     knife->setX(3);

@@ -15,6 +15,7 @@ public:
     Terrain(Terrain::Type terrainType);
     void setTerrain(Terrain::Type terrainType);
     Terrain::Type getType();
+    bool isSolid() const;              //Return if this terrain is solid
     char getSymbol();
     conmanip::console_bg_colors getBGcolor();
     conmanip::console_text_colors getTextcolor();
