@@ -3,7 +3,8 @@
 
 #include "gamestate.h"
 #include "stateintro.h"
-#include "stateplay.h"
+#include "statequest.h"
+#include "statehelp.h"
 
 void StateIntro::init(){
     if(!isInitDone()){
@@ -17,7 +18,7 @@ void StateIntro::clear(){
   std::cout << "IntroState clear!" << "\n";
 }
 
- void StateIntro::printCommands()
+void StateIntro::printCommands()
 {
     std::cout << "What would you like to do? (Navigate with w, s and enter)" << "\n";
 
@@ -45,9 +46,9 @@ void StateIntro::resume(){
 void StateIntro::menuOptionAction()
 {
     switch(getCurrentMenuOption()){
-        case 0: Engine::Instance().changeState(StatePlay::instance());
+        case 0: Engine::Instance().changeState(StateQuest::instance());
                 break;
-        case 1:
+        case 1: Engine::Instance().changeState(StateHelp::instance());
                 break;
         case 2: Engine::Instance().quit();
                 break;
