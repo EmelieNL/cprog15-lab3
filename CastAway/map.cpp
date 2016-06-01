@@ -203,8 +203,9 @@ void Map::initMap(){
 
 
     // Read map from input file
+    char ch;
     ifstream fileStream("map1.txt");
-    if (fileStream.is_open() == false) std:cerr << "Could not open file" << std::endl;
+    if (fileStream.is_open() == false) cerr << "Could not open file" << endl;
     while (!fileStream.eof()) {
         for(int x = 0; x < heightY; ++x){
             for(int y = 0; y < widthX; ++y){
