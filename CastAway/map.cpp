@@ -23,7 +23,7 @@
 #include "tree.h"
 
 #ifdef _WIN32
-    #include <conio.h>
+#include <conio.h>
 #endif
 
 using namespace conmanip;
@@ -42,7 +42,7 @@ Map::~Map()
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
             delete map[y][x];
-         }
+        }
     }
 }
 
@@ -91,23 +91,23 @@ void Map::render() const {
                     //First try to render any absEntity
                     if(current->getAbsEntity() != nullptr){
                         current->getAbsEntity()->render();
-                    //if not present render the terrain
+                        //if not present render the terrain
                     } else {
                         Render::printSymbol(current->getTerrain()->getSymbol(), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
                         Render::printSymbol(char(32), current->getTerrain()->getTextcolor(), current->getTerrain()->getBGcolor());
                     }
 
-                //if already explored, show terrain but not entities
+                    //if already explored, show terrain but not entities
                 } else if(current->isExplored()){
                     Render::printSymbol(current->getTerrain()->getSymbol(), console_text_colors::gray, console_bg_colors::black);
                     Render::printSymbol(char(32), console_text_colors::gray, console_bg_colors::black);
                 } else {
-                   Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
-                   Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                    Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                    Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
                 }
             } else {
-                 Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
-                 Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
+                Render::printSymbol('.', console_text_colors::black, console_bg_colors::black);
             }
         }
         cout << endl;
@@ -128,43 +128,104 @@ void Map::initMap(){
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
             map[y][x] = new Tile();
-          }
+        }
     }
 
-    Fish* shark = new Fish('^');
-    shark->setId("Shark");
-    shark->setFgColor(console_text_colors::light_cyan);
-    shark->setBgColor(console_bg_colors::blue);
-    shark->setX(3);
-    shark->setY(3);
-    shark->setMaxHealth(100);
-    shark->setBasicAttack(100);
-    addAbstractEntity(shark->getX(), shark->getY(), shark);
+    /* SHARKS */
+    Fish* shark1 = new Fish('^');
+    shark1->setId("Shark");
+    shark1->setFgColor(console_text_colors::light_cyan);
+    shark1->setBgColor(console_bg_colors::blue);
+    shark1->setX(3);
+    shark1->setY(3);
+    shark1->setMaxHealth(20);
+    shark1->setBasicAttack(15);
+    addAbstractEntity(shark1->getX(), shark1->getY(), shark1);
 
+    Fish* shark2 = new Fish('^');
+    shark2->setId("Shark");
+    shark2->setFgColor(console_text_colors::light_cyan);
+    shark2->setBgColor(console_bg_colors::blue);
+    shark2->setX(10);
+    shark2->setY(15);
+    shark2->setMaxHealth(20);
+    shark2->setBasicAttack(10);
+    addAbstractEntity(shark2->getX(), shark2->getY(), shark2);
+
+    Fish* shark3 = new Fish('^');
+    shark3->setId("Shark");
+    shark3->setFgColor(console_text_colors::light_cyan);
+    shark3->setBgColor(console_bg_colors::blue);
+    shark3->setX(10);
+    shark3->setY(16);
+    shark3->setMaxHealth(20);
+    shark3->setBasicAttack(10);
+    addAbstractEntity(shark3->getX(), shark3->getY(), shark3);
+
+    Fish* shark4 = new Fish('^');
+    shark4->setId("Shark");
+    shark4->setFgColor(console_text_colors::light_cyan);
+    shark4->setBgColor(console_bg_colors::blue);
+    shark4->setX(11);
+    shark4->setY(15);
+    shark4->setMaxHealth(20);
+    shark4->setBasicAttack(10);
+    addAbstractEntity(shark4->getX(), shark4->getY(), shark4);
+
+    Fish* shark5 = new Fish('^');
+    shark5->setId("Shark");
+    shark5->setFgColor(console_text_colors::light_cyan);
+    shark5->setBgColor(console_bg_colors::blue);
+    shark5->setX(12);
+    shark5->setY(13);
+    shark5->setMaxHealth(20);
+    shark5->setBasicAttack(10);
+    addAbstractEntity(shark5->getX(), shark5->getY(), shark5);
+
+
+    /* CRABS */
     //Crab meat that will be added to crab inventory
-    Consumable* crabMeat = new Consumable("Crabmeat", 100, 'M', 15);
+    Consumable* crabMeat1 = new Consumable("Crabmeat", 100, 'M', 15);
+    Crab* crab1 = new Crab('C');
+    crab1->setId("Crab");
+    crab1->setFgColor(console_text_colors::light_red);
+    crab1->setBgColor(console_bg_colors::light_yellow);
+    crab1->setX(17);
+    crab1->setY(8);
+    crab1->setMaxHealth(5);
+    crab1->getInventory()->addItem(crabMeat1);
+    addAbstractEntity(crab1->getX(), crab1->getY(), crab1);
 
-    Crab* crab = new Crab('C');
-    crab->setId("Crab");
-    crab->setFgColor(console_text_colors::light_red);
-    crab->setBgColor(console_bg_colors::light_yellow);
-    crab->setX(17);
-    crab->setY(8);
-    crab->setMaxHealth(5);
-    crab->getInventory()->addItem(crabMeat);
-    addAbstractEntity(crab->getX(), crab->getY(), crab);
-
-    /*Crab* crab2 = new Crab('C');
+    Crab* crab2 = new Crab('C');
     crab2->setId("Crab");
     crab2->setFgColor(console_text_colors::light_red);
     crab2->setBgColor(console_bg_colors::light_yellow);
-    crab2->setX(18);
-    crab2->setY(10);
+    crab2->setX(6);
+    crab2->setY(17);
     crab2->setMaxHealth(5);
     addAbstractEntity(crab2->getX(), crab2->getY(), crab2);
-    */
 
-    //Human native
+    Consumable* crabMeat2 = new Consumable("Crabmeat", 100, 'M', 15);
+    Crab* crab3 = new Crab('C');
+    crab3->setId("Crab");
+    crab3->setFgColor(console_text_colors::light_red);
+    crab3->setBgColor(console_bg_colors::light_yellow);
+    crab3->setX(39);
+    crab3->setY(16);
+    crab3->setMaxHealth(5);
+    crab3->getInventory()->addItem(crabMeat2);
+    addAbstractEntity(crab3->getX(), crab3->getY(), crab3);
+
+    Crab* crab4 = new Crab('C');
+    crab4->setId("Crab");
+    crab4->setFgColor(console_text_colors::light_red);
+    crab4->setBgColor(console_bg_colors::light_yellow);
+    crab4->setX(53);
+    crab4->setY(5);
+    crab4->setMaxHealth(5);
+    addAbstractEntity(crab4->getX(), crab4->getY(), crab4);
+
+    /* HUMAN NATIVES */
     Native* human = new Native('H');
     human->setX(15);
     human->setY(8);
@@ -174,20 +235,20 @@ void Map::initMap(){
     human->addDialog("I heard rumors there is a boat in the far east...");
     addAbstractEntity(human->getX(), human->getY(), human);
 
-    //Test weapon
+    /* WEAPONS */
     Weapon* knife = new Weapon("Knife", 400, '|', 80);
     knife->setX(3);
     knife->setY(2);
     addAbstractEntity(knife->getX(), knife->getY(), knife);
 
-    //Test apple
+    /* CONSUMABLES */
     Consumable* apple = new Consumable("Apple", 50, 'A', 20);
     apple->setFgColor(console_text_colors::light_red);
-    apple->setX(4);
-    apple->setY(4);
+    apple->setX(42);
+    apple->setY(8);
     addAbstractEntity(apple->getX(), apple->getY(), apple);
 
-
+    /*  WALLS */
     Blocked* wall = new Blocked('#'); //TODO add destructor
     wall->setX(12);
     wall->setY(11);
@@ -242,38 +303,10 @@ void Map::initMap(){
                     map[x][y]->setTerrain(Terrain::Type::WATER);
                     break;
                 }
-             ch = 'o';
+                ch = 'o';   // reset char
             }
         }
-
     }
-/*
-    map[5][18]->setTerrain(Terrain::Type::SAND);
-
-    map[6][15]->setTerrain(Terrain::Type::SAND);
-    map[6][16]->setTerrain(Terrain::Type::SAND);
-    map[6][17]->setTerrain(Terrain::Type::SAND);
-
-    map[7][15]->setTerrain(Terrain::Type::SAND);
-    map[7][16]->setTerrain(Terrain::Type::SAND);
-    map[7][17]->setTerrain(Terrain::Type::SAND);
-    map[7][18]->setTerrain(Terrain::Type::SAND);
-
-    map[8][15]->setTerrain(Terrain::Type::SAND);
-    map[8][16]->setTerrain(Terrain::Type::SAND);
-    map[8][17]->setTerrain(Terrain::Type::SAND);
-    map[8][18]->setTerrain(Terrain::Type::SAND);
-    map[8][19]->setTerrain(Terrain::Type::SAND);
-
-    map[9][16]->setTerrain(Terrain::Type::SAND);
-    map[9][17]->setTerrain(Terrain::Type::SAND);
-    map[9][18]->setTerrain(Terrain::Type::SAND);
-
-    map[10][17]->setTerrain(Terrain::Type::SAND);
-    map[10][18]->setTerrain(Terrain::Type::SAND);
-    map[10][19]->setTerrain(Terrain::Type::SAND);
-    map[10][20]->setTerrain(Terrain::Type::SAND);
-    */
 }
 
 void  Map::clear() const{

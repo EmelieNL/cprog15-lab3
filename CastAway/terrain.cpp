@@ -40,7 +40,7 @@ char Terrain::getSymbol() {
     case Type::FORREST:
         return '^';
     case Type::MOUNTAIN:
-        return 'V';
+        return '/';
 
     }
     return '?';
