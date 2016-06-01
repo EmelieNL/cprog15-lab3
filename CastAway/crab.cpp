@@ -1,16 +1,16 @@
-#include "fish.h"
+#include "crab.h"
 
-Fish::Fish()
+Crab::Crab()
 {
-    init('F');
+    init('C');
 }
 
-Fish::Fish(char symbol)
+Crab::Crab(char symbol)
 {
     init(symbol);
 }
 
-void Fish::moveX(int x)
+void Crab::moveX(int x)
 {
     const auto newX = getX() + x;
 
@@ -20,13 +20,13 @@ void Fish::moveX(int x)
 
     Terrain* newTerrain = Engine::Instance().getMap()->getTile(newX, getY())->getTerrain();
 
-    //Check that the new terrain really is water
-    if(newTerrain->getType() == Terrain::Type::WATER){
+    //Check that the new terrain really is sand
+    if(newTerrain->getType() == Terrain::Type::SAND){
         Creature::moveX(x); //call parent
     }
 }
 
-void Fish::moveY(int y)
+void Crab::moveY(int y)
 {
     const auto newY = getY() + y;
 
@@ -36,8 +36,8 @@ void Fish::moveY(int y)
 
     Terrain* newTerrain = Engine::Instance().getMap()->getTile(getX(), newY)->getTerrain();
 
-    //Check that the new terrain really is water
-    if(newTerrain->getType() == Terrain::Type::WATER){
+    //Check that the new terrain really is sand
+    if(newTerrain->getType() == Terrain::Type::SAND){
         Creature::moveY(y); //call parent
     }
 }

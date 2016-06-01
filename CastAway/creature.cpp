@@ -115,10 +115,30 @@ void Creature::update()
 {
     //Check if the creature is still alive
     if(!isAlive()){
+
+        bool dropItem = false;
+         Item* item;
+        //Drop the first item in inventory on the map if possible
+        //if the creature have something in the inventory
+        if(getInventory()->getInventorySize() > 0){
+            //Get the item from inventory
+            item = getInventory()->getAndRemoveItem(0);
+            item->setX(getX());
+            item->setY(getY());
+
+            dropItem = true;
+            //Wait to add item to the map until this creature is removed...
+        }
+
         //Remove from the map...
         Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
         //This might not exactly be the cleanest solution...
         delete this;
+
+        if(dropItem){
+             Engine::Instance().getMap()->getTile(item->getX(), item->getY())->setAbsEntity(item);
+        }
+
         return;
     }
 
@@ -223,9 +243,12 @@ void Creature::action(int x, int y)
     Tile* tile = Engine::Instance().getMap()->getTile(x, y);
     AbstractEntity* blocking = tile->getAbsEntity();
 
-    //If we hit the player, attack it
-    if(Player* enemy = dynamic_cast<Player*>(blocking)) {
-        attack(enemy);
+    //Is this creature hostile?
+    if(isHostile()){
+        //If we hit the player, attack it
+        if(Player* enemy = dynamic_cast<Player*>(blocking)) {
+            attack(enemy);
+        }
     }
 }
 

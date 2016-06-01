@@ -36,6 +36,16 @@ void Inventory::removeItem(Item* item)
     delete item;
 }
 
+Item *Inventory::getAndRemoveItem(unsigned int i)
+{
+    Item* item = items[i];
+
+    //Only remove the item from the vector, no delete
+    items.erase(std::remove(items.begin(), items.end(), items[i]), items.end());
+
+    return item;
+}
+
 Item* Inventory::getItem(unsigned int i)
 {
     if(items.size()+1 > i){

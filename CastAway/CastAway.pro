@@ -25,7 +25,11 @@ SOURCES += main.cpp \
     menuoption.cpp \
     weapon.cpp \
     fish.cpp \
-    stategameover.cpp
+    stategameover.cpp \
+    crab.cpp \
+    native.cpp \
+    statequest.cpp \
+    statehelp.cpp
 
 HEADERS += \
     map.h \
@@ -49,5 +53,9 @@ HEADERS += \
     menuoption.h \
     weapon.h \
     fish.h \
-    stategameover.h
+    stategameover.h \
+    crab.h \
+    native.h \
+    statequest.h \
+    statehelp.h
 

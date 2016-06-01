@@ -1,6 +1,7 @@
 #include "player.h"
 #include "item.h"
 #include "inventory.h"
+#include "native.h"
 
 #include <iostream>
 
@@ -131,7 +132,19 @@ void Player::action(int x, int y)
 
         //not hostile
         } else {
-            addLog("You bumped in to a friendly " + blocking->getId());
+
+            //Is it a native?
+            if(Native* native = dynamic_cast<Native*>(blocking)){
+
+                if(native->haveDialog()){
+                    addLog(native->getId() + " says: " + native->getRandomDialog());
+                } else {
+                   addLog("You bumped in to a friendly " + blocking->getId());
+                }
+
+            } else {
+                addLog("You bumped in to a friendly " + blocking->getId());
+            }
         }
     } else {
         addLog("You bumped in to a " + blocking->getId());
