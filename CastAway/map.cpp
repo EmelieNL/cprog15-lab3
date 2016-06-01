@@ -201,7 +201,7 @@ void Map::initMap(){
     wall3->setY(11);
     addAbstractEntity(wall3->getX(), wall3->getY(), wall3);
 
-    /*
+
     // Read map from input file
     char ch = 'x';
     ifstream fileStream("map1.txt");
@@ -212,23 +212,26 @@ void Map::initMap(){
         for(int y = 0; y < heightY; y++){
             for(int x = 0; x < widthX; x++){
 
-                switch(ch)
-                {
-                case 'x':
-                    map[x][y]->setTerrain(Terrain::Type::WATER);
+                switch(ch) {
+                case '~':
+                    map[y][x]->setTerrain(Terrain::Type::WATER);
+                    break;
                 case ':':
-                    map[x][y]->setTerrain(Terrain::Type::SAND);
+                    map[y][x]->setTerrain(Terrain::Type::SAND);
+                    break;
                 case '*':
-                    map[x][y]->setTerrain(Terrain::Type::FORREST);
+                    map[y][x]->setTerrain(Terrain::Type::FORREST);
+                    break;
                 case '^':
-                    map[x][y]->setTerrain(Terrain::Type::MOUNTAIN);
+                    map[y][x]->setTerrain(Terrain::Type::MOUNTAIN);
+                    break;
                 }
-             }
-            fileStream >> ch;
+             fileStream >> ch;
+            }
         }
 
-    } */
-
+    }
+/*
     map[5][18]->setTerrain(Terrain::Type::SAND);
 
     map[6][15]->setTerrain(Terrain::Type::SAND);
@@ -254,6 +257,7 @@ void Map::initMap(){
     map[10][18]->setTerrain(Terrain::Type::SAND);
     map[10][19]->setTerrain(Terrain::Type::SAND);
     map[10][20]->setTerrain(Terrain::Type::SAND);
+    */
 }
 
 void  Map::clear() const{
