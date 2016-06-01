@@ -2,6 +2,8 @@
 #include "item.h"
 #include "inventory.h"
 #include "native.h"
+#include "stategameover.h"
+#include "engine.h"
 
 #include <iostream>
 
@@ -151,9 +153,9 @@ void Player::action(int x, int y)
     }
 }
 
-void Player::update()
-{
-    //TODO Check if alive :)
+// If player is dead, it's GO
+void Player::update() {
+    if (!isAlive()) Engine::Instance().changeState(StateGameOver::instance());
 }
 
 void Player::updateTerrainData(int newX, int newY)

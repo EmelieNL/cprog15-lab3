@@ -20,7 +20,7 @@ void StateGameOver::render() {
     | |  __   /  \  | \  / | |__    | |  | \ \  / /| |__  | |__) |
     | | |_ | / /\ \ | |\/| |  __|   | |  | |\ \/ / |  __| |  _  /
     | |__| |/ ____ \| |  | | |____  | |__| | \  /  | |____| | \ \
-     \_____/_/    \_\_|  |_|______|  \____/   \/   |______|_|  \_\ )" << endl;
+     \_____/_/    \_\_|  |_|______|  \____/   \/   |______|_|  \_\ )" << endl << endl;
 
     printCommands();
 }
@@ -49,25 +49,28 @@ void StateGameOver::handleInput() {
 }
 
 void StateGameOver::printCommands() {
-    std::cout << "What would you like to do?" << "\n";
+    std::cout << "What would you like to do?" << endl;
 
-    for (std::vector<std::string>::const_iterator it = commands.begin() ; it != commands.end(); ++it){
+    /* for (std::vector<std::string>::const_iterator it = commands.begin() ; it != commands.end(); ++it){
         //If current item is selected show this to the user
         if(it - commands.begin() == getCurrentMenuOption()){
             std::cout << "-> ";
         }
-
+}
         std::cout << "\t";
-        std::cout << *it << "\n";
-    }
+        std::cout << *it << "\n"; */
+        cout << "-> " << commands[0] << endl;
+
+
 }
 
 void StateGameOver::menuOptionAction() {
 
     switch(getCurrentMenuOption()){
-    case 0: Engine::Instance().changeState(StateIntro::instance());
+    case 1: Engine::Instance().changeState(StateIntro::instance());
+        // TODO restart game or remove option
         break;
-    case 1: Engine::Instance().quit();
+    case 0: Engine::Instance().quit();
         break;
     default:
         break;

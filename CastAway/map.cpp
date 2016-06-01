@@ -135,7 +135,8 @@ void Map::initMap(){
     shark->setBgColor(console_bg_colors::blue);
     shark->setX(3);
     shark->setY(3);
-    shark->setMaxHealth(20);
+    shark->setMaxHealth(100);
+    shark->setBasicAttack(100);
     addAbstractEntity(shark->getX(), shark->getY(), shark);
 
     //Crab meat that will be added to crab inventory
@@ -226,7 +227,7 @@ void Map::initMap(){
             fileStream >> ch;
         }
 
-    }*/
+    } */
 
     map[5][18]->setTerrain(Terrain::Type::SAND);
 

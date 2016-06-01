@@ -33,7 +33,7 @@ public:
 protected:
     StateGameOver() {}
 private:
-    const std::vector<std::string> commands = {"Start menu", "Quit"};
+    const std::vector<std::string> commands = {"Quit"};
 };
 
 #endif // STATEGAMEOVER_H
