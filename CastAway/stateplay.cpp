@@ -22,7 +22,7 @@ void StatePlay::init(){
 
     //start pos for the player
     int playerX = 5;
-    int playerY = 5;
+    int playerY = 15;
 
     player->setX(playerX);
     player->setY(playerY);

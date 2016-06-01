@@ -3,6 +3,7 @@
 #include "inventory.h"
 #include "native.h"
 #include "stategameover.h"
+#include "statewin.h"
 #include "engine.h"
 #include "tree.h"
 #include "axe.h"
@@ -165,6 +166,9 @@ void Player::action(int x, int y)
     } else {
         addLog("You bumped in to a " + blocking->getId());
     }
+
+    // TODO: add win state where player has built a boat
+    //Engine::Instance().changeState(StateWin::instance());
 }
 
 // If player is dead, it's GO
