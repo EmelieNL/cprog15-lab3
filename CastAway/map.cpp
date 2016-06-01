@@ -203,30 +203,32 @@ void Map::initMap(){
 
 
     // Read map from input file
-    char ch = 'x';
     ifstream fileStream("map1.txt");
     if (fileStream.is_open() == false) std:cerr << "Could not open file" << std::endl;
-    fileStream >> ch;
     while (!fileStream.eof()) {
+        for(int x = 0; x < heightY; ++x){
+            for(int y = 0; y < widthX; ++y){
 
-        for(int y = 0; y < heightY; y++){
-            for(int x = 0; x < widthX; x++){
+                fileStream >> ch;
 
                 switch(ch) {
                 case '~':
-                    map[y][x]->setTerrain(Terrain::Type::WATER);
+                    map[x][y]->setTerrain(Terrain::Type::WATER);
                     break;
                 case ':':
-                    map[y][x]->setTerrain(Terrain::Type::SAND);
+                    map[x][y]->setTerrain(Terrain::Type::SAND);
                     break;
                 case '*':
-                    map[y][x]->setTerrain(Terrain::Type::FORREST);
+                    map[x][y]->setTerrain(Terrain::Type::FORREST);
                     break;
                 case '^':
-                    map[y][x]->setTerrain(Terrain::Type::MOUNTAIN);
+                    map[x][y]->setTerrain(Terrain::Type::MOUNTAIN);
+                    break;
+                default:
+                    map[x][y]->setTerrain(Terrain::Type::WATER);
                     break;
                 }
-             fileStream >> ch;
+             ch = 'o';
             }
         }
 

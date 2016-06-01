@@ -33,7 +33,7 @@ public:
 
 private:
     // Set map size
-    static const int widthX = 80;
+    static const int widthX = 70;
     static const int heightY = 20;
 
     Tile* map[heightY][widthX];
