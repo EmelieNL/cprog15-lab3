@@ -90,6 +90,11 @@ int Inventory::getWeight() const
     return totalWeight;
 }
 
+void Inventory::setMaxWeight(int value)
+{
+    maxWeight = value;
+}
+
 void Inventory::init(int newMaxWeight)
 {
     maxWeight = newMaxWeight;

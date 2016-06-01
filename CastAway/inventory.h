@@ -20,6 +20,8 @@ public:
     int getMaxWeight() const;
     int getWeight() const;
 
+    void setMaxWeight(int value);
+
 private:
     std::vector<Item*> items; //items in this inventory
     int maxWeight; //max weight this inventory can hold

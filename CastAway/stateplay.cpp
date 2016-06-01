@@ -17,6 +17,7 @@ void StatePlay::init(){
     Engine::Instance().loadMap("level_1");
 
     Player* player = new Player;
+    player->getInventory()->setMaxWeight(10000); //10 000 gram = 10 kg
     Engine::Instance().setPlayer(player);
 
     //start pos for the player

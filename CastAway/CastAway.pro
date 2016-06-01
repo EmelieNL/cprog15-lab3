@@ -29,7 +29,10 @@ SOURCES += main.cpp \
     crab.cpp \
     native.cpp \
     statequest.cpp \
-    statehelp.cpp
+    statehelp.cpp \
+    axe.cpp \
+    board.cpp \
+    tree.cpp
 
 HEADERS += \
     map.h \
@@ -57,5 +60,8 @@ HEADERS += \
     crab.h \
     native.h \
     statequest.h \
-    statehelp.h
+    statehelp.h \
+    axe.h \
+    board.h \
+    tree.h
 

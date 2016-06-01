@@ -20,7 +20,7 @@ private:
     Engine();
     ~Engine();
     Player* player;
-    bool debug = true;
+    bool debug = false;
 
 
 public:

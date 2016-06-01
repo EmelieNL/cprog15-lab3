@@ -4,6 +4,8 @@
 #include "native.h"
 #include "stategameover.h"
 #include "engine.h"
+#include "tree.h"
+#include "axe.h"
 
 #include <iostream>
 
@@ -148,6 +150,18 @@ void Player::action(int x, int y)
                 addLog("You bumped in to a friendly " + blocking->getId());
             }
         }
+
+    //If we hit a tree
+    } else if(Tree* tree = dynamic_cast<Tree*>(blocking)){
+
+            //Do we have a axe?
+            if(Axe* axe = dynamic_cast<Axe*>(getWeapon())){
+                if(tree->chopDown()){
+                    addLog("You choped down the " + tree->getId());
+                }
+            } else {
+                addLog("You need to equip a axe to chop down the " + tree->getId());
+            }
     } else {
         addLog("You bumped in to a " + blocking->getId());
     }

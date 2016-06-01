@@ -19,6 +19,8 @@
 #include "consumable.h"
 #include "weapon.h"
 #include "abstractentity.h"
+#include "axe.h"
+#include "tree.h"
 
 #ifdef _WIN32
     #include <conio.h>
@@ -201,6 +203,17 @@ void Map::initMap(){
     wall3->setY(11);
     addAbstractEntity(wall3->getX(), wall3->getY(), wall3);
 
+    Axe* axe = new Axe("Axe", 1200, '[', 25);
+    axe->setX(16);
+    axe->setY(8);
+    addAbstractEntity(axe->getX(), axe->getY(), axe);
+
+
+    //Tree
+    Tree* tree = new Tree();
+    tree->setX(17);
+    tree->setY(9);
+    addAbstractEntity(tree->getX(), tree->getY(), tree);
 
     // Read map from input file
     char ch;
