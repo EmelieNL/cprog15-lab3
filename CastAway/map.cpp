@@ -3,7 +3,8 @@
 #include <iostream>
 #include <cmath>
 #include <algorithm>
-
+#include <iostream>
+#include <fstream>
 #include "conmanip.h"
 #include "render.h"
 #include "engine.h"
@@ -163,7 +164,16 @@ void Map::initMap(){
     wall3->setY(11);
     addAbstractEntity(wall3->getX(), wall3->getY(), wall3);
 
-    map[4][15]->setTerrain(Terrain::Type::SAND);
+    // Read map from input file
+    char ch;
+    ifstream fileStream("map.txt");
+    fileStream >> ch;
+    while (!fileStream.eof()) {
+       map[1][1]->setTerrain(Terrain::Type::FORREST);
+       fileStream >> ch;
+    }
+
+    /* map[4][15]->setTerrain(Terrain::Type::SAND);
     map[4][16]->setTerrain(Terrain::Type::SAND);
     map[4][17]->setTerrain(Terrain::Type::FORREST);
     map[4][18]->setTerrain(Terrain::Type::SAND);
@@ -171,7 +181,7 @@ void Map::initMap(){
     map[5][15]->setTerrain(Terrain::Type::SAND);
     map[5][16]->setTerrain(Terrain::Type::MOUNTAIN);
     map[5][17]->setTerrain(Terrain::Type::SAND);
-    map[5][18]->setTerrain(Terrain::Type::SAND);
+    map[5][18]->setTerrain(Terrain::Type::SAND); */
 }
 
 void  Map::clear() const{
