@@ -2,10 +2,11 @@
 #include <iostream>
 #include "stateplay.h"
 #include "stateinventory.h"
+#include "statewin.h"
 #include "consumable.h"
 #include "weapon.h"
 #include "item.h"
-
+#include "boat.h"
 
 void StateInventory::init(){
     setInitDone();
@@ -116,6 +117,18 @@ void StateInventory::menuOptionAction()
     } else if(Weapon* wep = dynamic_cast<Weapon*>(item)) {
            player->setWeapon(wep);
            player->addLog("You arm yourself with the " + item->getId() + " (" + std::to_string(wep->getAttackValue()) + " damage)");
+
+    //Use a boat
+    } else if(Boat* boat = dynamic_cast<Boat*>(item)) {
+
+        //If player is in water
+        if(Engine::Instance().getMap()->getTile(player->getX(), player->getY())->getTerrain()->getType() == Terrain::Type::WATER){
+            player->addLog("You jump into the boat and start rowing to your freedom!");
+            Engine::Instance().changeState(StateWin::instance());
+            return;
+        } else {
+            player->addLog("You must be in the water to use the boat...");
+        }
 
     } else {
         player->addLog("You could not use that...");

@@ -5,15 +5,8 @@ Native::Native()
     /* initialize random seed: */
     srand (time(NULL));
 
+    setIsLookingForItem(false);
     init('H');
-}
-
-Native::Native(char symbol)
-{
-    /* initialize random seed: */
-    srand (time(NULL));
-
-    init(symbol);
 }
 
 void Native::moveX(int x)
@@ -72,4 +65,39 @@ bool Native::haveDialog() const
         return true;
 
     return false;
+}
+
+bool Native::isLookingForItem() const
+{
+    return lookingForItem;
+}
+
+void Native::setIsLookingForItem(bool value)
+{
+    lookingForItem = value;
+}
+
+std::string Native::getLookingForId() const
+{
+    return lookingForId;
+}
+
+void Native::setLookingForId(std::string id)
+{
+    lookingForId = id;
+}
+
+int Native::getNeedAmount() const
+{
+    return needAmount;
+}
+
+void Native::setNeedAmount(int value)
+{
+    needAmount = value;
+
+    //If the native have all items needed, dont look for anything more
+    if(needAmount == 0){
+        setIsLookingForItem(false);
+    }
 }

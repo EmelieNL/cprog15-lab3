@@ -21,6 +21,7 @@
 #include "abstractentity.h"
 #include "axe.h"
 #include "tree.h"
+#include "boat.h"
 
 #ifdef _WIN32
 #include <conio.h>
@@ -226,7 +227,7 @@ void Map::initMap(){
     addAbstractEntity(crab4->getX(), crab4->getY(), crab4);
 
     /* HUMAN NATIVES */
-    Native* human = new Native('H');
+    Native* human = new Native();
     human->setX(15);
     human->setY(8);
     human->setHostile(false);
@@ -234,6 +235,23 @@ void Map::initMap(){
     human->addDialog("Are you lost or something?");
     human->addDialog("I heard rumors there is a boat in the far east...");
     addAbstractEntity(human->getX(), human->getY(), human);
+
+    Native* boatBuilder = new Native();
+    boatBuilder->setX(15);
+    boatBuilder->setY(12);
+    boatBuilder->setHostile(false);
+    boatBuilder->setId("Indian boatbuilder");
+    boatBuilder->addDialog("I have already made a decent boat for you!");
+    boatBuilder->addDialog("I feel to tierd to build anything");
+    boatBuilder->setIsLookingForItem(true);
+    boatBuilder->setNeedAmount(8);
+    boatBuilder->setLookingForId("Wooden board");
+
+    //Boat that should be added to inventory
+    Boat* boat = new Boat("Boat", 5000, 'B');
+    boatBuilder->getInventory()->addItem(boat);
+
+    addAbstractEntity(boatBuilder->getX(), boatBuilder->getY(), boatBuilder);
 
     /* WEAPONS */
     Weapon* knife = new Weapon("Knife", 400, '|', 80);
@@ -272,9 +290,19 @@ void Map::initMap(){
 
     //Tree
     Tree* tree = new Tree();
-    tree->setX(17);
-    tree->setY(9);
+    tree->setX(20);
+    tree->setY(8);
     addAbstractEntity(tree->getX(), tree->getY(), tree);
+
+    Tree* tree2 = new Tree();
+    tree2->setX(24);
+    tree2->setY(8);
+    addAbstractEntity(tree2->getX(), tree2->getY(), tree2);
+
+    Tree* tree3 = new Tree();
+    tree3->setX(24);
+    tree3->setY(6);
+    addAbstractEntity(tree3->getX(), tree3->getY(), tree3);
 
     // Read map from input file
     char ch;

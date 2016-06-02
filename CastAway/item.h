@@ -12,7 +12,7 @@ public:
     bool getCanStack() const;
     void setCanStack(bool canStack);
     int getMaxStack() const;
-    void setMaxStack(bool maxStack);
+    void setMaxStack(int maxStack);
     int getStackAmount() const;
     void setStackAmount(int amount);
     int getWeight() const;

@@ -25,7 +25,7 @@ int Item::getMaxStack() const
     return maxStack;
 }
 
-void Item::setMaxStack(bool maxStack)
+void Item::setMaxStack(int maxStack)
 {
     this->maxStack = maxStack;
 }

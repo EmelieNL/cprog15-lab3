@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     axe.cpp \
     board.cpp \
     tree.cpp \
-    statewin.cpp
+    statewin.cpp \
+    boat.cpp
 
 HEADERS += \
     map.h \
@@ -65,5 +66,6 @@ HEADERS += \
     axe.h \
     board.h \
     tree.h \
-    statewin.h
+    statewin.h \
+    boat.h
 

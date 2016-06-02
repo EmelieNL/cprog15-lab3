@@ -141,7 +141,45 @@ void Player::action(int x, int y)
             //Is it a native?
             if(Native* native = dynamic_cast<Native*>(blocking)){
 
-                if(native->haveDialog()){
+                //Is this native looking for something?
+                if(native->isLookingForItem()){
+                   addLog(native->getId() + " says: I need " +  std::to_string(native->getNeedAmount()) + " " + native->getLookingForId() + " to build a decent boat for you.");
+
+                   //If the player have this item in inventory
+                   Item* giveItem = getInventory()->getItem(native->getLookingForId());
+                   if(giveItem != nullptr){
+                       int need = native->getNeedAmount();
+
+                       //If the player have more then needed
+                       if(giveItem->getStackAmount() > need){
+                           native->setNeedAmount(0); //The native now has all he needs
+                           giveItem->setStackAmount(giveItem->getStackAmount()-need); //lower stack amount
+                           addLog("You give "+ std::to_string(need) + " " + giveItem->getId() + " to " + native->getId() + " which is what was needed, and you still have some left.");
+
+                       //Player have just enough or less
+                       } else if(giveItem->getStackAmount() == need){
+                          native->setNeedAmount(0);
+                          addLog("You give all "+ std::to_string(need) + " " + giveItem->getId() + " to " + native->getId() + " which was exactly what was needed.");
+                          getInventory()->removeItem(giveItem); //remove from inventory
+
+                       //Player does not have enough
+                       } else {
+                           //Give as much as possible
+                           native->setNeedAmount(need-giveItem->getStackAmount());
+                           addLog("You give all " + std::to_string(giveItem->getStackAmount()) + " " + giveItem->getId() + " to " + native->getId() + " but more is needed.");
+                           getInventory()->removeItem(giveItem); //remove from inventory
+                       }
+
+                       //Does the native have all he needs? Then drop first item from his inventory
+                       if( native->getNeedAmount() == 0){
+                            addLog(native->getId() + " says: Thank you! Here is your reward... A " + native->getInventory()->getItem(0)->getId() + "! I will now go to rest");
+                            native->setHealth(0);
+                       }
+                   } else {
+                       addLog("You dont have any " + native->getLookingForId() + " to give...");
+
+                   }
+                } else if(native->haveDialog()){
                     addLog(native->getId() + " says: " + native->getRandomDialog());
                 } else {
                    addLog("You bumped in to a friendly " + blocking->getId());

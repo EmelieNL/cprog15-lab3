@@ -70,7 +70,7 @@ void StateWin::printCommands() {
 void StateWin::menuOptionAction() {
 
     switch(getCurrentMenuOption()){
-    case 0: Engine::Instance().changeState(StateIntro::instance());
+    case 0: Engine::Instance().quit();
     default:
         break;
     }

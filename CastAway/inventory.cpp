@@ -1,4 +1,5 @@
 #include "inventory.h"
+#include <string>
 
 Inventory::Inventory()
 {
@@ -22,8 +23,28 @@ Inventory::~Inventory()
 
 bool Inventory::addItem(Item* item)
 {
-    //TODO check if this item can be stacked
     if(!isFull()){
+
+        //Can the item be stacked?
+        if(item->getCanStack()){
+            bool isStacked = false;
+            //Check if the item type already exist and can be stacked
+            for (const auto currItem : items){
+                //Can the item stack, same id, and still room to stack?
+                if(currItem->getCanStack() && currItem->getId().compare(item->getId()) == 0 && (currItem->getStackAmount() + item->getStackAmount()) <= currItem->getMaxStack()){
+                   currItem->setStackAmount(currItem->getStackAmount() + item->getStackAmount());
+                   isStacked = true;
+                   return true;
+                }
+            }
+
+            //If the item could not be stacked, add normal
+            if(!isStacked){
+                items.push_back(item);
+                return true;
+            }
+        }
+
         items.push_back(item);
         return true;
     }
@@ -53,6 +74,17 @@ Item* Inventory::getItem(unsigned int i)
     } else {
         return nullptr;
     }
+}
+
+Item* Inventory::getItem(std::string id)
+{
+    for (const auto item : items){
+
+        if(item->getId().compare(id) == 0){
+          return item;
+        }
+    }
+    return nullptr;
 }
 
 int Inventory::getInventorySize() const
@@ -90,7 +122,6 @@ int Inventory::getWeight() const
         } else {
            totalWeight += item->getWeight();
         }
-
     }
     return totalWeight;
 }
