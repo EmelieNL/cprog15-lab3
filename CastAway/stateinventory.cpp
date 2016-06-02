@@ -4,6 +4,7 @@
 #include "stateinventory.h"
 #include "consumable.h"
 #include "weapon.h"
+#include "item.h"
 
 
 void StateInventory::init(){
@@ -81,7 +82,13 @@ void StateInventory::printCommands()
         if(pos == getCurrentMenuOption()){
             std::cout << "-> ";
         }
-        std::cout << item->getId() << ", " << item->getWeight() << " gram" << std::endl;
+        std::cout << item->getId() << ", " << item->getWeight() << " gram";
+
+        if(item->getCanStack()){
+            std::cout << " (" << item->getStackAmount() << " pcs)";
+        }
+
+        std::cout << std::endl;
         ++pos;
     }
 }

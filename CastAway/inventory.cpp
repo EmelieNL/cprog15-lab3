@@ -85,7 +85,12 @@ int Inventory::getWeight() const
 {
     int totalWeight = 0;
     for (const auto item : items){
-        totalWeight += item->getWeight();
+        if(item->getCanStack()){
+           totalWeight += item->getWeight()*item->getStackAmount();
+        } else {
+           totalWeight += item->getWeight();
+        }
+
     }
     return totalWeight;
 }
