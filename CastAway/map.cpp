@@ -183,6 +183,26 @@ void Map::initMap(){
     shark5->setBasicAttack(10);
     addAbstractEntity(shark5->getX(), shark5->getY(), shark5);
 
+    Fish* shark6 = new Fish('^');
+    shark6->setId("Shark");
+    shark6->setFgColor(console_text_colors::light_cyan);
+    shark6->setBgColor(console_bg_colors::blue);
+    shark6->setX(55);
+    shark6->setY(6);
+    shark6->setMaxHealth(20);
+    shark6->setBasicAttack(10);
+    addAbstractEntity(shark6->getX(), shark6->getY(), shark6);
+
+    Fish* shark7 = new Fish('^');
+    shark7->setId("Shark");
+    shark7->setFgColor(console_text_colors::light_cyan);
+    shark7->setBgColor(console_bg_colors::blue);
+    shark7->setX(52);
+    shark7->setY(10);
+    shark7->setMaxHealth(20);
+    shark7->setBasicAttack(10);
+    addAbstractEntity(shark7->getX(), shark7->getY(), shark7);
+
 
     /* CRABS */
     //Crab meat that will be added to crab inventory
@@ -233,12 +253,12 @@ void Map::initMap(){
     human->setHostile(false);
     human->setId("Native indian");
     human->addDialog("Are you lost or something?");
-    human->addDialog("I heard rumors there is a boat in the far east...");
+    human->addDialog("I heard rumors there is a boatbuilder in the far east...");
     addAbstractEntity(human->getX(), human->getY(), human);
 
     Native* boatBuilder = new Native();
-    boatBuilder->setX(15);
-    boatBuilder->setY(12);
+    boatBuilder->setX(47);
+    boatBuilder->setY(4);
     boatBuilder->setHostile(false);
     boatBuilder->setId("Indian boatbuilder");
     boatBuilder->addDialog("I have already made a decent boat for you!");
@@ -259,6 +279,11 @@ void Map::initMap(){
     knife->setY(2);
     addAbstractEntity(knife->getX(), knife->getY(), knife);
 
+    Axe* axe = new Axe("Axe", 1200, '[', 25);
+    axe->setX(16);
+    axe->setY(8);
+    addAbstractEntity(axe->getX(), axe->getY(), axe);
+
     /* CONSUMABLES */
     Consumable* apple = new Consumable("Apple", 50, 'A', 20);
     apple->setFgColor(console_text_colors::light_red);
@@ -266,29 +291,7 @@ void Map::initMap(){
     apple->setY(8);
     addAbstractEntity(apple->getX(), apple->getY(), apple);
 
-    /*  WALLS */
-    Blocked* wall = new Blocked('#'); //TODO add destructor
-    wall->setX(12);
-    wall->setY(11);
-    addAbstractEntity(wall->getX(), wall->getY(), wall);
-
-    Blocked* wall2 = new Blocked('#'); //TODO add destructor
-    wall2->setX(13);
-    wall2->setY(11);
-    addAbstractEntity(wall2->getX(), wall2->getY(), wall2);
-
-    Blocked* wall3 = new Blocked('#'); //TODO add destructor
-    wall3->setX(14);
-    wall3->setY(11);
-    addAbstractEntity(wall3->getX(), wall3->getY(), wall3);
-
-    Axe* axe = new Axe("Axe", 1200, '[', 25);
-    axe->setX(16);
-    axe->setY(8);
-    addAbstractEntity(axe->getX(), axe->getY(), axe);
-
-
-    //Tree
+    /* TREES */
     Tree* tree = new Tree();
     tree->setX(20);
     tree->setY(8);
@@ -303,6 +306,21 @@ void Map::initMap(){
     tree3->setX(24);
     tree3->setY(6);
     addAbstractEntity(tree3->getX(), tree3->getY(), tree3);
+
+    Tree* tree4 = new Tree();
+    tree4->setX(26);
+    tree4->setY(13);
+    addAbstractEntity(tree4->getX(), tree4->getY(), tree4);
+
+    Tree* tree5 = new Tree();
+    tree5->setX(35);
+    tree5->setY(10);
+    addAbstractEntity(tree5->getX(), tree5->getY(), tree5);
+
+    Tree* tree6 = new Tree();
+    tree6->setX(43);
+    tree6->setY(14);
+    addAbstractEntity(tree6->getX(), tree6->getY(), tree6);
 
     // Read map from input file
     char ch;
