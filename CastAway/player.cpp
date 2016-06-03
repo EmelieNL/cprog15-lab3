@@ -18,10 +18,8 @@ Player::Player()
     setBgColor(conmanip::console_bg_colors::black);
 }
 
-Player::~Player()
-{
-    std::cout << "Destructor for Player" << std::endl;
-}
+Player::~Player() {}
+
 void Player::addLog(std::string message)
 {
     log.insert(log.begin(), message); //Add message to first position
@@ -200,6 +198,7 @@ void Player::action(int x, int y)
                 }
             } else {
                 addLog("You need to equip a axe to chop down the " + tree->getId());
+                //delete tree;
             }
     } else {
         addLog("You bumped in to a " + blocking->getId());

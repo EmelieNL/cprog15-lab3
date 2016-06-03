@@ -26,13 +26,14 @@ bool Inventory::addItem(Item* item)
     if(!isFull()){
 
         //Can the item be stacked?
-        if(item->getCanStack()){
+        if(false){
             bool isStacked = false;
             //Check if the item type already exist and can be stacked
             for (const auto currItem : items){
                 //Can the item stack, same id, and still room to stack?
                 if(currItem->getCanStack() && currItem->getId().compare(item->getId()) == 0 && (currItem->getStackAmount() + item->getStackAmount()) <= currItem->getMaxStack()){
                    currItem->setStackAmount(currItem->getStackAmount() + item->getStackAmount());
+                   delete item;
                    isStacked = true;
                    return true;
                 }
