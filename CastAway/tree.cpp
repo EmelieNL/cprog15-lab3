@@ -1,6 +1,8 @@
 #include "tree.h"
 #include "board.h"
 #include "map.h"
+#include "engine.h"
+#include "player.h"
 
 Tree::Tree()
 {
@@ -27,7 +29,11 @@ bool Tree::chopDown()
     boards->setX(x);
     boards->setY(y);
 
-    Engine::Instance().getMap()->addAbstractEntity(boards->getX(), boards->getY(), boards);
+    //Engine::Instance().getMap()->addAbstractEntity(boards->getX(), boards->getY(), boards);
+
+    //Give the boards to the player
+    Engine::Instance().getPlayer()->getInventory()->addItem(boards);
+    Engine::Instance().getPlayer()->addLog(boards->getId() + " was added to your inventory!");
 
     // Might not be the cleanest solution but we will leak mem if we dont delete the object
     delete this;

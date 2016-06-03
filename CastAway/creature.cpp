@@ -120,14 +120,17 @@ void Creature::update()
          Item* item;
         //Drop the first item in inventory on the map if possible
         //if the creature have something in the inventory
-        //if(getInventory()->getInventorySize() > 0){
-         if(false){
+        if(getInventory()->getInventorySize() > 0){
             //Get the item from inventory
             item = getInventory()->getAndRemoveItem(0);
             item->setX(getX());
             item->setY(getY());
 
             dropItem = true;
+
+            //Give the item to the player
+            Engine::Instance().getPlayer()->getInventory()->addItem(item);
+            Engine::Instance().getPlayer()->addLog(item->getId() + " was added to your inventory!");
             //Wait to add item to the map until this creature is removed...
         }
 
@@ -135,7 +138,7 @@ void Creature::update()
         Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
 
         if(dropItem){
-             Engine::Instance().getMap()->addAbstractEntity(item->getX(), item->getY(), item);
+             //Engine::Instance().getMap()->addAbstractEntity(item->getX(), item->getY(), item);
         }
 
         //This might not exactly be the cleanest solution...
