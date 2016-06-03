@@ -39,6 +39,14 @@ Map::Map() {
 
 Map::~Map()
 {
+    while (!entities.empty()) {
+        auto entity = *entities.begin();
+        removeAbstractEntity(entity);
+        delete entity;
+    }
+
+    //entities.clear();
+
     //Clean tiles in this map
     for(int y=0; y < heightY; y++){
         for(int x=0; x < widthX; x++){
@@ -54,8 +62,8 @@ Tile* Map::getTile(int x, int y){
 
 void Map::addAbstractEntity(int x, int y, AbstractEntity *absEntity)
 {
-    this->map[y][x]->setAbsEntity(absEntity);
-    entities.insert(entities.begin(), absEntity);
+    map[y][x]->setAbsEntity(absEntity);
+    entities.push_back(absEntity);
 }
 
 //Remove a entity from the map vector
@@ -123,7 +131,7 @@ void Map::update()
 }
 
 void Map::initMap(){
-    cout << "Map is inited from Map class"<< "\n";
+    //cout << "Map is inited from Map class"<< "\n";
 
     //Init tiles
     for(int y=0; y < heightY; y++){

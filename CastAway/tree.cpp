@@ -21,6 +21,9 @@ bool Tree::chopDown()
     //Remove from the map...
     Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
 
+    // Might not be the cleanest solution but we will leak mem if we dont delete the object
+    //delete this;
+
     //Add some boards
     Board* boards = new Board("Wooden board", 250, 'B', true, 64, 5);
     boards->setX(x);

@@ -194,7 +194,7 @@ void Player::action(int x, int y)
     } else if(Tree* tree = dynamic_cast<Tree*>(blocking)){
 
             //Do we have a axe?
-            if(Axe* axe = dynamic_cast<Axe*>(getWeapon())){
+            if(dynamic_cast<Axe*>(getWeapon())){
                 if(tree->chopDown()){
                     addLog("You choped down the " + tree->getId());
                 }
@@ -204,9 +204,6 @@ void Player::action(int x, int y)
     } else {
         addLog("You bumped in to a " + blocking->getId());
     }
-
-    // TODO: add win state where player has built a boat
-    //Engine::Instance().changeState(StateWin::instance());
 }
 
 // If player is dead, it's GO

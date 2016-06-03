@@ -9,6 +9,7 @@ class Fish:public Creature
 public:
     Fish();
     Fish(char symbol);
+    virtual ~Fish() {}
     void moveX(int x);
     void moveY(int y);
 };

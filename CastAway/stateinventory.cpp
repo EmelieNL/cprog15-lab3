@@ -119,7 +119,7 @@ void StateInventory::menuOptionAction()
            player->addLog("You arm yourself with the " + item->getId() + " (" + std::to_string(wep->getAttackValue()) + " damage)");
 
     //Use a boat
-    } else if(Boat* boat = dynamic_cast<Boat*>(item)) {
+    } else if(dynamic_cast<Boat*>(item)) {
 
         //If player is in water
         if(Engine::Instance().getMap()->getTile(player->getX(), player->getY())->getTerrain()->getType() == Terrain::Type::WATER){

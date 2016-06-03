@@ -16,7 +16,7 @@ Creature::Creature(char symbol)
 
 Creature::~Creature()
 {
-    delete inventory;
+    //delete inventory;
 }
 
 void Creature::setHealth(int health)
@@ -227,15 +227,15 @@ void Creature::update()
 
 }
 
-Inventory *Creature::getInventory() const
+Inventory* Creature::getInventory()
 {
-    return inventory;
+    return &inventory;
 }
 
-void Creature::setInventory(Inventory *inventory)
-{
-    this->inventory = inventory;
-}
+//void Creature::setInventory(Inventory *inventory)
+//{
+//    this->inventory = inventory;
+//}
 
 void Creature::action(int x, int y)
 {
@@ -321,7 +321,7 @@ void Creature::init(char symbol)
     setY(0);
     setCanMove(true);
     setId("Creature");
-    setInventory(new Inventory());
+    //setInventory(new Inventory());
     setWeapon(nullptr);
     setHostile(true);
 }

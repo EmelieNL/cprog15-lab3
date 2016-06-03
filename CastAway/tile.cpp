@@ -3,13 +3,13 @@
 Tile::Tile()
 {
     absEntity = nullptr;
-    terrain = new Terrain(Terrain::Type::WATER); //TODO desturctor
+    terrain = new Terrain(Terrain::Type::WATER);
     explored = false;
 }
 
 Tile::~Tile()
 {
-    delete absEntity;
+    //delete absEntity;
     delete terrain;
 }
 
@@ -18,7 +18,7 @@ AbstractEntity *Tile::getAbsEntity()
     return absEntity;
 }
 
-Terrain *Tile::getTerrain()
+Terrain* Tile::getTerrain()
 {
     return terrain;
 }

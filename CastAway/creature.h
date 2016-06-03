@@ -6,8 +6,9 @@
 #include "tile.h"
 #include "map.h"
 #include "engine.h"
+#include "inventory.h"
 
-class Inventory;
+//class Inventory;
 class Weapon;
 
 class Creature:public AbstractEntity
@@ -15,7 +16,7 @@ class Creature:public AbstractEntity
 public:
     Creature();
     Creature(char symbol);
-    ~Creature();
+    virtual ~Creature();
     void setHealth(int health);
     void setMaxHealth(int maxHealth);
     int getHealth() const;
@@ -24,10 +25,9 @@ public:
     virtual void moveX(int x);
     virtual void moveY(int y);
     virtual void update() override;
-    Inventory* getInventory() const;
-    void setInventory(Inventory* inventory);
+    Inventory* getInventory();
+    //void setInventory(Inventory* inventory);
     virtual void action(int x, int y);
-
 
     Weapon *getWeapon() const;
     void setWeapon(Weapon *value);
@@ -48,7 +48,7 @@ private:
     int basicAttack;
     bool hostile;
     Weapon* weapon;
-    Inventory* inventory;
+    Inventory inventory;
 
 };
 
