@@ -120,7 +120,8 @@ void Creature::update()
          Item* item;
         //Drop the first item in inventory on the map if possible
         //if the creature have something in the inventory
-        if(getInventory()->getInventorySize() > 0){
+        //if(getInventory()->getInventorySize() > 0){
+         if(false){
             //Get the item from inventory
             item = getInventory()->getAndRemoveItem(0);
             item->setX(getX());
@@ -132,12 +133,13 @@ void Creature::update()
 
         //Remove from the map...
         Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
-        //This might not exactly be the cleanest solution...
-        delete this;
 
         if(dropItem){
-             Engine::Instance().getMap()->getTile(item->getX(), item->getY())->setAbsEntity(item);
+             Engine::Instance().getMap()->addAbstractEntity(item->getX(), item->getY(), item);
         }
+
+        //This might not exactly be the cleanest solution...
+        delete this;
 
         return;
     }

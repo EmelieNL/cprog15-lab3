@@ -21,8 +21,8 @@ void StatePlay::init(){
     Engine::Instance().setPlayer(player);
 
     //start pos for the player
-    int playerX = 5;
-    int playerY = 15;
+    int playerX = 15;
+    int playerY = 10;
 
     player->setX(playerX);
     player->setY(playerY);

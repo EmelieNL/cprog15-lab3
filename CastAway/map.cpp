@@ -128,7 +128,7 @@ void Map::update()
     //Update all entities once
     for(auto entity : entities)
         entity->update();
-}
+    }
 
 void Map::initMap(){
     //cout << "Map is inited from Map class"<< "\n";
