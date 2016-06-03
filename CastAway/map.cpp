@@ -69,7 +69,6 @@ void Map::addAbstractEntity(int x, int y, AbstractEntity *absEntity)
 //Remove a entity from the map vector
 void Map::removeAbstractEntity(AbstractEntity *absEntity)
 {
-    Engine::Instance().getPlayer()->addLog("Try to remove " + absEntity->getId());
 
     //Remove from map
     map[absEntity->getY()][absEntity->getX()]->setAbsEntity(nullptr);

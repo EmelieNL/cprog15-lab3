@@ -194,11 +194,10 @@ void Player::action(int x, int y)
             //Do we have a axe?
             if(dynamic_cast<Axe*>(getWeapon())){
                 if(tree->chopDown()){
-                    addLog("You choped down the " + tree->getId());
+                    addLog("You choped down the tree");
                 }
             } else {
                 addLog("You need to equip a axe to chop down the " + tree->getId());
-                //delete tree;
             }
     } else {
         addLog("You bumped in to a " + blocking->getId());
