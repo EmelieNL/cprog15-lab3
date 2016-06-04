@@ -25,7 +25,7 @@ bool Tree::chopDown()
     Engine::Instance().getMap()->removeAbstractEntity(dynamic_cast<AbstractEntity*>(this));
 
     //Add some boards
-    Board* boards = new Board("Wooden board", 250, 'B', true, 64, 5);
+    Board* boards = new Board("Wooden board", 250, 'B', true, 64);
     boards->setX(x);
     boards->setY(y);
 

@@ -7,6 +7,7 @@
 #include "engine.h"
 #include "tree.h"
 #include "axe.h"
+#include "board.h"
 
 #include <iostream>
 
@@ -42,16 +43,16 @@ void Player::moveX(int x)
     //Can this creature move at all?
     if(isCanMove()){
 
-         //check map boundaries in x
+        //check map boundaries in x
         if(newX < 0 || newX >= Engine::Instance().getMap()->getWidth()){
-              return;
+            return;
 
-        //is there anyting blocking?
+            //is there anyting blocking?
         }else if(Engine::Instance().getMap()->isBlocked(newX, newY)){
             action(newX, newY);
             return;
 
-        //move
+            //move
         } else {
 
             //Update terrain info
@@ -81,12 +82,12 @@ void Player::moveY(int y)
         if(newY < 0 || newY >= Engine::Instance().getMap()->getHeight()){
             return;
 
-        //is there anything blocking?
+            //is there anything blocking?
         } else if(Engine::Instance().getMap()->isBlocked(newX, newY)){
             action(newX, newY);
             return;
 
-        //move
+            //move
         } else {
 
             //Update terrain info
@@ -116,12 +117,12 @@ void Player::action(int x, int y)
             addLog("You picked up a " + item->getId());
             Engine::Instance().getMap()->removeAbstractEntity(blocking);
 
-         //could not pick up item
+            //could not pick up item
         } else {
-             addLog("You see a " + item->getId() + " but can't pick it up!");
+            addLog("You see a " + item->getId() + " but can't pick it up!");
         }
 
-    //If we hit a creature
+        //If we hit a creature
     } else if(Creature* enemy = dynamic_cast<Creature*>(blocking)){
 
         //If hostile attack
@@ -133,7 +134,7 @@ void Player::action(int x, int y)
                 addLog("You killed the " + enemy->getId() + "!");
             }
 
-        //not hostile
+            //not hostile
         } else {
 
             //Is it a native?
@@ -141,46 +142,49 @@ void Player::action(int x, int y)
 
                 //Is this native looking for something?
                 if(native->isLookingForItem()){
-                   addLog(native->getId() + " says: I need " +  std::to_string(native->getNeedAmount()) + " " + native->getLookingForId() + " to build a decent boat for you.");
+                    addLog(native->getId() + " says: I need " +  std::to_string(native->getNeedAmount()) + " " + native->getLookingForId() + " to build a decent boat for you.");
 
-                   //If the player have this item in inventory
-                   Item* giveItem = getInventory()->getItem(native->getLookingForId());
-                   if(giveItem != nullptr){
-                       int need = native->getNeedAmount();
+                    // How many boards do we have?
+                    int invAmount = 0;
+                    std::vector<Item*> inventory = getInventory()->getItems();
+                    for (const auto item : inventory) {
+                        if(dynamic_cast<Board*>(item)) invAmount++;
+                    }
+                    if (invAmount > 0) {
+                        int need = native->getNeedAmount();
 
-                       //If the player have more then needed
-                       if(giveItem->getStackAmount() > need){
-                           native->setNeedAmount(0); //The native now has all he needs
-                           giveItem->setStackAmount(giveItem->getStackAmount()-need); //lower stack amount
-                           addLog("You give "+ std::to_string(need) + " " + giveItem->getId() + " to " + native->getId() + " which is what was needed, and you still have some left.");
+                        //If the player have more then needed
+                        int needTmp = native->getNeedAmount();
+                        if(invAmount >= need){
+                            native->setNeedAmount(0); //The native now has all he needs
+                            for (const auto item : inventory) {
+                                if(dynamic_cast<Board*>(item) && needTmp > 0) {
+                                    getInventory()->removeItem(item); //remove from inventory
+                                    needTmp--;
+                                }
+                            }
+                            //giveItem->setStackAmount(giveItem->getStackAmount()-need); //lower stack amount
+                            addLog("You give "+ std::to_string(need) + " wooden boards to " + native->getId() + " which is what was needed, and you still have some left.");
 
-                       //Player have just enough or less
-                       } else if(giveItem->getStackAmount() == need){
-                          native->setNeedAmount(0);
-                          addLog("You give all "+ std::to_string(need) + " " + giveItem->getId() + " to " + native->getId() + " which was exactly what was needed.");
-                          getInventory()->removeItem(giveItem); //remove from inventory
+                            //Player does not have enough
+                        } else {
+                            addLog("You don't have enough board in you inventory");
+                            addLog(native->getId() + " says: Can you find some more?");
+                        }
 
-                       //Player does not have enough
-                       } else {
-                           //Give as much as possible
-                           native->setNeedAmount(need-giveItem->getStackAmount());
-                           addLog("You give all " + std::to_string(giveItem->getStackAmount()) + " " + giveItem->getId() + " to " + native->getId() + " but more is needed.");
-                           getInventory()->removeItem(giveItem); //remove from inventory
-                       }
-
-                       //Does the native have all he needs? Then drop first item from his inventory
-                       if( native->getNeedAmount() == 0){
+                        //Does the native have all he needs? Then drop first item from his inventory
+                        if( native->getNeedAmount() == 0){
                             addLog(native->getId() + " says: Thank you! Here is your reward... A " + native->getInventory()->getItem(0)->getId() + "! I will now go to rest");
                             native->setHealth(0);
-                       }
-                   } else {
-                       addLog("You dont have any " + native->getLookingForId() + " to give...");
+                        }
+                    } else if (invAmount <= 0){
+                        addLog("You dont have any " + native->getLookingForId() + " to give...");
+                    }
 
-                   }
                 } else if(native->haveDialog()){
                     addLog(native->getId() + " says: " + native->getRandomDialog());
                 } else {
-                   addLog("You bumped in to a friendly " + blocking->getId());
+                    addLog("You bumped in to a friendly " + blocking->getId());
                 }
 
             } else {
@@ -188,17 +192,17 @@ void Player::action(int x, int y)
             }
         }
 
-    //If we hit a tree
+        //If we hit a tree
     } else if(Tree* tree = dynamic_cast<Tree*>(blocking)){
 
-            //Do we have a axe?
-            if(dynamic_cast<Axe*>(getWeapon())){
-                if(tree->chopDown()){
-                    addLog("You choped down the tree");
-                }
-            } else {
-                addLog("You need to equip a axe to chop down the " + tree->getId());
+        //Do we have a axe?
+        if(dynamic_cast<Axe*>(getWeapon())){
+            if(tree->chopDown()){
+                addLog("You choped down the tree");
             }
+        } else {
+            addLog("You need to equip a axe to chop down the " + tree->getId());
+        }
     } else {
         addLog("You bumped in to a " + blocking->getId());
     }
@@ -217,7 +221,7 @@ void Player::updateTerrainData(int newX, int newY)
 
     //Add info to the player if the terrain changes
     if(currentTerrain->getType() != newTerrain->getType()){
-         Engine::Instance().getPlayer()->addLog(newTerrain->getDesc());
+        Engine::Instance().getPlayer()->addLog(newTerrain->getDesc());
     }
 
     //Effect the player if the terrain have any effect

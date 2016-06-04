@@ -7,7 +7,7 @@
 class Board:public Item
 {
 public:
-    Board(std::string id, int weight, char symbol, bool canStack, int maxStack, int stackAmount);
+    Board(std::string id, int weight, char symbol, bool canStack, int maxStack/*,  int stackAmount*/);
 };
 
 #endif // BOARD_H

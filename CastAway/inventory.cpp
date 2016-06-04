@@ -68,7 +68,7 @@ Item *Inventory::getAndRemoveItem(unsigned int i)
     return item;
 }
 
-Item* Inventory::getItem(unsigned int i)
+Item* Inventory::getItem(unsigned int i) const
 {
     if(items.size()+1 > i){
         return items[i];
@@ -77,7 +77,7 @@ Item* Inventory::getItem(unsigned int i)
     }
 }
 
-Item* Inventory::getItem(std::string id)
+Item* Inventory::getItem(std::string id) const
 {
     for (const auto item : items){
 

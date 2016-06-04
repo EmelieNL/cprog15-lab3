@@ -271,7 +271,7 @@ void Map::initMap(){
     boatBuilder->addDialog("I have already made a decent boat for you!");
     boatBuilder->addDialog("I feel to tierd to build anything");
     boatBuilder->setIsLookingForItem(true);
-    boatBuilder->setNeedAmount(8);
+    boatBuilder->setNeedAmount(3);
     boatBuilder->setLookingForId("Wooden board");
 
     //Boat that should be added to inventory
