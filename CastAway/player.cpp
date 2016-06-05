@@ -164,7 +164,7 @@ void Player::action(int x, int y)
                                 }
                             }
                             //giveItem->setStackAmount(giveItem->getStackAmount()-need); //lower stack amount
-                            addLog("You give "+ std::to_string(need) + " wooden boards to " + native->getId() + " which is what was needed, and you still have some left.");
+                            addLog("You give "+ std::to_string(need) + " wooden boards to " + native->getId() + " which is what was needed.");
 
                             //Player does not have enough
                         } else {
